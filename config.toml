@@ -1,0 +1,14 @@
+#name = "Orbit"
+#license = "MIT"
+#licenselink = "//github.com/aerohub/hugo-orbit-theme/blob/master/LICENSE.md"
+#description = "Responsive Resume/CV Theme for Developers"
+#homepage = "//github.com/aerohub/hugo-orbit-theme"
+#tags = ["cv", "resume", "colour schemes"]
+#features = ["responsive", "colour schemes"]
+min_version = 0.16
+PygmentsCodeFences = false
+baseURL = "http://tarunlalwani.com"
+
+[author]
+  name = "Tarun Lalwani"
+  homepage = "//github.com/tarunlalwani"

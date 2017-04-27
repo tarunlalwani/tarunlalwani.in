@@ -1,0 +1,7 @@
+config.toml.*
+docs
+themes
+workshop
+layout
+public
+.DS_Store
