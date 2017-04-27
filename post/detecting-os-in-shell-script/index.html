@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="Detecting OS in shell script">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-04-27">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="http://tarunlalwani.com/post/detecting-os-in-shell-script/">
+    <meta property="og:site_name" content="">
+    
+    <meta name="generator" content="Hugo 0.20.2" />
+    <title>Detecting OS in shell script &middot; </title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="http://tarunlalwani.comcss/style.css">
+    
+    <link href="http://tarunlalwani.com/index.xml" rel="alternate" type="application/rss+xml" title="" />
+    
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="http://tarunlalwani.com"></a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="http://tarunlalwani.com"></a></h1>
+		
+		
+		
+		
+		
+		<div id="social" class="text-center">
+			
+			
+			
+			
+			
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Detecting OS in shell script</h1>
+	</header>
+
+	<article>
+		
+
+<p>Each linux distribution uses different package manager. To be able to execute commands based on the type of OS in a shell script, we need a way to detect the OS first.</p>
+
+<h2 id="using-which-command">Using <code>which</code> command</h2>
+
+<p>My first take on resolving this was to use the <code>which</code> command</p>
+
+<pre><code class="language-bash">#!/bin/bash
+if [[ `which yum` ]]; then
+   IS_RHEL=1
+elif [[ `which apt` ]]; then
+   IS_UBUNTU=1
+elif [[ `which apk` ]]; then
+   IS_ALPINE=1
+else
+   IS_UNKNOWN=1
+fi
+</code></pre>
+
+<p>Now this works well on most OS, but the issue is that when you use the same on docker images. Official Docker images have minimal software packages. And <code>which</code> command is missing in case of the <code>centos:7.2.1511</code> image</p>
+
+<pre><code class="language-bash">tarunlalwani@instance-1:~$ docker run -it centos:7.2.1511 bash
+[root@cf78fcecc38e /]# which yum
+bash: which: command not found
+[root@cf78fcecc38e /]#
+</code></pre>
+
+<p>Now since we need to install the which command, we can either bruteforce the installation to make sure which command exists</p>
+
+<pre><code class="language-bash">#!/bin/bash
+yum install -y which &gt;/dev/null
+</code></pre>
+
+<p>And this command would run irrespective of the OS. Not a very clean approach but still works. Now let&rsquo;s turn our attention to the <code>alpine:3.5</code> docker image. Alpine images don&rsquo;t have the <code>bash</code> shell, instead it uses <code>sh</code>. This means in the she bang we should use <code>#!/bin/sh</code> instead of <code>#!/bin/bash</code>. But this breaks our script on <code>ubuntu:16.04</code> as ubuntu uses dash as its low end shell. <code>/bin/sh</code> is just symlink to <code>dash</code> in ubuntu.</p>
+
+<pre><code class="language-bash">$ if [[ `which yum` ]]; then
+   IS_RHEL=1
+fi
+sh: 1: [[: not found
+</code></pre>
+
+<p>The <code>[[:</code> not found issue is because <code>[[</code> is a bash operator and not supported in <code>dash</code>. But easy fix to the same is replacing <code>[[</code> and <code>]]</code> with <code>[</code> and <code>]</code> respectively. The updated code is shown below</p>
+
+<pre><code class="language-bash">#!/bin/bash
+if [ `which yum` ]; then
+   IS_RHEL=1
+elif [ `which apt` ]; then
+   IS_UBUNTU=1
+elif [ `which apk` ]; then
+   IS_ALPINE=1
+else
+   IS_UNKNOWN=1
+fi
+</code></pre>
+
+<h2 id="using-more-reliable-etc-os-release">Using more reliable <code>/etc/os-release</code></h2>
+
+<p>After some research I found a better a more reliable way of finding the OS details. Which is by using <code>/etc/os-release</code> file. Sample content for the <code>centos:7.2.1511</code> docker image is below</p>
+
+<pre><code class="language-bash">NAME=&quot;CentOS Linux&quot;
+VERSION=&quot;7 (Core)&quot;
+ID=&quot;centos&quot;
+ID_LIKE=&quot;rhel fedora&quot;
+VERSION_ID=&quot;7&quot;
+PRETTY_NAME=&quot;CentOS Linux 7 (Core)&quot;
+ANSI_COLOR=&quot;0;31&quot;
+CPE_NAME=&quot;cpe:/o:centos:centos:7&quot;
+HOME_URL=&quot;https://www.centos.org/&quot;
+BUG_REPORT_URL=&quot;https://bugs.centos.org/&quot;
+
+CENTOS_MANTISBT_PROJECT=&quot;CentOS-7&quot;
+CENTOS_MANTISBT_PROJECT_VERSION=&quot;7&quot;
+REDHAT_SUPPORT_PRODUCT=&quot;centos&quot;
+REDHAT_SUPPORT_PRODUCT_VERSION=&quot;7&quot;
+</code></pre>
+
+<p>And for <code>ubuntu:16.04</code> docker image</p>
+
+<pre><code class="language-bash">NAME=&quot;Ubuntu&quot;
+VERSION=&quot;16.04.2 LTS (Xenial Xerus)&quot;
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME=&quot;Ubuntu 16.04.2 LTS&quot;
+VERSION_ID=&quot;16.04&quot;
+HOME_URL=&quot;http://www.ubuntu.com/&quot;
+SUPPORT_URL=&quot;http://help.ubuntu.com/&quot;
+BUG_REPORT_URL=&quot;http://bugs.launchpad.net/ubuntu/&quot;
+VERSION_CODENAME=xenial
+UBUNTU_CODENAME=xenial
+</code></pre>
+
+<p>So we can use <code>$ID</code> to identify the OS. Simply use the <code>source</code> command to load the file in your script and then use <code>$ID</code> for checking the OS</p>
+
+<pre><code class="language-bash">#!/bin/sh
+source /etc/os-release
+
+echo &quot;Your OS is $ID&quot;
+</code></pre>
+
+<p>In case of Ubuntu&rsquo;s <code>dash</code> you will get an error <code>sh: 1: source: not found</code>. This is becase <code>dash</code> doesn&rsquo;t implement the bash&rsquo;s <code>source</code> command. The simple fix is to replace <code>source</code> with <code>.</code> command</p>
+
+<pre><code class="language-bash">#!/bin/sh
+. /etc/os-release
+
+echo &quot;Your OS is $ID&quot;
+</code></pre>
+
+<h4 id="references">References</h4>
+
+<ul>
+<li><a href="https://www.freedesktop.org/software/systemd/man/os-release.html">os-release — Operating system identification</a></li>
+</ul>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" http://tarunlalwani.com" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  
+  <script src="http://tarunlalwani.com/js/App.js"></script>
+  
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="MySQL master slave using docker">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-03-30">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="http://tarunlalwani.com/post/mysql-master-slave-using-docker/">
+    <meta property="og:site_name" content="">
+    
+    <meta name="generator" content="Hugo 0.20.2" />
+    <title>MySQL master slave using docker &middot; </title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="http://tarunlalwani.comcss/style.css">
+    
+    <link href="http://tarunlalwani.com/index.xml" rel="alternate" type="application/rss+xml" title="" />
+    
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="http://tarunlalwani.com"></a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="http://tarunlalwani.com"></a></h1>
+		
+		
+		
+		
+		
+		<div id="social" class="text-center">
+			
+			
+			
+			
+			
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>MySQL master slave using docker</h1>
+	</header>
+
+	<article>
+		
+
+<p>Docker makes it easy to run multiple independent mysql instances on the same machines for different projects. But some projects use a Master and slave setup of MySQL, where usually writes are directed to Master and the reads are directed to Slave.</p>
+
+<p>I based my approach on <a href="https://github.com/tegansnyder/docker-mysql-master-slave/blob/master/setup.sh">tegansnyder/docker-mysql-master-slave</a>. But what I didn&rsquo;t like about the existing setup is that it assumed mysql client setup on the host. I wanted to do it using the mysql docker images itself. Also other things I wanted is that it is compatible with <code>docker-compose</code> as well.</p>
+
+<p>So we first create a basic <code>docker-compose.yml</code> with two mysql instances</p>
+
+<pre><code class="language-yml">version: '2'
+services:
+  mysqlmaster:
+    image: mysql:5.7
+    environment:
+      - &quot;MYSQL_ROOT_PASSWORD=root&quot;
+    volumes:
+      - ./data/mysql-master:/var/lib/mysql/
+      - ./config/mysql-master:/etc/mysql/conf.d/
+  mysqlslave:
+    image: mysql:5.7
+    environment:
+      - &quot;MYSQL_ROOT_PASSWORD=root&quot;
+    volumes:
+      - ./data/mysql-slave:/var/lib/mysql/
+      - ./config/mysql-slave:/etc/mysql/conf.d/
+</code></pre>
+
+<p>Now next we need master and slave config to give <code>server-id</code> to the mysql instances.</p>
+
+<h5 id="config-mysql-master-master-cnf">config/mysql-master/master.cnf</h5>
+
+<pre><code class="language-ini">[mysqld]
+server-id=1
+log-bin=mysql-bin
+log-slave-updates=1
+datadir=/var/lib/mysql/
+innodb_flush_log_at_trx_commit = 2
+innodb_flush_method = O_DIRECT
+skip-host-cache
+skip-name-resolve
+</code></pre>
+
+<h5 id="config-mysql-slave-slave-cnf">config/mysql-slave/slave.cnf</h5>
+
+<pre><code class="language-ini">[mysqld]
+server-id=2
+log-bin=mysql-bin
+log-slave-updates=1
+auto_increment_increment=2
+auto_increment_offset=2
+datadir=/var/lib/mysql
+read-only=1
+slave-skip-errors = 1062
+skip-host-cache
+skip-name-resolve
+</code></pre>
+
+<h3 id="configuration-script">Configuration script</h3>
+
+<p>Next we create a configuration shell script which we would run in an seperate image</p>
+
+<h5 id="mysql-connector-sh">mysql_connector.sh</h5>
+
+<pre><code class="language-bash">#!/bin/bash
+BASE_PATH=$(dirname $0)
+
+echo &quot;Waiting for mysql to get up&quot;
+# Give 60 seconds for master and slave to come up
+sleep 60
+
+echo &quot;Create MySQL Servers (master / slave repl)&quot;
+echo &quot;-----------------&quot;
+
+
+echo &quot;* Create replication user&quot;
+
+mysql --host mysqlslave -uroot -p$MYSQL_SLAVE_PASSWORD -AN -e 'STOP SLAVE;';
+mysql --host mysqlslave -uroot -p$MYSQL_MASTER_PASSWORD -AN -e 'RESET SLAVE ALL;';
+
+mysql --host mysqlmaster -uroot -p$MYSQL_MASTER_PASSWORD -AN -e &quot;CREATE USER '$MYSQL_REPLICATION_USER'@'%';&quot;
+mysql --host mysqlmaster -uroot -p$MYSQL_MASTER_PASSWORD -AN -e &quot;GRANT REPLICATION SLAVE ON *.* TO '$MYSQL_REPLICATION_USER'@'%' IDENTIFIED BY '$MYSQL_REPLICATION_PASSWORD';&quot;
+mysql --host mysqlmaster -uroot -p$MYSQL_MASTER_PASSWORD -AN -e 'flush privileges;'
+
+
+echo &quot;* Set MySQL01 as master on MySQL02&quot;
+
+MYSQL01_Position=$(eval &quot;mysql --host mysqlmaster -uroot -p$MYSQL_MASTER_PASSWORD -e 'show master status \G' | grep Position | sed -n -e 's/^.*: //p'&quot;)
+MYSQL01_File=$(eval &quot;mysql --host mysqlmaster -uroot -p$MYSQL_MASTER_PASSWORD -e 'show master status \G'     | grep File     | sed -n -e 's/^.*: //p'&quot;)
+MASTER_IP=$(eval &quot;getent hosts mysqlmaster|awk '{print \$1}'&quot;)
+echo $MASTER_IP
+mysql --host mysqlslave -uroot -p$MYSQL_SLAVE_PASSWORD -AN -e &quot;CHANGE MASTER TO master_host='mysqlmaster', master_port=3306, \
+        master_user='$MYSQL_REPLICATION_USER', master_password='$MYSQL_REPLICATION_PASSWORD', master_log_file='$MYSQL01_File', \
+        master_log_pos=$MYSQL01_Position;&quot;
+
+echo &quot;* Set MySQL02 as master on MySQL01&quot;
+
+MYSQL02_Position=$(eval &quot;mysql --host mysqlslave -uroot -p$MYSQL_SLAVE_PASSWORD -e 'show master status \G' | grep Position | sed -n -e 's/^.*: //p'&quot;)
+MYSQL02_File=$(eval &quot;mysql --host mysqlslave -uroot -p$MYSQL_SLAVE_PASSWORD -e 'show master status \G'     | grep File     | sed -n -e 's/^.*: //p'&quot;)
+
+SLAVE_IP=$(eval &quot;getent hosts mysqlslave|awk '{print \$1}'&quot;)
+echo $SLAVE_IP
+mysql --host mysqlmaster -uroot -p$MYSQL_MASTER_PASSWORD -AN -e &quot;CHANGE MASTER TO master_host='mysqlslave', master_port=3306, \
+        master_user='$MYSQL_REPLICATION_USER', master_password='$MYSQL_REPLICATION_PASSWORD', master_log_file='$MYSQL02_File', \
+        master_log_pos=$MYSQL02_Position;&quot;
+
+echo &quot;* Start Slave on both Servers&quot;
+mysql --host mysqlslave -uroot -p$MYSQL_SLAVE_PASSWORD -AN -e &quot;start slave;&quot;
+
+echo &quot;Increase the max_connections to 2000&quot;
+mysql --host mysqlmaster -uroot -p$MYSQL_MASTER_PASSWORD -AN -e 'set GLOBAL max_connections=2000';
+mysql --host mysqlslave -uroot -p$MYSQL_SLAVE_PASSWORD -AN -e 'set GLOBAL max_connections=2000';
+
+mysql --host mysqlslave -uroot -p$MYSQL_MASTER_PASSWORD -e &quot;show slave status \G&quot;
+
+echo &quot;MySQL servers created!&quot;
+echo &quot;--------------------&quot;
+echo
+echo Variables available fo you :-
+echo
+echo MYSQL01_IP       : mysqlmaster
+echo MYSQL02_IP       : mysqlslave
+</code></pre>
+
+<p>Next we update on our <code>docker-compose.yml</code> to run this script</p>
+
+<pre><code class="language-yaml">version: '2'
+services:
+  mysqlmaster:
+    image: mysql:5.7.15
+    environment:
+      - &quot;MYSQL_ROOT_PASSWORD=root&quot;
+    volumes:
+      - ./data/mysql-master:/var/lib/mysql/
+      - ./config/mysql-master:/etc/mysql/conf.d/
+  mysqlslave:
+    image: mysql:5.7
+    environment:
+      - &quot;MYSQL_ROOT_PASSWORD=root&quot;
+    volumes:
+      - ./data/mysql-slave:/var/lib/mysql/
+      - ./config/mysql-slave:/etc/mysql/conf.d/
+  mysqlconfigure:
+    image: mysql:5.7.15
+    environment:
+      - &quot;MYSQL_SLAVE_PASSWORD=root&quot;
+      - &quot;MYSQL_MASTER_PASSWORD=root&quot;
+      - &quot;MYSQL_ROOT_PASSWORD=root&quot;
+      - &quot;MYSQL_REPLICATION_USER=repl&quot;
+      - &quot;MYSQL_REPLICATION_PASSWORD=repl&quot;
+    volumes:
+      - ./mysql_connector.sh:/tmp/mysql_connector.sh
+    command: /bin/bash -x /tmp/mysql_connector.sh
+</code></pre>
+
+<h3 id="testing-the-setup">Testing the setup</h3>
+
+<pre><code class="language-bash">
+$ docker-compose up -d
+$ docker-compose logs -f mysqlconfigure
+$ docker-compose exec mysqlmaster mysql -uroot -proot -e &quot;CREATE DATABASE test_replication;&quot;
+$ docker-compose exec mysqlslave mysql -uroot -proot -e &quot;SHOW DATABASES;&quot;
+</code></pre>
+
+<p>The last command produces below output showing that the replication works fine</p>
+
+<pre><code>+--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| test_replication   |
++--------------------+
+</code></pre>
+
+<p>You can find the whole setup on my <a href="https://github.com/tarunlalwani/docker-compose-mysql-master-slave">tarunlalwani/docker-compose-mysql-master-slave</a></p>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" http://tarunlalwani.com" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  
+  <script src="http://tarunlalwani.com/js/App.js"></script>
+  
+</body>
+</html>
