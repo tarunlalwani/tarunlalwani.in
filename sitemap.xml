@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://tarunlalwani.com/post/detecting-os-in-shell-script/</loc>
+    <lastmod>2017-04-27T15:05:18+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/post/php-code-coverage-web-selenium/</loc>
+    <lastmod>2017-03-31T11:57:30+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/post/mysql-master-slave-using-docker/</loc>
+    <lastmod>2017-03-30T00:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/</loc>
+    <lastmod>2017-04-27T15:05:18+05:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/post/</loc>
+    <lastmod>2017-04-27T15:05:18+05:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
