@@ -6,10 +6,21 @@
     <description>Recent content in Posts on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Apr 2017 15:05:18 +0530</lastBuildDate>
+    <lastBuildDate>Sun, 30 Apr 2017 01:42:00 +0530</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Building Nginx from source with LuaJIT</title>
+      <link>http://tarunlalwani.com/post/building-nginx-with-lua/</link>
+      <pubDate>Sun, 30 Apr 2017 01:42:00 +0530</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/building-nginx-with-lua/</guid>
+      <description>Nginx is a great webserver. But it has no scripting capabilities. To add scripting capabilities in Nginx, one needs to build it from source with the necessary add-ons.
+In this article I will showcase how we can build Nginx with Lua inside Docker. There are two ways to do it
+1. OpenResty OpenRestry® is a full-fledged web platform that integrates the standard Nginx core, LuaJIT, many carefully written Lua libraries, lots of high quality 3rd-party Nginx modules</description>
+    </item>
     
     <item>
       <title>Detecting OS in shell script</title>
