@@ -10,5 +10,23 @@
 	<atom:link href="http://tarunlalwani.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>Development</title>
+      <link>http://tarunlalwani.com/categories/development/</link>
+      <pubDate>Thu, 30 Mar 2017 00:00:00 +0530</pubDate>
+      
+      <guid>http://tarunlalwani.com/categories/development/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vim</title>
+      <link>http://tarunlalwani.com/categories/vim/</link>
+      <pubDate>Thu, 30 Mar 2017 00:00:00 +0530</pubDate>
+      
+      <guid>http://tarunlalwani.com/categories/vim/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

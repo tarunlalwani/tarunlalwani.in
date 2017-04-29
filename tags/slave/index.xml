@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Slave on TARUN LALWANI</title>
+    <link>http://tarunlalwani.com/tags/slave/</link>
+    <description>Recent content in Slave on TARUN LALWANI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Mar 2017 00:00:00 +0530</lastBuildDate>
+    
+	<atom:link href="http://tarunlalwani.com/tags/slave/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL master slave using docker</title>
+      <link>http://tarunlalwani.com/post/mysql-master-slave-using-docker/</link>
+      <pubDate>Thu, 30 Mar 2017 00:00:00 +0530</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/mysql-master-slave-using-docker/</guid>
+      <description>Docker makes it easy to run multiple independent mysql instances on the same machines for different projects. But some projects use a Master and slave setup of MySQL, where usually writes are directed to Master and the reads are directed to Slave.
+I based my approach on tegansnyder/docker-mysql-master-slave. But what I didn&amp;rsquo;t like about the existing setup is that it assumed mysql client setup on the host. I wanted to do it using the mysql docker images itself.</description>
+    </item>
+    
+  </channel>
+</rss>
