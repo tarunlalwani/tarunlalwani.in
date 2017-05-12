@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://tarunlalwani.com/post/best-practices-using-environment-files-docker-compose/</loc>
+    <lastmod>2017-05-12T12:43:22+05:30</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/post/building-nginx-with-lua/</loc>
     <lastmod>2017-04-30T01:42:00+05:30</lastmod>
   </url>
@@ -52,7 +57,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/post/</loc>
-    <lastmod>2017-04-30T01:42:00+05:30</lastmod>
+    <lastmod>2017-05-12T12:43:22+05:30</lastmod>
     <priority>0</priority>
   </url>
   
@@ -70,7 +75,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/</loc>
-    <lastmod>2017-04-30T01:42:00+05:30</lastmod>
+    <lastmod>2017-05-12T12:43:22+05:30</lastmod>
     <priority>0</priority>
   </url>
   

@@ -6,10 +6,22 @@
     <description>Recent content on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 30 Apr 2017 01:42:00 +0530</lastBuildDate>
+    <lastBuildDate>Fri, 12 May 2017 12:43:22 +0530</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Best practices while using environment files with Docker Compose</title>
+      <link>http://tarunlalwani.com/post/best-practices-using-environment-files-docker-compose/</link>
+      <pubDate>Fri, 12 May 2017 12:43:22 +0530</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/best-practices-using-environment-files-docker-compose/</guid>
+      <description>docker-compose is an amazing tool to create a full fledged environment using different docker containers. We have used the same in our case to deploy multiple environments for testing.
+This article will share the best practices when it comes to using environments files inside docker-compose.yml
+Approach #1 - Using env_file Let&amp;rsquo;s create a simple docker-compose.yml file which prints a environment variable and then sleeps for sometime
+docker-compose.yml version: &#39;2&#39; services: demo: image: centos:7.</description>
+    </item>
     
     <item>
       <title>Building Nginx from source with LuaJIT</title>
