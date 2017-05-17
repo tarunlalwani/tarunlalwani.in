@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="Migrating/Upgrading Gitlab 6.X to latest Gitlab docker">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-05-17">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="http://tarunlalwani.com/post/migrating-gitlab-6-mysql-to-latest-gitlab/">
+    <meta property="og:site_name" content="TARUN LALWANI">
+   
+
+    
+    <meta property="og:tags" content="gitlab">
+    
+    <meta property="og:tags" content="upgrade">
+    
+    <meta property="og:tags" content="migrate">
+    
+    <meta property="og:tags" content="docker">
+    
+    <meta property="og:tags" content="latest">
+    
+
+    
+    <meta property="og:image" content="http://tarunlalwani.com/images/gitlab_migration.png">
+    <meta property="twitter:image:src" content="http://tarunlalwani.com/images/gitlab_migration.png">
+    
+
+    <meta name="generator" content="Hugo 0.20.2" />
+    <title>Migrating/Upgrading Gitlab 6.X to latest Gitlab docker &middot; TARUN LALWANI</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://tarunlalwani.com/css/style.css">
+
+    
+
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/solarized-dark.min.css">
+
+    
+
+    
+    <link href="http://tarunlalwani.com/index.xml" rel="alternate" type="application/rss+xml" title="TARUN LALWANI" />
+    
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="http://tarunlalwani.com/">TARUN LALWANI</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="http://tarunlalwani.com/">TARUN LALWANI</a></h1>
+		
+		
+		
+			<small class="text-center center-block">Technology Enthusiast</small>
+		
+		
+		
+			<img id="profile-pic" src="http://tarunlalwani.com//images/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			
+			<a href="https://plus.google.com/&#43;TarunLalwani"><i class="fa fa-google-plus fa-2x"></i></a>
+			<a href="https://www.linkedin.com/in/tarunlalwani"><i class="fa fa-linkedin fa-2x"></i></a>
+			<a href="https://github.com/tarunlalwani"><i class="fa fa-github fa-2x"></i></a>
+			
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Migrating/Upgrading Gitlab 6.X to latest Gitlab docker</h1>
+	</header>
+
+	<article>
+		
+
+<p><a href="https://about.gitlab.com/">Gitlab</a> is an amazing Git hosting service. With it&rsquo;s community edition, one can setup an in-house git server in no time.</p>
+
+<p>Those who have been an earlier follower of Gitlab, may still be stuck with the version 6.X. Version 6.X was setup manually by creating DB in MySQL/Postgres, Nginx/Apache entries and few other setup steps.</p>
+
+<p>As time moved on, Gitlab started providing packages and one could install or upgrade Gitlab using a package manager like <code>yum</code>, <code>apt</code>. And now it provides docker images for all its Gitlab versions. Those who didn&rsquo;t upgrade are really missing some of the latest and the collest features of Gitlab</p>
+
+<p>I was tasked to upgrade Gitlab 6.X at our company to the latest version, so we could use the latest Gitlab CI capabilities. Our existing setup was using MySQL.</p>
+
+<p>The impression was that we can&rsquo;t upgrade, so we would install a new version and import projects into the same. This would mean loosing all the MR&rsquo;s that we had and won&rsquo;t be much of use</p>
+
+<p>So I decided to dig into the same and see if we could do an automated/manual upgrade. Gitlab is a Ruby on Rails (ROR) application, so it uses migrations for the DB upgrade. Using migrations should mean no issues upgrading to any version, but that was not the case with Gitlab.</p>
+
+<p>It took me a week or two to resolve different issues that came up during the migration and that&rsquo;s when I decided to share the details for others</p>
+
+<p>Below is the list of steps one need to follow for an upgrade</p>
+
+<ul>
+<li>Stop the existing server and dump the MySQL database dump</li>
+<li>Convert the dump from MySQL to Postgres compatible dump</li>
+<li>Launch a new Dockerized instance of Gitlab</li>
+<li>Import the Postgres Compatible dump</li>
+<li>Copy existing repositories</li>
+<li>Reconfigure and restart gitlab</li>
+<li>Run the migrations and Resolve any issues</li>
+<li>Excute gitlab checks</li>
+<li>Reconfigure and restart gitlab</li>
+<li>Run the post migration setup steps</li>
+<li>Upgrading to latest Gitlab</li>
+</ul>
+
+<h2 id="taking-the-mysql-dump">Taking the mysql dump</h2>
+
+<p>To take the dump we use the <code>mysqldump</code> command</p>
+
+<pre><code class="language-bash">mysqldump --compatible=postgresql --default-character-set=utf8 -r gitlabhq_production_new.mysql --extended-insert=FALSE -u root gitlab -p
+</code></pre>
+
+<blockquote>
+<p>Note: I have used the user root, but if you have a different user, use that</p>
+</blockquote>
+
+<h2 id="converting-the-dump-from-mysql-to-postgres">Converting the Dump from MySQL to Postgres</h2>
+
+<p>This requires python, so make sure you have python installed.</p>
+
+<pre><code class="language-bash">$ git clone https://github.com/gitlabhq/mysql-postgresql-converter.git -b gitlab
+$ mkdir db
+$ python mysql-postgresql-converter/db_converter.py gitlabhq_production.mysql db/database.sql
+</code></pre>
+
+<h2 id="launch-gitlab-using-docker">Launch Gitlab using Docker</h2>
+
+<p>You can get all the available tags <a href="https://hub.docker.com/r/gitlab/gitlab-ce/tags/">here</a>. I have assumed <code>8.11.11-ce.0</code> as the lowest one. The approach is to upgrade to the lowest available tag first and then move on to the higher tag</p>
+
+<p>So we use the below <code>docker-compose.yml</code> file</p>
+
+<pre><code class="language-yaml">version: '2'
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:8.11.11-ce.0
+    ports:
+      - &quot;22:22&quot;
+      - &quot;80:80&quot;
+    volumes:
+      - ./config:/etc/gitlab
+      - ./logs:/var/log/gitlab
+      - ./data:/var/opt/gitlab
+      - ./db:/db
+      - ./scripts:/scripts
+</code></pre>
+
+<blockquote>
+<p>Note: Before launching this, you need to update your <code>/etc/ssh/sshd_config</code> and set your ssh port to something different than 22. Else you would need change the SSH port of the gitlab. This would require setting some environment variables in the docker-compose.yml. See this <a href="https://docs.gitlab.com/omnibus/docker/README.html">article</a> for more details</p>
+</blockquote>
+
+<p>Now we launch gitlab and wait for the Postgres DB to be up</p>
+
+<pre><code class="language-bash"># Start the gitlab composition
+docker-compose up -d
+
+# Give 2 minutes for the system to start
+sleep 120
+
+# Wait for the DB to get up
+docker-compose logs -f gitlab | grep -q 'autovacuum launcher started'
+</code></pre>
+
+<h2 id="import-the-postgres-compatible-dump">Import the Postgres Compatible dump</h2>
+
+<p>Now to import the dump, we need an empty Postgres DB, but when we start the new docker image it runs the migrations. This initialize the database according to the latest schema and hence and import would fail. So our first task is to clear the database</p>
+
+<pre><code class="language-bash">echo &quot;Dropping current tables&quot;
+echo &quot;select 'DROP table ' || tablename || ' CASCADE;'  from pg_tables  WHERE schemaname='public';&quot; | gitlab-rails db | head -n -2 | tail -n +3 | gitlab-rails db
+
+echo &quot;Dropping current sequences&quot;
+echo &quot;select 'DROP SEQUENCE ' || sequence_name || ';'  from information_schema.sequences  WHERE NOT sequence_schema IN ('pg_catalog', 'information_schema') and sequence_schema='public' and sequenc    e_catalog='gitlabhq_production';&quot; | gitlab-rails db | head -n -2 | tail -n +3 | gitlab-rails db
+</code></pre>
+
+<blockquote>
+<p>Note: Above commands need to be executed inside the gitlab container. So use <code>docker-compose exec gitlab bash</code> to get inside the container and then execute the commands. All upcoming commands need to be executed inside the container</p>
+</blockquote>
+
+<p>Now we import our db</p>
+
+<pre><code class="language-bash">echo &quot;Loading current database&quot;
+cat /db/database.sql | gitlab-rails db
+</code></pre>
+
+<h2 id="copy-existing-repositories">Copy existing repositories</h2>
+
+<p>Before we proceed further, we need to copy over the existing repositories to the <code>./data/git-data/repositories</code> folder. I would recommend top copy and not move the repositories, as there are changes that are made during the upgrade.</p>
+
+<h2 id="reconfigure-and-restart-gitlab">Reconfigure and Restart Gitlab</h2>
+
+<p>Now we need to reconfigure and restart the gitlab server</p>
+
+<pre><code class="language-bash">
+echo &quot;Updating permissions&quot;
+update-permissions
+
+echo &quot;Reconfigure gitlab&quot;
+gitlab-ctl reconfigure
+
+echo &quot;Restart gitlab&quot;
+gitlab-ctl restart
+</code></pre>
+
+<p>These steps may seem unnecessary but I encountered weird errors if these commands where not executed</p>
+
+<h2 id="run-the-migrations-and-resolve-any-issues">Run the migrations and Resolve any issues</h2>
+
+<p>This is a important step and it take certain attempts to get past through this. To run a migration we execute the below command</p>
+
+<pre><code class="language-bash">MIGRATION_COUNT=0
+
+run_migrations() {
+    ((MIGRATION_COUNT++))
+    echo &quot;Running migration $MIGRATION_COUNT&quot;
+    gitlab-rake db:migrate 2&gt;&amp;1 | tee -a /tmp/migration.log | grep -A9 ERROR
+}
+</code></pre>
+
+<p>We call the <code>run_migrations</code> function, it runs migration and sends all migration logs to <code>/tmp/migration.log</code> in append mode (<code>-a</code> flag). The grep command makes sure that on screen we only see lines with <code>ERROR</code> in it (+9 next lines).</p>
+
+<p>When we run the above migration, first time. The command would error out with below error</p>
+
+<pre><code>PG::UndefinedColumn: ERROR:  column issues.deleted_at does not exist
+</code></pre>
+
+<p>We fix this issue by manually altering the TABLE for migration to proceed</p>
+
+<pre><code class="language-bash">echo &quot;Fixing issues.deleted_at migration issue&quot;
+echo &quot;ALTER TABLE issues add column deleted_at timestamp;&quot; | gitlab-rails db
+</code></pre>
+
+<p>Next migration error we would get is</p>
+
+<pre><code>PG::UndefinedColumn: ERROR:  column projects.pending_delete does not exist
+</code></pre>
+
+<p>The fix is similar to previous one</p>
+
+<pre><code class="language-bash">echo &quot;Fixing projects.pending_delete migration issue&quot;
+echo &quot;ALTER TABLE projects add column pending_delete boolean;&quot; | gitlab-rails db
+</code></pre>
+
+<p>Next migration we get is</p>
+
+<pre><code>NoMethodError: undefined method create_label_from_tagging'
+</code></pre>
+
+<blockquote>
+<p>Note: You may or may not face this issue, depending on the state of the database</p>
+</blockquote>
+
+<p>If the issue is faced, below command will fix it</p>
+
+<pre><code class="language-bash">echo &quot;Fixing nilClass migration issue&quot;
+gitlab-rake gitlab:db:mark_migration_complete[20140729152420]
+</code></pre>
+
+<pre><code>PG::DuplicateColumn: ERROR:  column &quot;pending_delete&quot; of relation &quot;projects&quot; already exists
+</code></pre>
+
+<pre><code class="language-bash">echo &quot;Fixing projects.pending_delete migration issue&quot;
+echo &quot;ALTER TABLE projects DROP COLUMN pending_delete;&quot; | gitlab-rails db
+</code></pre>
+
+<pre><code>PG::DuplicateColumn: ERROR:  column &quot;deleted_at&quot; of relation &quot;issues&quot; already exists
+</code></pre>
+
+<pre><code class="language-bash">echo &quot;Fixing issues.deleted_at migration issue&quot;
+echo &quot;ALTER TABLE issues DROP COLUMN deleted_at ;&quot; | gitlab-rails db
+</code></pre>
+
+<h2 id="execute-gitlab-checks">Execute gitlab checks</h2>
+
+<p>Next we execute gitlab checks to validate that everything is ok</p>
+
+<pre><code class="language-bash">echo &quot;Checking issues&quot;
+gitlab-rake gitlab:check
+</code></pre>
+
+<h2 id="reconfigure-and-restart-gitlab-1">Reconfigure and restart Gitlab</h2>
+
+<p>Next we reconfigure and restart gitlab</p>
+
+<pre><code class="language-bash">echo &quot;Reconfigure gitlab&quot;
+gitlab-ctl reconfigure
+
+echo &quot;Gitlab restart&quot;
+gitlab-ctl restart
+</code></pre>
+
+<h2 id="run-the-post-migration-setup-steps">Run the post migration setup steps</h2>
+
+<p>The ssh based access to the any repository works by creating a <code>authorized_keys</code> file with ssh keys of the user. This file gets updated when a user adds a new ssh key through the Gitlab UI. But since we imported all the ssh keys directly to DB, none of keys get added to the file.</p>
+
+<p>We must regenerate the file using a rake task</p>
+
+<pre><code class="language-bash">echo &quot;Setting up SSH KEYS&quot;
+LC_ALL=en_US.UTF-8 gitlab-rake gitlab:shell:setup
+</code></pre>
+
+<h2 id="upgrading-to-latest-gitlab">Upgrading to latest Gitlab</h2>
+
+<p>By using docker the upgrade process of gitlab becomes very simple. We update the image in our <code>docker-compose.yml</code> from <code>gitlab/gitlab-ce:8.11.11-ce.0</code> to <code>gitlab/gitlab-ce:latest</code></p>
+
+<p>So now whenever we pull the images, it would always pull the latest version.</p>
+
+<pre><code class="language-bash"># This step is only needed if you are upgrading from previous docker setup
+docker-compose exec gitlab gitlab-rake gitlab:backup:create
+
+# Pull the latest image
+docker-compose pull
+
+# Update docker
+docker-compose up -d
+
+# Check logs for any issues
+docker-compose logs -f
+</code></pre>
+
+<p>If you need a fully automated script for migration, refer to <a href="https://github.com/tarunlalwani/gitlab-6-migration-latest.git">tarunlalwani/gitlab-6-migration-latest.git</a></p>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" http://tarunlalwani.com/" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-99088991-1', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "http:\/\/tarunlalwani.com\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  
+
+  <script src="http://tarunlalwani.com//js/highlight.pack.js"></script>
+  
+  <script src="http://tarunlalwani.com//js/App.js"></script>
+  
+</body>
+</html>

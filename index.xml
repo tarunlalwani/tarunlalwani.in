@@ -6,10 +6,21 @@
     <description>Recent content on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 May 2017 01:12:38 +0530</lastBuildDate>
+    <lastBuildDate>Wed, 17 May 2017 11:47:37 +0530</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Migrating/Upgrading Gitlab 6.X to latest Gitlab docker</title>
+      <link>http://tarunlalwani.com/post/migrating-gitlab-6-mysql-to-latest-gitlab/</link>
+      <pubDate>Wed, 17 May 2017 11:47:37 +0530</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/migrating-gitlab-6-mysql-to-latest-gitlab/</guid>
+      <description>Gitlab is an amazing Git hosting service. With it&amp;rsquo;s community edition, one can setup an in-house git server in no time.
+Those who have been an earlier follower of Gitlab, may still be stuck with the version 6.X. Version 6.X was setup manually by creating DB in MySQL/Postgres, Nginx/Apache entries and few other setup steps.
+As time moved on, Gitlab started providing packages and one could install or upgrade Gitlab using a package manager like yum, apt.</description>
+    </item>
     
     <item>
       <title>Should we deploying code inside docker images Statically or Dynamically?</title>
