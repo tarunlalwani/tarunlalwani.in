@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://tarunlalwani.com/post/debugging-php-xdebug-docker/</loc>
+    <lastmod>2017-05-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/post/migrating-gitlab-6-mysql-to-latest-gitlab/</loc>
     <lastmod>2017-05-17T11:47:37+05:30</lastmod>
   </url>
@@ -42,6 +47,18 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/debug/</loc>
+    <lastmod>2017-05-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/tags/debugging/</loc>
+    <lastmod>2017-05-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/categories/development/</loc>
     <lastmod>2017-03-30T00:00:00+05:30</lastmod>
     <priority>0</priority>
@@ -49,7 +66,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/docker/</loc>
-    <lastmod>2017-05-17T11:47:37+05:30</lastmod>
+    <lastmod>2017-05-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -84,8 +101,14 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/php/</loc>
+    <lastmod>2017-05-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/post/</loc>
-    <lastmod>2017-05-17T11:47:37+05:30</lastmod>
+    <lastmod>2017-05-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -102,14 +125,20 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/ssh/</loc>
+    <lastmod>2017-05-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/</loc>
-    <lastmod>2017-05-17T11:47:37+05:30</lastmod>
+    <lastmod>2017-05-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://tarunlalwani.com/tags/</loc>
-    <lastmod>2017-05-17T11:47:37+05:30</lastmod>
+    <lastmod>2017-05-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -122,6 +151,12 @@
   <url>
     <loc>http://tarunlalwani.com/categories/vim/</loc>
     <lastmod>2017-03-30T00:00:00+05:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/tags/xdebug/</loc>
+    <lastmod>2017-05-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -6,15 +6,33 @@
     <description>Recent content in Tags on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 May 2017 11:47:37 +0530</lastBuildDate>
+    <lastBuildDate>Sat, 20 May 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Debug</title>
+      <link>http://tarunlalwani.com/tags/debug/</link>
+      <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/debug/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Debugging</title>
+      <link>http://tarunlalwani.com/tags/debugging/</link>
+      <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/debugging/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Docker</title>
       <link>http://tarunlalwani.com/tags/docker/</link>
-      <pubDate>Wed, 17 May 2017 11:47:37 +0530</pubDate>
+      <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/docker/</guid>
       <description></description>
@@ -66,6 +84,15 @@
     </item>
     
     <item>
+      <title>Php</title>
+      <link>http://tarunlalwani.com/tags/php/</link>
+      <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/php/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Replication</title>
       <link>http://tarunlalwani.com/tags/replication/</link>
       <pubDate>Thu, 30 Mar 2017 00:00:00 +0530</pubDate>
@@ -84,11 +111,29 @@
     </item>
     
     <item>
+      <title>Ssh</title>
+      <link>http://tarunlalwani.com/tags/ssh/</link>
+      <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/ssh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Upgrade</title>
       <link>http://tarunlalwani.com/tags/upgrade/</link>
       <pubDate>Wed, 17 May 2017 11:47:37 +0530</pubDate>
       
       <guid>http://tarunlalwani.com/tags/upgrade/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Xdebug</title>
+      <link>http://tarunlalwani.com/tags/xdebug/</link>
+      <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/xdebug/</guid>
       <description></description>
     </item>
     

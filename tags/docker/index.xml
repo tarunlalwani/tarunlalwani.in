@@ -6,10 +6,22 @@
     <description>Recent content in Docker on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 May 2017 11:47:37 +0530</lastBuildDate>
+    <lastBuildDate>Sat, 20 May 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Debugging PHP web applications using XDebug inside Docker</title>
+      <link>http://tarunlalwani.com/post/debugging-php-xdebug-docker/</link>
+      <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/debugging-php-xdebug-docker/</guid>
+      <description>Debugging is an important aspect of any test environment. It helps developer troubleshoot their code on a deployed environment.
+XDebug is one of the popular debuggers for PHP and many PHP IDEs have built-in support for XDebug.
+Docker provides official images for php-fpm and nginx. php-fpm process all the PHP code and for client request handling we will use nginx.
+In this article we will explore 2 approaches for using XDebug in a php-fpm + Nginx setup.</description>
+    </item>
     
     <item>
       <title>Migrating/Upgrading Gitlab 6.X to latest Gitlab docker</title>
