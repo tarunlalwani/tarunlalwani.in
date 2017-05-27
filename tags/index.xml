@@ -6,10 +6,19 @@
     <description>Recent content in Tags on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 May 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 02 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Checkout</title>
+      <link>http://tarunlalwani.com/tags/checkout/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/checkout/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Debug</title>
@@ -32,9 +41,18 @@
     <item>
       <title>Docker</title>
       <link>http://tarunlalwani.com/tags/docker/</link>
-      <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>http://tarunlalwani.com/tags/git/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/git/</guid>
       <description></description>
     </item>
     
@@ -57,6 +75,15 @@
     </item>
     
     <item>
+      <title>Log</title>
+      <link>http://tarunlalwani.com/tags/log/</link>
+      <pubDate>Mon, 29 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/log/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Master</title>
       <link>http://tarunlalwani.com/tags/master/</link>
       <pubDate>Thu, 30 Mar 2017 00:00:00 +0530</pubDate>
@@ -71,6 +98,15 @@
       <pubDate>Wed, 17 May 2017 11:47:37 +0530</pubDate>
       
       <guid>http://tarunlalwani.com/tags/migrate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Missing</title>
+      <link>http://tarunlalwani.com/tags/missing/</link>
+      <pubDate>Mon, 29 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/missing/</guid>
       <description></description>
     </item>
     
@@ -93,11 +129,38 @@
     </item>
     
     <item>
+      <title>Private</title>
+      <link>http://tarunlalwani.com/tags/private/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/private/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>http://tarunlalwani.com/tags/python/</link>
+      <pubDate>Mon, 29 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Replication</title>
       <link>http://tarunlalwani.com/tags/replication/</link>
       <pubDate>Thu, 30 Mar 2017 00:00:00 +0530</pubDate>
       
       <guid>http://tarunlalwani.com/tags/replication/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Repository</title>
+      <link>http://tarunlalwani.com/tags/repository/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/repository/</guid>
       <description></description>
     </item>
     
