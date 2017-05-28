@@ -6,30 +6,20 @@
     <description>Recent content in Posts on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 02 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 28 May 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Git checkout private repository inside Docker</title>
-      <link>http://tarunlalwani.com/post/git-checkout-private-repository-inside-docker/</link>
-      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      <title>Selenium change User-Agent of different browsers</title>
+      <link>http://tarunlalwani.com/post/selenium-change-user-agent-different-browsers/</link>
+      <pubDate>Sun, 28 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/git-checkout-private-repository-inside-docker/</guid>
-      <description>One of the aim of moving project&amp;rsquo;s deployment to docker, is to be able to build a image on any system without any manual setup. This articles shows how you can clone your private git repos inside a docker image without the need of username and password using SSH keys.
-Generating the SSH key pairs First we would generate a SSH key pair, which will be used by the docker image</description>
-    </item>
-    
-    <item>
-      <title>Why delayed output for python process in my Docker logs?</title>
-      <link>http://tarunlalwani.com/post/why-delayed-output-python-docker/</link>
-      <pubDate>Mon, 29 May 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://tarunlalwani.com/post/why-delayed-output-python-docker/</guid>
-      <description>Recently while moving one of our projects to Docker, we had a weird error that our python script would not output any data in docker logs. We thought the scripts were stuck, but later we realized the logs had a delayed output
-When we were running the script inside the docker image through bash they would give all output on the console fine. Which kind of puzzled us
-So we created a simple project to recreate the issue</description>
+      <guid>http://tarunlalwani.com/post/selenium-change-user-agent-different-browsers/</guid>
+      <description>Server uses User-Agent string to differentiate between different browsers and devices. Each device + browser combination can have a different name to identify the Browser and its version. Thougth that may not be 100% true in all cases.
+In this article we will see how to change the user-agent of different browser when automating them using Selenium
+Changing User-Agent in Internet Explorer Unfortunately there is no good way to change the User-Agent of a IE browser.</description>
     </item>
     
     <item>

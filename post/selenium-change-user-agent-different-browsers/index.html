@@ -4,32 +4,37 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="description" content="">
-    <meta property="og:title" content="Git checkout private repository inside Docker">
+    <meta property="og:title" content="Selenium change User-Agent of different browsers">
     
     <meta property="og:type" content="article">
-    <meta property="article:published_time" content="2017-06-02">
+    <meta property="article:published_time" content="2017-05-28">
     
     <meta property="og:description" content="">
-    <meta property="og:url" content="http://tarunlalwani.com/post/git-checkout-private-repository-inside-docker/">
+    <meta property="og:url" content="http://tarunlalwani.com/post/selenium-change-user-agent-different-browsers/">
     <meta property="og:site_name" content="TARUN LALWANI">
    
 
     
-    <meta property="og:tags" content="git">
+    <meta property="og:tags" content="selenium">
     
-    <meta property="og:tags" content="checkout">
+    <meta property="og:tags" content="user-agent">
     
-    <meta property="og:tags" content="private">
+    <meta property="og:tags" content="safari">
     
-    <meta property="og:tags" content="repository">
+    <meta property="og:tags" content="chrome">
     
-    <meta property="og:tags" content="docker">
+    <meta property="og:tags" content="firefox">
+    
+    <meta property="og:tags" content="phantomjs">
     
 
+    
+    <meta property="og:image" content="http://tarunlalwani.com/images/useragent_selenium.png">
+    <meta property="twitter:image:src" content="http://tarunlalwani.com/images/useragent_selenium.png">
     
 
     <meta name="generator" content="Hugo 0.20.2" />
-    <title>Git checkout private repository inside Docker &middot; TARUN LALWANI</title>
+    <title>Selenium change User-Agent of different browsers &middot; TARUN LALWANI</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://tarunlalwani.com/css/style.css">
@@ -106,92 +111,84 @@
 
 <main>
 	<header>
-		<h1>Git checkout private repository inside Docker</h1>
+		<h1>Selenium change User-Agent of different browsers</h1>
 	</header>
 
 	<article>
 		
 
-<p>One of the aim of moving project&rsquo;s deployment to docker, is to be able to build a image on any system without any manual setup. This articles shows how you can clone your private git repos inside a docker image without the need of username and password using SSH keys.</p>
+<p>Server uses <code>User-Agent</code> string to differentiate between different browsers and devices. Each device + browser combination can have a different name to identify the Browser and its version. Thougth that may not be 100% true in all cases.</p>
 
-<h2 id="generating-the-ssh-key-pairs">Generating the SSH key pairs</h2>
+<p>In this article we will see how to change the user-agent of different browser when automating them using Selenium</p>
 
-<p>First we would generate a SSH key pair, which will be used by the docker image</p>
+<h2 id="changing-user-agent-in-internet-explorer">Changing User-Agent in Internet Explorer</h2>
 
-<pre><code class="language-bash">$ mkdir ~/keys
-$ ssh-keygen -t rsa -b 4096 -C &quot;xxxxxx@yyyyy.com&quot;
-Generating public/private rsa key pair.
-Enter file in which to save the key (/home/tarunlalwani/.ssh/id_rsa): /home/tarunlalwani/keys/id_rsa
-Enter passphrase (empty for no passphrase): 
-Enter same passphrase again: 
-Your identification has been saved in /home/tarunlalwani/keys/id_rsa.
-Your public key has been saved in /home/tarunlalwani/keys/id_rsa.pub.
+<p>Unfortunately there is no good way to change the User-Agent of a IE browser. This is either done through registry or through use of Windows API. GitHub <a href="https://github.com/SeleniumHQ/selenium/issues/759">Issue # 759</a> discussed this possibility and was rejected. So one can use the registry method as discussed <a href="http://www.pctools.com/guides/registry/detail/799/">here</a></p>
+
+<h2 id="changing-user-agent-in-chrome">Changing User-Agent in Chrome</h2>
+
+<p>To change the user agent in Chrome, we need to use the <code>ChromeOptions</code> object and pass it along when start the driver</p>
+
+<pre><code class="language-python">from selenium import webdriver
+
+options = webdriver.ChromeOptions()
+options.add_argument(&quot;--user-agent=New User Agent&quot;)
+driver = webdriver.Chrome(chrome_options=options)
 </code></pre>
 
-<p>Now we have a keys folder generated in our home directotry with <code>id_rsa</code> and <code>id_rsa.pub</code> files.</p>
+<h2 id="changing-user-agent-in-firefox">Changing User-Agent in Firefox</h2>
 
-<h2 id="adding-the-target-host-fingerprints-to-known-hosts">Adding the target host fingerprints to known hosts</h2>
+<p>User agent can be changed in Firefox using the profile</p>
 
-<p>For security reason, each host that we would connect to using ssh, need to have finger prints in <code>known_hosts</code> file. When we connect to a server for the firts time, it asks us to save those finger print. To do that automatically we need to use the <code>ssh-keyscan</code> command</p>
+<pre><code class="language-python">from selenium import webdriver
 
-<pre><code class="language-bash">$ ssh-keyscan github.com &gt;&gt; ~/keys/known_hosts
-$ ssh-keyscan gitlab.mydomain.com &gt;&gt; ~/keys/known_hosts
+profile = webdriver.FirefoxProfile()
+binary = FirefoxBinary(&quot;/opt/homebrew-cask/Caskroom/firefox/38.0.5/Firefox.app/Contents/MacOS/firefox&quot;)
+
+profile.set_preference(&quot;general.useragent.override&quot;, &quot;New user agent&quot;)
+
+driver = webdriver.Firefox(firefox_profile=profile, firefox_binary=binary)
 </code></pre>
 
-<h2 id="adding-the-ssh-keys-on-your-git-server">Adding the SSH keys on your git server</h2>
+<blockquote>
+<p>Note: The FirefoxBinary is only needed because I have Firefox installed on a non-default path using Homebrew. For others even the below code should work</p>
+</blockquote>
 
-<p>Make sure you add the content of the <code>id_rsa.pub</code> we generated earlier into the allowed SSH keys of your git server(github or gitlab or bitbucket) settings</p>
+<pre><code class="language-python">from selenium import webdriver
 
-<h2 id="creating-the-dockerfile">Creating the Dockerfile</h2>
+profile = webdriver.FirefoxProfile()
+profile.set_preference(&quot;general.useragent.override&quot;, &quot;New user agent&quot;)
 
-<p>We will create a new <code>docker-git</code> folder in the home directory</p>
-
-<pre><code>$ mkdir ~/docker-git
-$ mv ~/keys/ ~/docker-git/
-$ cd ~/docker-git
+driver = webdriver.Firefox(firefox_profile=profile)
 </code></pre>
 
-<p>Now let&rsquo;s create a new <code>Dockerfile</code> inside the <code>docker-git</code> folder</p>
+<h2 id="changing-user-agent-in-phantomjs">Changing User-Agent in PhantomJS</h2>
 
-<h4 id="dockerfile">Dockerfile</h4>
+<p>PhantomJS is headless webkit based browser. It is quite fast compared to other browsers as there is no GUI rendering. To change the User-Agent of the same we can use below code</p>
 
-<pre><code class="language-Dockerfile">FROM ubuntu:14.04
-ENV DEBIAN_FRONTEND noninteractive
+<pre><code>from selenium import webdriver
 
-RUN apt-get -y update &amp;&amp; apt-get -y install --no-install-recommends git ssh
-
-WORKDIR /root
-RUN mkdir -p /root/.ssh
-COPY keys .ssh
-
-RUN git clone git@gitlab.mydomain.com:root/seleniumplus.git
-RUN unset DEBIAN_FRONTEND 
-
-CMD [&quot;/bin/bash&quot;]
+cap = webdriver.DesiredCapabilities.PHANTOMJS
+cap[&quot;phantomjs.page.settings.userAgent&quot;] = &quot;New user agent&quot;
+driver = webdriver.PhantomJS(desired_capabilities=cap)
 </code></pre>
 
-<p>Now if build and run the docker build command</p>
+<h2 id="changing-user-agent-in-safari-mac-osx">Changing User-Agent in Safari (Mac OSX)</h2>
 
-<pre><code>$ docker build -t gittest:latest .
+<p>Safari driver in Selenium doesn&rsquo;t give much control on customization of settings for the browser. To do this we need to change the default settings of the browser from Terminal</p>
+
+<pre><code class="language-bash">$ defaults write com.apple.Safari CustomUserAgent &quot;New user agent&quot;
 </code></pre>
 
-<p>The output would come something like below</p>
+<blockquote>
+<p>Note: The new user agent will not impact already open Safari browsers and will only impact all new instances of the Safari browser</p>
+</blockquote>
 
-<pre><code>....
-Step 8 : CMD /bin/bash
- ---&gt; 93a05264fbca
-Successfully built 93a05264fbca
-</code></pre>
+<h4 id="reverting-the-user-agent-for-safari">Reverting the User-Agent for Safari</h4>
 
-<p>To test same we can run the image using the tag</p>
+<p>To revert the user agent back to the normal safari agent we can do the following</p>
 
-<pre><code>$ docker run -it gittest:latest
-root@bf7ebb0619c0:~# ls
-seleniumplus
-root@bf7ebb0619c0:~# cd seleniumplus/
-root@bf7ebb0619c0:~/seleniumplus# ls
-README  __init__.py  selenium_automation.py
-root@bf7ebb0619c0:~/seleniumplus# 
+<pre><code class="language-bash">$ defaults delete com.apple.Safari CustomUserAgent
 </code></pre>
 
 	</article>

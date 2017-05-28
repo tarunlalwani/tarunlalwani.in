@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>User Agent on TARUN LALWANI</title>
+    <link>http://tarunlalwani.com/tags/user-agent/</link>
+    <description>Recent content in User Agent on TARUN LALWANI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 28 May 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tarunlalwani.com/tags/user-agent/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Selenium change User-Agent of different browsers</title>
+      <link>http://tarunlalwani.com/post/selenium-change-user-agent-different-browsers/</link>
+      <pubDate>Sun, 28 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/selenium-change-user-agent-different-browsers/</guid>
+      <description>Server uses User-Agent string to differentiate between different browsers and devices. Each device + browser combination can have a different name to identify the Browser and its version. Thougth that may not be 100% true in all cases.
+In this article we will see how to change the user-agent of different browser when automating them using Selenium
+Changing User-Agent in Internet Explorer Unfortunately there is no good way to change the User-Agent of a IE browser.</description>
+    </item>
+    
+  </channel>
+</rss>
