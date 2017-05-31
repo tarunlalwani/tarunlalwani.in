@@ -6,10 +6,21 @@
     <description>Recent content in Session_id on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 30 May 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 31 May 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/tags/session_id/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Re-using existing browser session in Selenium using Java</title>
+      <link>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-java/</link>
+      <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-java/</guid>
+      <description>Yesterday I wrote an article on how to re-use a session in Selenium using Python. @Aditya Baraskar asked if the same was possible in Java.
+Once you know the concepts, languages usually is no barrier. So I tried using the same approach that we did in Python and see how it works out in Java
+Attempt 1 ChromeDriver driver = new ChromeDriver(); HttpCommandExecutor executor = (HttpCommandExecutor) driver.getCommandExecutor(); URL url = executor.</description>
+    </item>
     
     <item>
       <title>Re-using existing browser session in selenium</title>

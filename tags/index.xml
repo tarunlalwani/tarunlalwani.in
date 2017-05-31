@@ -6,7 +6,7 @@
     <description>Recent content in Tags on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 30 May 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 31 May 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Browser</title>
       <link>http://tarunlalwani.com/tags/browser/</link>
-      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/browser/</guid>
       <description></description>
@@ -89,6 +89,15 @@
       <pubDate>Mon, 29 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/image/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>http://tarunlalwani.com/tags/java/</link>
+      <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/java/</guid>
       <description></description>
     </item>
     
@@ -176,7 +185,7 @@
     <item>
       <title>Reuse</title>
       <link>http://tarunlalwani.com/tags/reuse/</link>
-      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/reuse/</guid>
       <description></description>
@@ -194,7 +203,7 @@
     <item>
       <title>Selenium</title>
       <link>http://tarunlalwani.com/tags/selenium/</link>
-      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/selenium/</guid>
       <description></description>
@@ -203,7 +212,7 @@
     <item>
       <title>Sesison</title>
       <link>http://tarunlalwani.com/tags/sesison/</link>
-      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/sesison/</guid>
       <description></description>
@@ -212,7 +221,7 @@
     <item>
       <title>Session_id</title>
       <link>http://tarunlalwani.com/tags/session_id/</link>
-      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/session_id/</guid>
       <description></description>

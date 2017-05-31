@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-java/</loc>
+    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium/</loc>
     <lastmod>2017-05-30T00:00:00+00:00</lastmod>
   </url>
@@ -58,7 +63,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/browser/</loc>
-    <lastmod>2017-05-30T00:00:00+00:00</lastmod>
+    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -122,6 +127,12 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/java/</loc>
+    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/tags/latest/</loc>
     <lastmod>2017-05-17T11:47:37+05:30</lastmod>
     <priority>0</priority>
@@ -165,7 +176,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/post/</loc>
-    <lastmod>2017-05-30T00:00:00+00:00</lastmod>
+    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -183,7 +194,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/reuse/</loc>
-    <lastmod>2017-05-30T00:00:00+00:00</lastmod>
+    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -195,19 +206,19 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/selenium/</loc>
-    <lastmod>2017-05-30T00:00:00+00:00</lastmod>
+    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://tarunlalwani.com/tags/sesison/</loc>
-    <lastmod>2017-05-30T00:00:00+00:00</lastmod>
+    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://tarunlalwani.com/tags/session_id/</loc>
-    <lastmod>2017-05-30T00:00:00+00:00</lastmod>
+    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -225,13 +236,13 @@
   
   <url>
     <loc>http://tarunlalwani.com/</loc>
-    <lastmod>2017-05-30T00:00:00+00:00</lastmod>
+    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://tarunlalwani.com/tags/</loc>
-    <lastmod>2017-05-30T00:00:00+00:00</lastmod>
+    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
