@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+      <meta name="description" content="Learn how to re-use an existing open session of a browser in Selenium. This trick can speed up your development effort">
+      <meta name="twitter:description" content="Learn how to re-use an existing open session of a browser in Selenium. This trick can speed up your development effort">
+    
+
+    <meta property="og:title" content="Re-using existing browser session in selenium">
+    <meta property="twitter:title" content="Re-using existing browser session in selenium">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-05-30">
+    
+    <meta property="og:description" content="Learn how to re-use an existing open session of a browser in Selenium. This trick can speed up your development effort">
+    <meta property="og:url" content="http://tarunlalwani.com/post/reusing-existing-browser-session-selenium/">
+    <meta property="og:site_name" content="TARUN LALWANI">
+   
+
+    
+    <meta property="og:tags" content="sesison">
+    
+    <meta property="og:tags" content="session_id">
+    
+    <meta property="og:tags" content="selenium">
+    
+    <meta property="og:tags" content="reuse">
+    
+    <meta property="og:tags" content="browser">
+    
+    <meta property="og:tags" content="python">
+    
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ask4tarun">
+    <meta property="og:image" content="http://tarunlalwani.com/images/reuse_session_selenium.png">
+    <meta property="twitter:image" content="http://tarunlalwani.com/images/reuse_session_selenium.png">
+    
+
+    <meta name="generator" content="Hugo 0.20.2" />
+    <title>Re-using existing browser session in selenium &middot; TARUN LALWANI</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://tarunlalwani.com/css/style.css">
+
+    
+
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/solarized-dark.min.css">
+
+    
+
+    
+    <link href="http://tarunlalwani.com/index.xml" rel="alternate" type="application/rss+xml" title="TARUN LALWANI" />
+    
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="http://tarunlalwani.com/">TARUN LALWANI</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="http://tarunlalwani.com/">TARUN LALWANI</a></h1>
+		
+		
+		
+			<small class="text-center center-block">Technology Enthusiast</small>
+		
+		
+		
+			<img id="profile-pic" src="http://tarunlalwani.com//images/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			<a href="https://twitter.com/ask4tarun"><i class="fa fa-twitter fa-2x"></i></a>
+			<a href="https://plus.google.com/&#43;TarunLalwani"><i class="fa fa-google-plus fa-2x"></i></a>
+			<a href="https://www.linkedin.com/in/tarunlalwani"><i class="fa fa-linkedin fa-2x"></i></a>
+			<a href="https://github.com/tarunlalwani"><i class="fa fa-github fa-2x"></i></a>
+			
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Re-using existing browser session in selenium</h1>
+	</header>
+
+	<article>
+		
+
+<h3 id="comparison-between-selenium-and-uft-behavior">Comparison between Selenium and UFT Behavior</h3>
+
+<p>For those of us who come from a QTP/UFT background, being able to test the same browser after a disconnect is usually a piece of cake</p>
+
+<pre><code class="language-VBScript">1. systemutil.run &quot;iexplore.exe&quot;
+2. x = 2/0
+3. Browser(&quot;index:=0&quot;).navigate (&quot;http://www.google.com&quot;)
+</code></pre>
+
+<p>If we run the above script in QTP/UFT, the script will error out on Line #2 and we can re-run the script from Line #3 and it would still work and navigate inside the browser we had opened earlier.</p>
+
+<p>UFT also works when the browser is launched manually and not through script. This is not possible in Selenium though because of the architectural differences.</p>
+
+<p>Since the selenium developers don&rsquo;t see this as a much needed feature, they are strongly against adding this to the selenium code.</p>
+
+<p>There are solutions people have spoken about, which requires patching the <code>webdriver.py</code> file. I don&rsquo;t recommend such solutions as it makes it difficult to update the selenium package to newer versions.</p>
+
+<p>In this article we will see a much cleaner and effecient way to achieve this</p>
+
+<h2 id="launching-a-browser-in-selenium">Launching a browser in Selenium</h2>
+
+<p>To launch a browser in Selenium using python, we just import the webdriver and start a browser</p>
+
+<pre><code class="language-python">from selenium import webdriver
+
+driver = webdriver.Chrome()
+</code></pre>
+
+<p>If we run the above script, it will launch the browser and exit. Since the browser object we created got destroyed, we no more can control this browser using script. This is a zombie browser in terms of Selenium, though one can kill it manually</p>
+
+<p>Now when we create a WebDriver (Firefox, chromer or any browser) object in Selenium there are few things that happen</p>
+
+<ol>
+<li>The intended browser agent is started (chromedriver for chrome, geckodriver for Firefox and soon)</li>
+<li>A command executor is created. This object is responsbile for sending commands to the agent</li>
+<li>A new session is established with the agent, which in turn communicates with the browser. A <code>session_id</code> is also generated to identify the session.</li>
+</ol>
+
+<p>The information from Step #2 and Step #3 is important for us to be able to re-create a driver object. So let us update our script to print this information</p>
+
+<pre><code class="language-python">from selenium import webdriver
+driver = webdriver.Chrome()
+
+executor_url = driver.command_executor._url
+session_id = driver.session_id
+
+print session_id
+print executor_url
+
+driver.get(&quot;http://tarunlalwani.com&quot;)
+</code></pre>
+
+<p>A sample output of the above is as below</p>
+
+<pre><code>7397a385-7661-0449-9e0a-902355617485
+http://127.0.0.1:51259
+</code></pre>
+
+<h3 id="creating-driver-using-session-id-and-command-executor">Creating driver using Session ID and Command Executor</h3>
+
+<p>So now we have the <code>session_id</code> and <code>executor_url</code>. Let&rsquo;s try and recreate the session</p>
+
+<p>My first take was to create the driver using the <code>RemoteWebDriver</code> or <code>WebDriver</code> driver</p>
+
+<pre><code class="language-python">from selenium import webdriver
+
+driver = webdriver.Chrome()
+executor_url = driver.command_executor._url
+session_id = driver.session_id
+driver.get(&quot;http://tarunlalwani.com&quot;)
+
+print session_id
+print executor_url
+
+
+driver2 = webdriver.Remote(command_executor=executor_url, desired_capabilities={})
+driver2.session_id = session_id
+print driver2.current_url
+</code></pre>
+
+<p>When we run the above code, it prints the url <code>http://tarunlalwani.com</code> at the end. Which means we were able to recreate the driver object for a Chrome browser.</p>
+
+<h4 id="testing-on-firefox-browser">Testing on Firefox browser</h4>
+
+<p>We tested our previous approach on Chrome browser. Let&rsquo;s test our solution on Firefox as well. When we update our code and run it</p>
+
+<pre><code class="language-python">from selenium import webdriver
+
+driver = webdriver.Firefox()
+executor_url = driver.command_executor._url
+session_id = driver.session_id
+driver.get(&quot;http://tarunlalwani.com&quot;)
+
+print session_id
+print executor_url
+
+
+driver2 = webdriver.Remote(command_executor=executor_url, desired_capabilities={})
+driver2.session_id = session_id
+print driver2.current_url
+</code></pre>
+
+<p>This errors out at <code>driver2 = webdriver.Remote(command_executor=executor_url, desired_capabilities={})</code> in our script</p>
+
+<pre><code class="language-python">Traceback (most recent call last):
+  File &quot;/Users/tarun.lalwani/Desktop/tarunlalwani.com/tarunlalwani/content/code/selenium_enumerator.py&quot;, line 101, in &lt;module&gt;
+    driver2 = webdriver.Remote(command_executor=executor_url, desired_capabilities={})
+  File &quot;/usr/local/lib/python2.7/site-packages/selenium/webdriver/remote/webdriver.py&quot;, line 98, in __init__
+    self.start_session(desired_capabilities, browser_profile)
+  File &quot;/usr/local/lib/python2.7/site-packages/selenium/webdriver/remote/webdriver.py&quot;, line 188, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File &quot;/usr/local/lib/python2.7/site-packages/selenium/webdriver/remote/webdriver.py&quot;, line 252, in execute
+    self.error_handler.check_response(response)
+  File &quot;/usr/local/lib/python2.7/site-packages/selenium/webdriver/remote/errorhandler.py&quot;, line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: Session is already started
+</code></pre>
+
+<p>The error occurs at <code>response = self.execute(Command.NEW_SESSION, parameters)</code>. The issue is that <code>geckodriver</code> doesn&rsquo;t support firing <code>newSession</code> command again. So we need a way to override the execute function while creating the driver</p>
+
+<p>We create a new function which returns a dummy response on newSession with our sessionId. Updated code is as below</p>
+
+<pre><code class="language-python">from selenium import webdriver
+
+driver = webdriver.Firefox()
+executor_url = driver.command_executor._url
+session_id = driver.session_id
+driver.get(&quot;http://tarunlalwani.com&quot;)
+
+print session_id
+print executor_url
+
+def create_driver_session(session_id, executor_url):
+    from selenium.webdriver.remote.webdriver import WebDriver as RemoteWebDriver
+
+    # Save the original function, so we can revert our patch
+    org_command_execute = RemoteWebDriver.execute
+
+    def new_command_execute(self, command, params=None):
+        if command == &quot;newSession&quot;:
+            # Mock the response
+            return {'success': 0, 'value': None, 'sessionId': session_id}
+        else:
+            return org_command_execute(self, command, params)
+
+    # Patch the function before creating the driver object
+    RemoteWebDriver.execute = new_command_execute
+
+    new_driver = webdriver.Remote(command_executor=executor_url, desired_capabilities={})
+    new_driver.session_id = session_id
+
+    # Replace the patched function with original function
+    RemoteWebDriver.execute = org_command_execute
+
+    return new_driver
+
+driver2 = create_driver_session(session_id, executor_url)
+print driver2.current_url
+</code></pre>
+
+<p>This code works fine. The only caveat being that we loose the actual capabilities that the browser returned when it was launched. This should not be a big deal as such in most cases.</p>
+
+<h2 id="why-and-where-to-re-use-the-session">Why and where to re-use the session?</h2>
+
+<p>Now we have achieved something, but the question remains as to what do we do with it? And why do we need it even?</p>
+
+<p>Well we have used it in few particular scenarios</p>
+
+<h3 id="idle-browser">Idle Browser</h3>
+
+<p>In one of our scraping project, we want to end our script and leave the browser idle. When the script re-runs it re-uses the last browser and continues the work.</p>
+
+<p>This mimics how a human would actually behave. Which can become an important factor when scraping sites with higher security against scraping</p>
+
+<h3 id="continuing-exited-script">Continuing exited script</h3>
+
+<p>In one of our automation scripts, we were going through different types of pages and had handling for most of them. But there were certain edge cases.</p>
+
+<p>So we wanted our script to stop and fail. Once we patch and re-run it, it resumes the work from existing open url</p>
+
+<h3 id="framework-functionality">Framework functionality</h3>
+
+<p>One of our automation framework, allowed users to execute the automation scripts from any point. For implementing such feature it was important to be able to recreate the last session driver.</p>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" http://tarunlalwani.com/" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tarunlalwani';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-99088991-1', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "http:\/\/tarunlalwani.com\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  
+
+  <script src="http://tarunlalwani.com//js/highlight.pack.js"></script>
+  
+  <script src="http://tarunlalwani.com//js/App.js"></script>
+  
+</body>
+</html>

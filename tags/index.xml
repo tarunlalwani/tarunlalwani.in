@@ -6,10 +6,19 @@
     <description>Recent content in Tags on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 May 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 30 May 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Browser</title>
+      <link>http://tarunlalwani.com/tags/browser/</link>
+      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/browser/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Chrome</title>
@@ -147,11 +156,29 @@
     </item>
     
     <item>
+      <title>Python</title>
+      <link>http://tarunlalwani.com/tags/python/</link>
+      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Replication</title>
       <link>http://tarunlalwani.com/tags/replication/</link>
       <pubDate>Thu, 30 Mar 2017 00:00:00 +0530</pubDate>
       
       <guid>http://tarunlalwani.com/tags/replication/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reuse</title>
+      <link>http://tarunlalwani.com/tags/reuse/</link>
+      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/reuse/</guid>
       <description></description>
     </item>
     
@@ -167,9 +194,27 @@
     <item>
       <title>Selenium</title>
       <link>http://tarunlalwani.com/tags/selenium/</link>
-      <pubDate>Mon, 29 May 2017 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/selenium/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sesison</title>
+      <link>http://tarunlalwani.com/tags/sesison/</link>
+      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/sesison/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Session_id</title>
+      <link>http://tarunlalwani.com/tags/session_id/</link>
+      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/session_id/</guid>
       <description></description>
     </item>
     
