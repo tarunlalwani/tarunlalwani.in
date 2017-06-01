@@ -106,6 +106,30 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
+			<a href="http://tarunlalwani.com/post/detecting-os-in-shell-script/">Detecting OS in shell script</a>
+			<br>
+			<small>
+				27 April 2017
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+		Each linux distribution uses different package manager. To be able to execute commands based on the type of OS in a shell script, we need a way to detect the OS first.
+Using which command My first take on resolving this was to use the which command
+#!/bin/bash if [[ `which yum` ]]; then IS_RHEL=1 elif [[ `which apt` ]]; then IS_UBUNTU=1 elif [[ `which apk` ]]; then IS_ALPINE=1 else IS_UNKNOWN=1 fi  Now this works well on most OS, but the issue is that when you use the same on docker images.
+		
+			... <a href="http://tarunlalwani.com/post/detecting-os-in-shell-script/">Read More</a>
+		
+	</div>
+	<div class="panel-footer">
+		
+	</div>
+</div>
+
+
+	<div class="panel panel-default">
+	<div class="panel-header">
+		<h3>
 			<a href="http://tarunlalwani.com/post/php-code-coverage-web-selenium/">PHP Code Coverage for your web/selenium automation</a>
 			<br>
 			<small>

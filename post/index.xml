@@ -6,10 +6,21 @@
     <description>Recent content in Posts on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 31 May 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 01 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Selenium disable popup blocker in different browsers</title>
+      <link>http://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/</guid>
+      <description>Some testing scenarios requires that the Popup blocking be disabled. In this article we will look at ways for disabling popup blocker for different browser
+Disabling Popup blocker in InternetExplorer This can be done by setting a registry setting.
+from _winreg import * def set_popupblocker_status(enabled): key = OpenKey(HKEY_CURRENT_USER, r&amp;quot;Software\Microsoft\Internet Explorer\New Windows&amp;quot;, 0, KEY_ALL_ACCESS) SetValueEx(key, &amp;quot;PopupMgr&amp;quot;, 0, REG_SZ, enabled) CloseKey(key) set_popupblocker_status(&amp;quot;no&amp;quot;)  Disabling Popup blocker in Firefox For firefox, this can be done using a preference setting dom.</description>
+    </item>
     
     <item>
       <title>Re-using existing browser session in Selenium using Java</title>

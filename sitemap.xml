@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/</loc>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-java/</loc>
     <lastmod>2017-05-31T00:00:00+00:00</lastmod>
   </url>
@@ -62,6 +67,12 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/blocker/</loc>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/tags/browser/</loc>
     <lastmod>2017-05-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -74,7 +85,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/chrome/</loc>
-    <lastmod>2017-05-29T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -98,7 +109,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/disable/</loc>
-    <lastmod>2017-05-29T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -110,7 +121,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/firefox/</loc>
-    <lastmod>2017-05-29T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -164,7 +175,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/phantomjs/</loc>
-    <lastmod>2017-05-29T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -175,8 +186,14 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/popup/</loc>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/post/</loc>
-    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -200,13 +217,13 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/safari/</loc>
-    <lastmod>2017-05-29T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://tarunlalwani.com/tags/selenium/</loc>
-    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -236,13 +253,13 @@
   
   <url>
     <loc>http://tarunlalwani.com/</loc>
-    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://tarunlalwani.com/tags/</loc>
-    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
