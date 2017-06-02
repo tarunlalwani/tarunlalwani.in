@@ -6,10 +6,19 @@
     <description>Recent content in Tags on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 02 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Automation</title>
+      <link>http://tarunlalwani.com/tags/automation/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/automation/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Blocker</title>
@@ -185,7 +194,7 @@
     <item>
       <title>Python</title>
       <link>http://tarunlalwani.com/tags/python/</link>
-      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/python/</guid>
       <description></description>
@@ -257,7 +266,7 @@
     <item>
       <title>Ssh</title>
       <link>http://tarunlalwani.com/tags/ssh/</link>
-      <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/ssh/</guid>
       <description></description>

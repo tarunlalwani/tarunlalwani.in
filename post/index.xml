@@ -6,10 +6,21 @@
     <description>Recent content in Posts on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 02 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SSH automation using Python</title>
+      <link>http://tarunlalwani.com/post/ssh-automation-using-python/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/ssh-automation-using-python/</guid>
+      <description>Sometimes its required for us to be able to communicate with a remote host using automation. To do it in bash we can use the expect command. But do it in Python, we can use a package named paramiko.
+Installing Paramiko Installation is quite simple. It can be done using the pip or pip3 command
+$ pip install paramiko   Note: based on your setup, you might need to use sudo as well before the pip command</description>
+    </item>
     
     <item>
       <title>Selenium disable popup blocker in different browsers</title>
