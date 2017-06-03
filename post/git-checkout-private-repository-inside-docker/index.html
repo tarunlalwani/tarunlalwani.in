@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+      <meta name="description" content="See how to checkout private repositories inside Docker using GIT SSH Keys">
+      <meta name="twitter:description" content="See how to checkout private repositories inside Docker using GIT SSH Keys">
+    
+
+    <meta property="og:title" content="Git checkout private repository inside Docker">
+    <meta property="twitter:title" content="Git checkout private repository inside Docker">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-06-03">
+    
+    <meta property="og:description" content="See how to checkout private repositories inside Docker using GIT SSH Keys">
+    <meta property="og:url" content="http://tarunlalwani.com/post/git-checkout-private-repository-inside-docker/">
+    <meta property="og:site_name" content="TARUN LALWANI">
+   
+
+    
+    <meta property="og:tags" content="git">
+    
+    <meta property="og:tags" content="checkout">
+    
+    <meta property="og:tags" content="private">
+    
+    <meta property="og:tags" content="repository">
+    
+    <meta property="og:tags" content="docker">
+    
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ask4tarun">
+    <meta property="og:image" content="http://tarunlalwani.com/images/git_docker.png">
+    <meta property="twitter:image" content="http://tarunlalwani.com/images/git_docker.png">
+    
+
+    <meta name="generator" content="Hugo 0.20.2" />
+    <title>Git checkout private repository inside Docker &middot; TARUN LALWANI</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://tarunlalwani.com/css/style.css">
+
+    
+
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/solarized-dark.min.css">
+
+    
+
+    
+    <link href="http://tarunlalwani.com/index.xml" rel="alternate" type="application/rss+xml" title="TARUN LALWANI" />
+    
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="http://tarunlalwani.com/">TARUN LALWANI</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="http://tarunlalwani.com/">TARUN LALWANI</a></h1>
+		
+		
+		
+			<small class="text-center center-block">Technology Enthusiast</small>
+		
+		
+		
+			<img id="profile-pic" src="http://tarunlalwani.com//images/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			<a href="https://twitter.com/ask4tarun"><i class="fa fa-twitter fa-2x"></i></a>
+			<a href="https://plus.google.com/&#43;TarunLalwani"><i class="fa fa-google-plus fa-2x"></i></a>
+			<a href="https://www.linkedin.com/in/tarunlalwani"><i class="fa fa-linkedin fa-2x"></i></a>
+			<a href="https://github.com/tarunlalwani"><i class="fa fa-github fa-2x"></i></a>
+			
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Git checkout private repository inside Docker</h1>
+	</header>
+
+	<article>
+		
+
+<p>One of the aim of moving project&rsquo;s deployment to docker, is to be able to build a image on any system without any manual setup. This articles shows how you can clone your private git repos inside a docker image without the need of username and password using SSH keys.</p>
+
+<h2 id="generating-the-ssh-key-pairs">Generating the SSH key pairs</h2>
+
+<p>First we would generate a SSH key pair, which will be used by the docker image</p>
+
+<pre><code class="language-bash">$ mkdir ~/keys
+$ ssh-keygen -t rsa -b 4096 -C &quot;xxxxxx@yyyyy.com&quot;
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/tarunlalwani/.ssh/id_rsa): /home/tarunlalwani/keys/id_rsa
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/tarunlalwani/keys/id_rsa.
+Your public key has been saved in /home/tarunlalwani/keys/id_rsa.pub.
+</code></pre>
+
+<p>Now we have a keys folder generated in our home directotry with <code>id_rsa</code> and <code>id_rsa.pub</code> files.</p>
+
+<h2 id="adding-the-target-host-fingerprints-to-known-hosts">Adding the target host fingerprints to known hosts</h2>
+
+<p>For security reason, each host that we would connect to using ssh, need to have finger prints in <code>known_hosts</code> file. When we connect to a server for the firts time, it asks us to save those finger print. To do that automatically we need to use the <code>ssh-keyscan</code> command</p>
+
+<pre><code class="language-bash">$ ssh-keyscan github.com &gt;&gt; ~/keys/known_hosts
+$ ssh-keyscan gitlab.mydomain.com &gt;&gt; ~/keys/known_hosts
+</code></pre>
+
+<h2 id="adding-the-ssh-keys-on-your-git-server">Adding the SSH keys on your git server</h2>
+
+<p>Make sure you add the content of the <code>id_rsa.pub</code> we generated earlier into the allowed SSH keys of your git server(github or gitlab or bitbucket) settings</p>
+
+<h2 id="creating-the-dockerfile">Creating the Dockerfile</h2>
+
+<p>We will create a new <code>docker-git</code> folder in the home directory</p>
+
+<pre><code>$ mkdir ~/docker-git
+$ mv ~/keys/ ~/docker-git/
+$ cd ~/docker-git
+</code></pre>
+
+<p>Now let&rsquo;s create a new <code>Dockerfile</code> inside the <code>docker-git</code> folder</p>
+
+<h4 id="dockerfile">Dockerfile</h4>
+
+<pre><code class="language-Dockerfile">FROM ubuntu:14.04
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get -y update &amp;&amp; apt-get -y install --no-install-recommends git ssh
+
+WORKDIR /root
+RUN mkdir -p /root/.ssh
+COPY keys .ssh
+
+RUN git clone git@gitlab.mydomain.com:root/seleniumplus.git
+RUN unset DEBIAN_FRONTEND 
+
+CMD [&quot;/bin/bash&quot;]
+</code></pre>
+
+<p>Now if build and run the docker build command</p>
+
+<pre><code>$ docker build -t gittest:latest .
+</code></pre>
+
+<p>The output would come something like below</p>
+
+<pre><code>....
+Step 8 : CMD /bin/bash
+ ---&gt; 93a05264fbca
+Successfully built 93a05264fbca
+</code></pre>
+
+<p>To test same we can run the image using the tag</p>
+
+<pre><code>$ docker run -it gittest:latest
+root@bf7ebb0619c0:~# ls
+seleniumplus
+root@bf7ebb0619c0:~# cd seleniumplus/
+root@bf7ebb0619c0:~/seleniumplus# ls
+README  __init__.py  selenium_automation.py
+root@bf7ebb0619c0:~/seleniumplus# 
+</code></pre>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" http://tarunlalwani.com/" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tarunlalwani';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-99088991-1', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "http:\/\/tarunlalwani.com\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  
+
+  <script src="http://tarunlalwani.com//js/highlight.pack.js"></script>
+  
+  <script src="http://tarunlalwani.com//js/App.js"></script>
+  
+</body>
+</html>

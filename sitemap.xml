@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://tarunlalwani.com/post/git-checkout-private-repository-inside-docker/</loc>
+    <lastmod>2017-06-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/post/ssh-automation-using-python/</loc>
     <lastmod>2017-06-02T00:00:00+00:00</lastmod>
   </url>
@@ -95,6 +100,12 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/checkout/</loc>
+    <lastmod>2017-06-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/tags/chrome/</loc>
     <lastmod>2017-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -126,13 +137,19 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/docker/</loc>
-    <lastmod>2017-05-20T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://tarunlalwani.com/tags/firefox/</loc>
     <lastmod>2017-06-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/tags/git/</loc>
+    <lastmod>2017-06-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -204,7 +221,13 @@
   
   <url>
     <loc>http://tarunlalwani.com/post/</loc>
-    <lastmod>2017-06-02T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/tags/private/</loc>
+    <lastmod>2017-06-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -217,6 +240,12 @@
   <url>
     <loc>http://tarunlalwani.com/tags/replication/</loc>
     <lastmod>2017-03-30T00:00:00+05:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/tags/repository/</loc>
+    <lastmod>2017-06-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -264,7 +293,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/</loc>
-    <lastmod>2017-06-02T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
