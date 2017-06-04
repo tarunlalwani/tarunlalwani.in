@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+      <meta name="description" content="When using Python scripts in Docker, you may notice a lagged response in logs. This article discusses the issues and its solution">
+      <meta name="twitter:description" content="When using Python scripts in Docker, you may notice a lagged response in logs. This article discusses the issues and its solution">
+    
+
+    <meta property="og:title" content="Why delayed output for python process in my Docker logs?">
+    <meta property="twitter:title" content="Why delayed output for python process in my Docker logs?">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-06-04">
+    
+    <meta property="og:description" content="When using Python scripts in Docker, you may notice a lagged response in logs. This article discusses the issues and its solution">
+    <meta property="og:url" content="http://tarunlalwani.com/post/why-delayed-output-python-docker/">
+    <meta property="og:site_name" content="TARUN LALWANI">
+   
+
+    
+    <meta property="og:tags" content="python">
+    
+    <meta property="og:tags" content="log">
+    
+    <meta property="og:tags" content="missing">
+    
+    <meta property="og:tags" content="docker">
+    
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ask4tarun">
+    <meta property="og:image" content="http://tarunlalwani.com/images/docker_python.png">
+    <meta property="twitter:image" content="http://tarunlalwani.com/images/docker_python.png">
+    
+
+    <meta name="generator" content="Hugo 0.20.2" />
+    <title>Why delayed output for python process in my Docker logs? &middot; TARUN LALWANI</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://tarunlalwani.com/css/style.css">
+
+    
+
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/sunburst.min.css">
+
+    
+
+    
+    <link href="http://tarunlalwani.com/index.xml" rel="alternate" type="application/rss+xml" title="TARUN LALWANI" />
+    
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="http://tarunlalwani.com/">TARUN LALWANI</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="http://tarunlalwani.com/">TARUN LALWANI</a></h1>
+		
+		
+		
+			<small class="text-center center-block">Technology Enthusiast</small>
+		
+		
+		
+			<img id="profile-pic" src="http://tarunlalwani.com//images/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			<a href="https://twitter.com/ask4tarun"><i class="fa fa-twitter fa-2x"></i></a>
+			<a href="https://plus.google.com/&#43;TarunLalwani"><i class="fa fa-google-plus fa-2x"></i></a>
+			<a href="https://www.linkedin.com/in/tarunlalwani"><i class="fa fa-linkedin fa-2x"></i></a>
+			<a href="https://github.com/tarunlalwani"><i class="fa fa-github fa-2x"></i></a>
+			
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Why delayed output for python process in my Docker logs?</h1>
+	</header>
+
+	<article>
+		
+
+<p>Recently while moving one of our projects to Docker, we had a weird error that our python script would not output any data in docker logs. We thought the scripts were stuck, but later we realized the logs had a delayed output</p>
+
+<p>When we were running the script inside the docker image through bash they would give all output on the console fine. Which kind of puzzled us</p>
+
+<p>So we created a simple project to recreate the issue</p>
+
+<h4 id="dockerfile">Dockerfile</h4>
+
+<pre><code class="language-Dockerfile">FROM python:2.7
+WORKDIR /data
+COPY ./app.py /data/app.py
+COPY ./timer.sh /data/timer.sh
+CMD [&quot;python&quot;, &quot;app.py&quot;]
+</code></pre>
+
+<p><code>app.py</code> is a simple script which prints time after every second for 10 secs</p>
+
+<h4 id="app-py">app.py</h4>
+
+<pre><code class="language-python">import time
+import datetime
+
+count = 10
+while count:
+    print datetime.datetime.now()
+    time.sleep(1)
+    count -= 1
+</code></pre>
+
+<h4 id="timer-sh">timer.sh</h4>
+
+<p>A similar script to <code>app.py</code> but in bash</p>
+
+<pre><code class="language-bash">#!/bin/bash
+
+i=&quot;0&quot;
+
+while [ $i -lt 10 ]
+do
+i=$[$i+1]
+echo &quot;$i `date`&quot;
+done
+</code></pre>
+
+<h4 id="docker-compose-yml">docker-compose.yml</h4>
+
+<pre><code class="language-yaml">version: '2'
+services:
+  server:
+    build: .
+  server_sh:
+    build: .
+    command: [&quot;/bin/bash&quot;, &quot;/data/timer.sh&quot;]
+</code></pre>
+
+<p>Now when we run the composition <code>docker-compose up</code> command we get the following output</p>
+
+<pre><code class="language-bash">vagrant@vagrant:/vagrant/python-no-output$ docker-compose up
+Creating pythonnooutput_server_sh_1
+Creating pythonnooutput_server_1
+Attaching to pythonnooutput_server_1, pythonnooutput_server_sh_1
+server_sh_1  | 1 Fri May 26 19:11:54 UTC 2017
+server_sh_1  | 2 Fri May 26 19:11:55 UTC 2017
+server_sh_1  | 3 Fri May 26 19:11:56 UTC 2017
+server_sh_1  | 4 Fri May 26 19:11:57 UTC 2017
+server_sh_1  | 5 Fri May 26 19:11:58 UTC 2017
+server_sh_1  | 6 Fri May 26 19:11:59 UTC 2017
+server_sh_1  | 7 Fri May 26 19:12:00 UTC 2017
+server_sh_1  | 8 Fri May 26 19:12:01 UTC 2017
+server_sh_1  | 9 Fri May 26 19:12:02 UTC 2017
+server_sh_1  | 10 Fri May 26 19:12:03 UTC 2017
+server_1     | 2017-05-26 19:11:54.363404
+server_1     | 2017-05-26 19:11:55.364241
+server_1     | 2017-05-26 19:11:56.365709
+server_1     | 2017-05-26 19:11:57.367153
+server_1     | 2017-05-26 19:11:58.368840
+server_1     | 2017-05-26 19:11:59.370574
+server_1     | 2017-05-26 19:12:00.371755
+server_1     | 2017-05-26 19:12:01.372124
+server_1     | 2017-05-26 19:12:02.372288
+server_1     | 2017-05-26 19:12:03.373790
+pythonnooutput_server_1 exited with code 0
+pythonnooutput_server_sh_1 exited with code 0
+</code></pre>
+
+<p>As you can see there is no output from python script at start and then after some delay all the outputs show up</p>
+
+<p>After some digging I found that python buffers all its console output.</p>
+
+<p>The same can be fixed by passing the <code>-u</code> flag to <code>python</code> or by defining the environment variable <code>PYTHONUNBUFFERED</code>. For more details about the same refer <a href="https://docs.python.org/2/using/cmdline.html#envvar-PYTHONUNBUFFERED">here</a></p>
+
+<p>So define the environment variable in <code>docker-compose.yml</code></p>
+
+<h4 id="docker-compose-yml-1">docker-compose.yml</h4>
+
+<pre><code class="language-yaml">version: '2'
+services:
+  server:
+    build: .
+    environment:
+      - &quot;PYTHONUNBUFFERED=1&quot;
+  server_sh:
+    build: .
+    command: [&quot;/bin/bash&quot;, &quot;/data/timer.sh&quot;]
+
+</code></pre>
+
+<p>Now when we run the composition again</p>
+
+<pre><code class="language-bash">vagrant@vagrant:/vagrant/python-no-output$ docker-compose up
+Creating pythonnooutput_server_sh_1
+Creating pythonnooutput_server_1
+Attaching to pythonnooutput_server_sh_1, pythonnooutput_server_1
+server_sh_1  | 1 Fri May 26 19:14:54 UTC 2017
+server_1     | 2017-05-26 19:14:54.061717
+server_sh_1  | 2 Fri May 26 19:14:55 UTC 2017
+server_1     | 2017-05-26 19:14:55.063070
+server_sh_1  | 3 Fri May 26 19:14:56 UTC 2017
+server_1     | 2017-05-26 19:14:56.064899
+server_sh_1  | 4 Fri May 26 19:14:57 UTC 2017
+server_1     | 2017-05-26 19:14:57.066194
+server_sh_1  | 5 Fri May 26 19:14:58 UTC 2017
+server_1     | 2017-05-26 19:14:58.067593
+server_sh_1  | 6 Fri May 26 19:14:59 UTC 2017
+server_1     | 2017-05-26 19:14:59.069434
+server_sh_1  | 7 Fri May 26 19:15:00 UTC 2017
+server_1     | 2017-05-26 19:15:00.070952
+server_sh_1  | 8 Fri May 26 19:15:01 UTC 2017
+server_1     | 2017-05-26 19:15:01.072400
+server_sh_1  | 9 Fri May 26 19:15:02 UTC 2017
+server_1     | 2017-05-26 19:15:02.074138
+server_sh_1  | 10 Fri May 26 19:15:03 UTC 2017
+server_1     | 2017-05-26 19:15:03.075766
+pythonnooutput_server_sh_1 exited with code 0
+pythonnooutput_server_1 exited with code 0
+</code></pre>
+
+<p>As you can see, issue is fixed and the output now is non-buffered.</p>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" http://tarunlalwani.com/" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tarunlalwani';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-99088991-1', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "http:\/\/tarunlalwani.com\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  
+
+  <script src="http://tarunlalwani.com//js/highlight.pack.js"></script>
+  
+  <script src="http://tarunlalwani.com//js/App.js"></script>
+  
+</body>
+</html>

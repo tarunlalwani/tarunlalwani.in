@@ -6,10 +6,21 @@
     <description>Recent content on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 03 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 04 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Why delayed output for python process in my Docker logs?</title>
+      <link>http://tarunlalwani.com/post/why-delayed-output-python-docker/</link>
+      <pubDate>Sun, 04 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/why-delayed-output-python-docker/</guid>
+      <description>Recently while moving one of our projects to Docker, we had a weird error that our python script would not output any data in docker logs. We thought the scripts were stuck, but later we realized the logs had a delayed output
+When we were running the script inside the docker image through bash they would give all output on the console fine. Which kind of puzzled us
+So we created a simple project to recreate the issue</description>
+    </item>
     
     <item>
       <title>Git checkout private repository inside Docker</title>
