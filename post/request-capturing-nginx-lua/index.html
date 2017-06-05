@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+      <meta name="description" content="Learn how to capture incoming request and log them in JSON format for further processing using tools like ElasticSearch or Kafka">
+      <meta name="twitter:description" content="Learn how to capture incoming request and log them in JSON format for further processing using tools like ElasticSearch or Kafka">
+    
+
+    <meta property="og:title" content="Request Capturing using NGINX and Lua">
+    <meta property="twitter:title" content="Request Capturing using NGINX and Lua">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-06-06">
+    
+    <meta property="og:description" content="Learn how to capture incoming request and log them in JSON format for further processing using tools like ElasticSearch or Kafka">
+    <meta property="og:url" content="http://tarunlalwani.com/post/request-capturing-nginx-lua/">
+    <meta property="og:site_name" content="TARUN LALWANI">
+   
+
+    
+    <meta property="og:tags" content="capture">
+    
+    <meta property="og:tags" content="request">
+    
+    <meta property="og:tags" content="nginx">
+    
+    <meta property="og:tags" content="web">
+    
+    <meta property="og:tags" content="lua">
+    
+    <meta property="og:tags" content="record">
+    
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ask4tarun">
+    <meta property="og:image" content="http://tarunlalwani.com//images/request_capture.png">
+    <meta property="twitter:image" content="http://tarunlalwani.com//images/request_capture.png">
+    
+
+    <meta name="generator" content="Hugo 0.21" />
+    <title>Request Capturing using NGINX and Lua &middot; TARUN LALWANI</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://tarunlalwani.com/css/style.css">
+
+    
+
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/sunburst.min.css">
+
+    
+
+    
+    <link href="http://tarunlalwani.com/index.xml" rel="alternate" type="application/rss+xml" title="TARUN LALWANI" />
+    
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="http://tarunlalwani.com/">TARUN LALWANI</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="http://tarunlalwani.com/">TARUN LALWANI</a></h1>
+		
+		
+		
+			<small class="text-center center-block">Technology Enthusiast</small>
+		
+		
+		
+			<img id="profile-pic" src="http://tarunlalwani.com//images/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			<a href="https://twitter.com/ask4tarun"><i class="fa fa-twitter fa-2x"></i></a>
+			<a href="https://plus.google.com/&#43;TarunLalwani"><i class="fa fa-google-plus fa-2x"></i></a>
+			<a href="https://www.linkedin.com/in/tarunlalwani"><i class="fa fa-linkedin fa-2x"></i></a>
+			<a href="https://github.com/tarunlalwani"><i class="fa fa-github fa-2x"></i></a>
+			
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Request Capturing using NGINX and Lua</h1>
+	</header>
+
+	<article>
+		
+
+<p>In one of our projects we wanted to capture and document incoming traffic to our server. The requirements for recording/capturing the incoming traffic were as below</p>
+
+<ul>
+<li>Capture both GET and POST requests</li>
+<li>Capture only certain locations</li>
+<li>Back-end service involved were PHP, Java and some NodeJS also</li>
+<li>Capture Response Code, Response Text and Duration also</li>
+<li>Mask certain sensitive data like emails, credit card numbers</li>
+</ul>
+
+<p>The plan was to use this data for creating simulated production replay and make sure any changes made to code doesn&rsquo;t impact existing working flows.</p>
+
+<p>Our first thought was to update our code to log the calls, but this meant changing different projects and unnecessary code changes to production for our experimentation.</p>
+
+<p>So we wanted to come up with a more generic approach, which is when I stumbled upon LuaJIT and its integration with Nginx. I have already discussed about setting up the same in a previous <a href="../../post/building-nginx-with-lua/">article</a></p>
+
+<p>We would use <code>openresty/openresty</code> docker image for starting our request capturing. The available features for Nginx lua module can be looked upon at <a href="https://github.com/openresty/lua-nginx-module">openresty/lua-nginx-module</a>.</p>
+
+<p>We are interested in a <code>log_by_lua_file</code> directive, which allows us to specify a lua file which would be executed when request completes.</p>
+
+<p>We will create a very simple server which will echo the URL back as its content for our testing purpose.</p>
+
+<h2 id="sample-server-config">Sample Server Config</h2>
+
+<p>First we create a <code>docker-compose.yml</code> file</p>
+
+<h4 id="docker-compose-yml">docker-compose.yml</h4>
+
+<pre><code class="language-yaml">version: '2'
+services:
+  nginx:
+    image: openresty/openresty:jessie
+    ports:
+      - &quot;8080:80&quot;
+    volumes:
+      - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ./nginx.conf.d/:/usr/local/openresty/nginx/conf/conf.d/
+</code></pre>
+
+<h4 id="nginx-conf">nginx.conf</h4>
+
+<p>A simpe <code>nginx.conf</code> which loads all <code>*.conf</code> file in <code>conf.d</code> directory</p>
+
+<pre><code class="language-nginx">worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    sendfile        on;
+    keepalive_timeout  65;
+
+    include conf.d/*.conf;
+}
+</code></pre>
+
+<h4 id="main-conf">main.conf</h4>
+
+<p>This config file will create a main front facing server on port <code>80</code> and another dummy echo server on port <code>8080</code>. Each request would be recieved on port <code>80</code> and proxy passe to port <code>8080</code></p>
+
+<h4 id="nginx-conf-d-main-conf">nginx.conf.d/main.conf</h4>
+
+<pre><code class="language-nginx">server {
+  listen 80;
+
+  location / {
+    proxy_pass http://127.0.0.1:8081/;
+  }
+}
+
+server {
+  listen 8081;
+
+  location / {
+     add_header Content-Type &quot;text/html&quot;;
+     echo &quot;$request_method $uri $args&quot;;
+  }
+}
+</code></pre>
+
+<p>Testing the server</p>
+
+<pre><code class="language-bash">$ curl &quot;http://192.168.33.100:8080/abc?x=2&amp;y=z&quot;
+GET /abc x=2&amp;y=z
+</code></pre>
+
+<blockquote>
+<p>Note: <code>192.168.33.100</code> is the docker host ip in my case</p>
+</blockquote>
+
+<p>Now let us update our <code>main.conf</code> to use the <code>log_by_lua_file</code></p>
+
+<pre><code class="language-nginx">server {
+  listen 80;
+  # This will make sure that any changes to the lua code file is picked up
+  # without reloading or restarting nginx
+  lua_code_cache off;
+
+  location / {
+    proxy_pass http://127.0.0.1:8081/;
+    log_by_lua_file lua/request_logger.lua;
+  }
+}
+
+server {
+  listen 8081;
+
+  location / {
+     add_header Content-Type &quot;text/html&quot;;
+     echo &quot;$request_method $uri $args&quot;;
+  }
+}
+
+</code></pre>
+
+<h4 id="lua-request-logger-lua">lua/request_logger.lua</h4>
+
+<pre><code class="language-lua">ngx.log(ngx.ERR, &quot;REQUEST capturing started&quot;)
+json = require(&quot;json&quot;)
+
+function getval(v, def)
+  if v == nil then
+     return def
+  end
+  return v
+end
+
+local data = {request={}, response={}}
+
+local req = data[&quot;request&quot;]
+local resp = data[&quot;response&quot;]
+req[&quot;host&quot;] = ngx.var.host
+req[&quot;uri&quot;] = ngx.var.uri
+req[&quot;headers&quot;] = ngx.req.get_headers()
+req[&quot;time&quot;] = ngx.req.start_time()
+req[&quot;method&quot;] = ngx.req.get_method()
+req[&quot;get_args&quot;] = ngx.req.get_uri_args()
+
+
+req[&quot;post_args&quot;] = ngx.req.get_post_args()
+req[&quot;body&quot;] = ngx.var.request_body
+
+content_type = getval(ngx.var.CONTENT_TYPE, &quot;&quot;)
+
+
+resp[&quot;headers&quot;] = ngx.resp.get_headers()
+resp[&quot;status&quot;] = ngx.status
+resp[&quot;duration&quot;] = ngx.var.upstream_response_time
+resp[&quot;time&quot;] = ngx.now()
+resp[&quot;body&quot;] = ngx.var.response_body
+
+ngx.log(ngx.CRIT, json.encode(data));
+</code></pre>
+
+<p>We have used <code>require(&quot;json&quot;)</code> in our code, but json is not a built-in lua module. The good part about the <code>openresty</code> docker image is that it comes pre-packaged with <code>luarocks</code>. <a href="https://luarocks.org/">LuaRocks</a> is a package manager for Lua. Now we need to install a json module, so we introduce a <code>Dockerfile</code> as well to customize the <code>openresty</code> image</p>
+
+<h4 id="dockerfile">Dockerfile</h4>
+
+<pre><code class="language-Dockerfile">FROM openresty/openresty:jessie
+RUN luarocks install luajson
+</code></pre>
+
+<p>We update our <code>docker-compose.yml</code> to build the <code>Dockerfile</code> instead of using a direct image</p>
+
+<h4 id="docker-compose-yml-1">docker-compose.yml</h4>
+
+<pre><code class="language-yaml">version: '2'
+services:
+  nginx:
+    #image: openresty/openresty
+    build: .
+    ports:
+      - &quot;8080:80&quot;
+    volumes:
+      - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ./nginx.conf.d/:/usr/local/openresty/nginx/conf/conf.d/
+      - ./lua:/usr/local/openresty/nginx/lua
+</code></pre>
+
+<p>Once we run the latest composition and hit a test url again</p>
+
+<pre><code class="language-bash">$ curl &quot;http://192.168.33.100:8080/abc?x=2&amp;y=z&quot;
+GET /abc x=2&amp;y=z
+</code></pre>
+
+<p>We would see a entry in our docker logs</p>
+
+<pre><code class="language-json">[crit] 5#5: *4 [lua] request_logger.lua:35: {&quot;response&quot;:{&quot;time&quot;:1495433636.68,&quot;headers&quot;:{&quot;connection&quot;:&quot;close&quot;,&quot;content-type&quot;:&quot;text\/html&quot;,&quot;transfer-encoding&quot;:&quot;chunked&quot;},&quot;status&quot;:200,&quot;duration&quot;:&quot;0.000&quot;},&quot;request&quot;:{&quot;host&quot;:&quot;192.168.33.100&quot;,&quot;uri&quot;:&quot;\/abc&quot;,&quot;post_args&quot;:{},&quot;method&quot;:&quot;GET&quot;,&quot;headers&quot;:{&quot;host&quot;:&quot;192.168.33.100:8080&quot;,&quot;accept&quot;:&quot;*\/*&quot;,&quot;user-agent&quot;:&quot;curl\/7.51.0&quot;},&quot;get_args&quot;:{&quot;y&quot;:&quot;z&quot;,&quot;x&quot;:&quot;2&quot;},&quot;time&quot;:1495433636.68}} while logging request, client: 192.168.33.1, server: , request: &quot;GET /abc?x=2&amp;y=z HTTP/1.1&quot;, upstream: &quot;http://127.0.0.1:8081/abc?x=2&amp;y=z&quot;, host: &quot;192.168.33.100:8080&quot;
+</code></pre>
+
+<p>If we do a POST to the same url</p>
+
+<pre><code class="language-bash">$ curl -X POST -d name=tarun &quot;http://192.168.33.100:8080/abc?x=2&amp;y=z&quot;
+POST /abc x=2&amp;y=z
+</code></pre>
+
+<p>The log entry would be</p>
+
+<pre><code class="language-json">[crit] 5#5: *7 [lua] request_logger.lua:35: {&quot;response&quot;:{&quot;time&quot;:1495434620.413,&quot;headers&quot;:{&quot;connection&quot;:&quot;close&quot;,&quot;content-type&quot;:&quot;text\/html&quot;,&quot;transfer-encoding&quot;:&quot;chunked&quot;},&quot;status&quot;:200,&quot;duration&quot;:&quot;0.000&quot;},&quot;request&quot;:{&quot;host&quot;:&quot;192.168.33.100&quot;,&quot;body&quot;:&quot;name=tarun&quot;,&quot;uri&quot;:&quot;\/abc&quot;,&quot;post_args&quot;:{&quot;name&quot;:&quot;tarun&quot;},&quot;method&quot;:&quot;POST&quot;,&quot;headers&quot;:{&quot;host&quot;:&quot;192.168.33.100:8080&quot;,&quot;content-length&quot;:&quot;10&quot;,&quot;user-agent&quot;:&quot;curl\/7.51.0&quot;,&quot;accept&quot;:&quot;*\/*&quot;,&quot;content-type&quot;:&quot;application\/x-www-form-urlencoded&quot;},&quot;get_args&quot;:{&quot;y&quot;:&quot;z&quot;,&quot;x&quot;:&quot;2&quot;},&quot;time&quot;:1495434620.413}} while logging request, client: 192.168.33.1, server: , request: &quot;POST /abc?x=2&amp;y=z HTTP/1.1&quot;, upstream: &quot;http://127.0.0.1:8081/abc?x=2&amp;y=z&quot;, host: &quot;192.168.33.100:8080
+</code></pre>
+
+<p>We are able to capture a lot of details about the request, but not the response body as of now. Response doesn&rsquo;t get stored anywhere by default. So we need to put some code around to gather response body. Nginx uses buffered response, so we have to collect each buffer and combine into a single one to get a complete response.</p>
+
+<p>To do this we update our <code>main.conf</code> and add a <code>body_filter_by_lua_block</code> directive.</p>
+
+<pre><code class="language-nginx">#we must declare variables first, we cannot create vars in lua
+set $response_body '';  
+
+body_filter_by_lua_block {
+    -- arg[1] contains a chunk of response content
+    local resp_body = string.sub(ngx.arg[1], 1, 1000)  
+    ngx.ctx.buffered = string.sub((ngx.ctx.buffered or &quot;&quot;) .. resp_body, 1, 1000)
+    -- arg[2] is true if this is the last chunk
+    if ngx.arg[2] then
+      ngx.var.response_body = ngx.ctx.buffered
+    end
+}
+</code></pre>
+
+<p>Then we update our <code>request_logger.lua</code> to include the code for adding body</p>
+
+<pre><code class="language-lua">resp[&quot;body&quot;] = ngx.var.response_body
+</code></pre>
+
+<p>Now if we restart and run the test again, the log entry would be</p>
+
+<pre><code class="language-json">[crit] 5#5: *1 [lua] request_logger.lua:35: {&quot;response&quot;:{&quot;time&quot;:1495436040.177,&quot;body&quot;:&quot;POST \/abc x=2&amp;y=z\n&quot;,&quot;headers&quot;:{&quot;connection&quot;:&quot;close&quot;,&quot;content-type&quot;:&quot;text\/html&quot;,&quot;transfer-encoding&quot;:&quot;chunked&quot;},&quot;status&quot;:200,&quot;duration&quot;:&quot;0.000&quot;},&quot;request&quot;:{&quot;host&quot;:&quot;192.168.33.100&quot;,&quot;body&quot;:&quot;name=tarun&quot;,&quot;uri&quot;:&quot;\/abc&quot;,&quot;post_args&quot;:{&quot;name&quot;:&quot;tarun&quot;},&quot;method&quot;:&quot;POST&quot;,&quot;headers&quot;:{&quot;host&quot;:&quot;192.168.33.100:8080&quot;,&quot;content-length&quot;:&quot;10&quot;,&quot;user-agent&quot;:&quot;curl\/7.51.0&quot;,&quot;accept&quot;:&quot;*\/*&quot;,&quot;content-type&quot;:&quot;application\/x-www-form-urlencoded&quot;},&quot;get_args&quot;:{&quot;y&quot;:&quot;z&quot;,&quot;x&quot;:&quot;2&quot;},&quot;time&quot;:1495436040.177}} while logging request, client: 192.168.33.1, server: , request: &quot;POST /abc?x=2&amp;y=z HTTP/1.1&quot;, upstream: &quot;http://127.0.0.1:8081/abc?x=2&amp;y=z&quot;, host: &quot;192.168.33.100:8080&quot;
+</code></pre>
+
+<p>As you would notice <code>&quot;body&quot;:&quot;POST \/abc x=2&amp;y=z\n&quot;</code> also got captured. Now we can easily use <code>rsyslog</code> to read the nginx logs and pass this information onto some other stack like ElasticSearch or Kafka etc&rsquo;</p>
+
+<p>You can download the code for above article at <a href="https://github.com/tarunlalwani/nginx-lua-request-capture.git">tarunlalwani/nginx-lua-request-capture.git</a></p>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" http://tarunlalwani.com/" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tarunlalwani';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-99088991-1', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "http:\/\/tarunlalwani.com\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  
+
+  <script src="http://tarunlalwani.com//js/highlight.pack.js"></script>
+  
+  <script src="http://tarunlalwani.com//js/App.js"></script>
+  
+</body>
+</html>
