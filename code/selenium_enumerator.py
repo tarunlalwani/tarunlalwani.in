@@ -1,4 +1,7 @@
+import json
 import os
+import urllib
+
 from fabric.api import local, env
 import marionette_driver
 
@@ -9,6 +12,7 @@ import psutil
 
 from fabric.context_managers import hide, settings
 from selenium import webdriver
+from selenium.common.exceptions import WebDriverException
 
 OS_DETERMINED = None
 IS_MAC = True
@@ -86,19 +90,31 @@ def get_running_firefox(geckodriver=True):
 #
 # print "we are here"
 
-from selenium import webdriver
+# from selenium import webdriver
+#
+# driver = webdriver.Firefox()
+# executor_url = driver.command_executor._url
+# session_id = driver.session_id
+# driver.get("http://tarunlalwani.com")
+#
+# print session_id
+# print executor_url
+# print driver.capabilities
 
-driver = webdriver.Firefox()
-executor_url = driver.command_executor._url
-session_id = driver.session_id
-driver.get("http://tarunlalwani.com")
 
-print session_id
-print executor_url
-print driver.capabilities
+def get_sessions_from_executor(executor_url):
+    sessions_req = urllib.request.urlopen(executor_url + "/sessions")
+    sessions_data = sessions_req.read()
+    sessions_encoding = sessions_req.info().get_content_charset('utf-8')
+
+    sessions = json.loads(sessions_data.decode(sessions_encoding))
+
+    for session in sessions["value"]:
+        yield (session["id"], session["capabilities"]["browserName"])
 
 
 def create_driver_session(session_id, executor_url):
+    # type: (str, str) -> WebDriver
     from selenium.webdriver.remote.webdriver import WebDriver as RemoteWebDriver
 
     # Save the original function, so we can revert our patch
@@ -122,5 +138,29 @@ def create_driver_session(session_id, executor_url):
 
     return new_driver
 
-driver2 = create_driver_session(session_id, executor_url)
-print driver2.current_url
+# driver2 = create_driver_session(session_id, executor_url)
+# print driver2.current_url
+
+#ins2 = Marionette(host="127.0.0.1", port=65090)
+# ins2.start_session()
+# ins = marionette_driver.geckoinstance.GeckoInstance(host="127.0.0.1", port=60860)
+# ins2.
+#print ins2.session_id
+
+
+def create_driver_session_firefox(executor_url):
+    _driver = create_driver_session("dummy", executor_url)
+
+    try:
+        _driver.current_url
+    except WebDriverException as ex:
+        session_id = ex.msg.replace("Got unexpected session id dummy expected ", "")
+        if session_id:
+            _driver = create_driver_session(session_id, executor_url)
+            return _driver
+
+    raise Exception("failed to find session id and create driver")
+
+driver = create_driver_session_firefox("http://127.0.0.1:52099")
+
+driver.get("http://google.com")

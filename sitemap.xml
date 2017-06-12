@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://tarunlalwani.com/post/simple-parameterized-config-files-docker/</loc>
+    <lastmod>2017-06-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/post/request-capturing-nginx-lua/</loc>
     <lastmod>2017-06-06T00:00:00+00:00</lastmod>
   </url>
@@ -146,6 +151,12 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/config/</loc>
+    <lastmod>2017-06-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/tags/debug/</loc>
     <lastmod>2017-05-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -171,7 +182,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/docker/</loc>
-    <lastmod>2017-06-04T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -266,6 +277,12 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/parameter/</loc>
+    <lastmod>2017-06-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/tags/phantomjs/</loc>
     <lastmod>2017-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -285,7 +302,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/post/</loc>
-    <lastmod>2017-06-06T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -369,13 +386,19 @@
   
   <url>
     <loc>http://tarunlalwani.com/</loc>
-    <lastmod>2017-06-06T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://tarunlalwani.com/tags/</loc>
     <lastmod>2017-06-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/tags/template/</loc>
+    <lastmod>2017-06-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

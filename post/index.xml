@@ -6,10 +6,21 @@
     <description>Recent content in Posts on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 06 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Simple Parameterized config files inside Docker</title>
+      <link>http://tarunlalwani.com/post/simple-parameterized-config-files-docker/</link>
+      <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/simple-parameterized-config-files-docker/</guid>
+      <description>Parameterized config files are a must to create customizable and flexible docker images. There are many tools available for doing the same. To name a few, consul-template, confd
+But in this article I want to discuss about few of the basic approaches. So why basic ones? Well, when you can do the job with a knife, why use a gun!
+Approach 1 - Using Bash Substituion This uses shell parameter and file redirection.</description>
+    </item>
     
     <item>
       <title>Request Capturing using NGINX and Lua</title>
