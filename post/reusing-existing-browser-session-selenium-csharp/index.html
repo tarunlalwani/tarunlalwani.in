@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+      <meta name="description" content="Learn how to re-use an existing open session of a browser in Selenium. This trick can speed up your development effort">
+      <meta name="twitter:description" content="Learn how to re-use an existing open session of a browser in Selenium. This trick can speed up your development effort">
+    
+
+    <meta property="og:title" content="Re-using existing browser session in Selenium using C#">
+    <meta property="twitter:title" content="Re-using existing browser session in Selenium using C#">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-06-15">
+    
+    <meta property="og:description" content="Learn how to re-use an existing open session of a browser in Selenium. This trick can speed up your development effort">
+    <meta property="og:url" content="http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-csharp/">
+    <meta property="og:site_name" content="TARUN LALWANI">
+   
+
+    
+    <meta property="og:tags" content="sesison">
+    
+    <meta property="og:tags" content="session_id">
+    
+    <meta property="og:tags" content="selenium">
+    
+    <meta property="og:tags" content="reuse">
+    
+    <meta property="og:tags" content="browser">
+    
+    <meta property="og:tags" content="csharp">
+    
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ask4tarun">
+    <meta property="og:image" content="http://tarunlalwani.com/images/reuse_session_selenium_csharp.png">
+    <meta property="twitter:image" content="http://tarunlalwani.com/images/reuse_session_selenium_csharp.png">
+    
+
+    <meta name="generator" content="Hugo 0.21" />
+    <title>Re-using existing browser session in Selenium using C# &middot; TARUN LALWANI</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://tarunlalwani.com/css/style.css">
+
+    
+
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/sunburst.min.css">
+
+    
+
+    
+    <link href="http://tarunlalwani.com/index.xml" rel="alternate" type="application/rss+xml" title="TARUN LALWANI" />
+    
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="http://tarunlalwani.com/">TARUN LALWANI</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="http://tarunlalwani.com/">TARUN LALWANI</a></h1>
+		
+		
+		
+			<small class="text-center center-block">Technology Enthusiast</small>
+		
+		
+		
+			<img id="profile-pic" src="http://tarunlalwani.com//images/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			<a href="https://twitter.com/ask4tarun"><i class="fa fa-twitter fa-2x"></i></a>
+			<a href="https://plus.google.com/&#43;TarunLalwani"><i class="fa fa-google-plus fa-2x"></i></a>
+			<a href="https://www.linkedin.com/in/tarunlalwani"><i class="fa fa-linkedin fa-2x"></i></a>
+			<a href="https://github.com/tarunlalwani"><i class="fa fa-github fa-2x"></i></a>
+			
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Re-using existing browser session in Selenium using C#</h1>
+	</header>
+
+	<article>
+		
+
+<p>Earlier I wrote an <a href="../../post/reusing-existing-browser-session-selenium-java">article</a> on how to re-use a session in Selenium using Java. <a href="http://disq.us/p/1jkmxto">@Jim Hazen</a> asked if the I could provide the implementation of same in C#. So here it is</p>
+
+<p>The first time I worked out this approach was in C# only, but that was back in 2014. That time I copied code from the Selenium source code and modified it. This makes upgrading Selenium version difficult. So I would reattempt to do this again in a better way.</p>
+
+<p>Let&rsquo;s start</p>
+
+<pre><code class="language-csharp">var driver = new ChromeDriver();
+</code></pre>
+
+<p>As discussed in previous articles. Two things that we need is the Session Id and the Executor url to be able to re-create the driver.</p>
+
+<h3 id="getting-the-session-id">Getting the Session Id</h3>
+
+<p>Getting the Session Id is quite simple</p>
+
+<pre><code class="language-csharp">Console.WriteLine(driver.SessionId.ToString());
+</code></pre>
+
+<h3 id="getting-the-executor-url">Getting the Executor URL</h3>
+
+<p>Getting the Executor URL is not straight forward. So we will see how to get it in multiple steps</p>
+
+<p>If we look at the RemoteWebDriver class source code we will find the executor is stored in a private field</p>
+
+<pre><code class="language-csharp">private ICommandExecutor executor;
+</code></pre>
+
+<p>To get a private field we need to use Reflection concepts in C#</p>
+
+<pre><code class="language-csharp">var executorField = driver.GetType().GetField(&quot;executor&quot;, BindingFlags.NonPublic |BindingFlags.Instance);
+</code></pre>
+
+<p>The executorField value will come as <code>null</code>. The reason this happens is that we had initiated the driver as a <code>ChromeDriver</code> and the private field is of <code>RemoteWebDriver</code> which means it is not accesible to the <code>ChromeDriver</code> class also. So we need to go to it&rsquo;s base class to fetch the <code>executor</code> field.</p>
+
+<p>So we update our code as below</p>
+
+<pre><code class="language-csharp">var executorField = driver.GetType().GetField(&quot;executor&quot;, BindingFlags.NonPublic |BindingFlags.Instance);
+if (executorField == null )
+{
+    executorField = driver.GetType().BaseType.GetField(&quot;executor&quot;, BindingFlags.NonPublic |BindingFlags.Instance);
+}
+
+object executor = executorField.GetValue(driver);
+</code></pre>
+
+<p>Now if we look the executor object value. It is of type <code>OpenQA.Selenium.Remote.DriverServiceCommandExecutor</code>. If we look at the source code of this class</p>
+
+<pre><code class="language-csharp">internal class DriverServiceCommandExecutor : ICommandExecutor
+{
+    private DriverService service;
+
+    private HttpCommandExecutor internalExecutor;
+</code></pre>
+
+<p>This is a internal class, so we can&rsquo;t cast this object. Also since the <code>internalExecutor</code> is a private field, we anyways have to use reflection further.</p>
+
+<pre><code class="language-csharp">var internalExecutorField = executor.GetType().GetField(&quot;internalExecutor&quot;, BindingFlags.Instance | BindingFlags.NonPublic);
+object internalExecutor = internalExecutorField.GetValue(executor);
+</code></pre>
+
+<p>The <code>internalExecutor</code> object has a type of <code>OpenQA.Selenium.Remote.HttpCommandExecutor</code>. The source code of the class is as below</p>
+
+<pre><code class="language-csharp">internal class HttpCommandExecutor : ICommandExecutor
+{
+    private const string JsonMimeType = &quot;application/json&quot;;
+
+    private const string ContentTypeHeader = &quot;application/json;charset=utf-8&quot;;
+
+    private const string RequestAcceptHeader = &quot;application/json, image/png&quot;;
+
+    private Uri remoteServerUri;
+</code></pre>
+
+<p>So there is the field we are interested in <code>remoteServerUri</code>. We can get it the same way we got <code>remoteServerUri</code>.</p>
+
+<pre><code class="language-csharp">var remoteServerUriField = internalExecutor.GetType().GetField(&quot;remoteServerUri&quot;, BindingFlags.Instance | BindingFlags.NonPublic);
+var remoteServerUri = remoteServerUriField.GetValue(internalExecutor) as Uri;
+</code></pre>
+
+<p>The value of <code>remoteServerUri</code> comes out be <code>http://localhost:52600/</code> in my case. This would change everytime we launch a new driver.</p>
+
+<p>Here is a refactored and more polished version of the code we wrote</p>
+
+<pre><code class="language-csharp">public static Uri GetExecutorURLFromDriver(OpenQA.Selenium.Remote.RemoteWebDriver driver)
+{
+    var executorField = typeof(OpenQA.Selenium.Remote.RemoteWebDriver)
+        .GetField(&quot;executor&quot;,
+                  System.Reflection.BindingFlags.NonPublic
+                  | System.Reflection.BindingFlags.Instance);
+    
+    object executor = executorField.GetValue(driver);
+    
+    var internalExecutorField = executor.GetType()
+        .GetField(&quot;internalExecutor&quot;,
+                  System.Reflection.BindingFlags.NonPublic
+                  | System.Reflection.BindingFlags.Instance);
+    object internalExecutor = internalExecutorField.GetValue(executor);
+    
+    //executor.CommandInfoRepository
+    var remoteServerUriField = internalExecutor.GetType()
+        .GetField(&quot;remoteServerUri&quot;,
+                  System.Reflection.BindingFlags.NonPublic
+                  | System.Reflection.BindingFlags.Instance);
+    var remoteServerUri = remoteServerUriField.GetValue(internalExecutor) as Uri;
+    
+    return remoteServerUri;
+}
+</code></pre>
+
+<p>So now we have solved the first issue, which is to have the Session Id and Exeuctor URL for us to save before reconstructing the WebDriver next time.</p>
+
+<h2 id="reconstructing-the-driver">Reconstructing the driver</h2>
+
+<p>So we have what we need to re-create the driver, now it is for us to look at what we need from a C# language perspective. We need to create a new class with base class <code>OpenQA.Selenium.Remote.RemoteWebDriver</code> class and override the execute method to change the <code>NewSession</code> command response</p>
+
+<pre><code class="language-csharp">public class ReuseRemoteWebDriver: OpenQA.Selenium.Remote.RemoteWebDriver{
+    private String _sessionId;
+    
+    public ReuseRemoteWebDriver(Uri remoteAddress, String sessionId)
+        :base( remoteAddress,  new OpenQA.Selenium.Remote.DesiredCapabilities()) {
+        this._sessionId = sessionId;
+    }
+    
+    protected override OpenQA.Selenium.Remote.Response 
+        Execute(string driverCommandToExecute, System.Collections.Generic.Dictionary&lt;string, object&gt; parameters)
+    {
+        if (driverCommandToExecute == OpenQA.Selenium.Remote.DriverCommand.NewSession)
+        {
+            var resp =  new OpenQA.Selenium.Remote.Response();
+            resp.Status = OpenQA.Selenium.WebDriverResult.Success;
+            resp.SessionId = this._sessionId;
+            resp.Value = new System.Collections.Generic.Dictionary&lt;String, Object&gt;();
+            return resp;
+        }
+        var respBase = base.Execute(driverCommandToExecute, parameters);
+        return respBase;
+    }
+}
+</code></pre>
+
+<p>This code creates a the driver successfully. Now let&rsquo;s test it.</p>
+
+<pre><code class="language-csharp">var driverReUse = new ReuseRemoteWebDriver(remoteUri, driverChrome.SessionId.ToString());
+driverReUse.Url = &quot;http://tarunlalwani.com&quot;;
+
+Console.WriteLine(driverReUse.Url);
+</code></pre>
+
+<p>The line of code to set Url of the driver doesn&rsquo;t do anything, but doesn&rsquo;t error too. On printing the Url a exception is raised</p>
+
+<pre><code>OpenQA.Selenium.WebDriverException: no such session
+  (Driver info: chromedriver=2.30.477700 (0057494ad8732195794a7b32078424f92a5fce41),platform=Windows NT 6.1.7601 SP1 x86_64)
+
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at SeleniumReuseSession.ReuseRemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters) in c:\Users\tarun\Documents\SharpDevelop Projects\SeleniumReuseSession\SeleniumReuseSession\Program.cs:line 40
+   at OpenQA.Selenium.Remote.RemoteWebDriver.get_Url()
+   at SeleniumReuseSession.Program.Main(String[] args) in c:\Users\tarun\Documents\SharpDevelop Projects\SeleniumReuseSession\SeleniumReuseSession\Program.cs:line 83
+</code></pre>
+
+<p>After debugging the code, I found the issue. The problem is that the base class constructor is called first and then the line <code>this._sessionId = sessionId</code>. The base constructor calls the <code>Execute</code> method. So when we set the sessionId in the dummy response, the ID is <code>null</code> as our constructor code has not been called yet.</p>
+
+<p>Now this is the way constructor are suppose to work and there is no workaround to this behavior. So we need to dig into the constructor to find our workaround</p>
+
+<p>The constructor calls the <code>StartSession</code> method which in turn executes the <code>NewSession</code> command and then save the session in <code>sessionId</code> private field.</p>
+
+<pre><code class="language-csharp">//https://github.com/SeleniumHQ/selenium/blob/master/dotnet/src/webdriver/Remote/RemoteWebDriver.cs#L1100
+
+protected void StartSession(ICapabilities desiredCapabilities)
+{
+    Dictionary&lt;string, object&gt; parameters = new Dictionary&lt;string, object&gt;();
+    parameters.Add(&quot;desiredCapabilities&quot;, this.GetLegacyCapabilitiesDictionary(desiredCapabilities));
+
+    Dictionary&lt;string, object&gt; firstMatchCapabilities = this.GetCapabilitiesDictionary(desiredCapabilities);
+
+    List&lt;object&gt; firstMatchCapabilitiesList = new List&lt;object&gt;();
+    firstMatchCapabilitiesList.Add(firstMatchCapabilities);
+
+    Dictionary&lt;string, object&gt; specCompliantCapabilities = new Dictionary&lt;string, object&gt;();
+    specCompliantCapabilities[&quot;firstMatch&quot;] = firstMatchCapabilitiesList;
+    parameters.Add(&quot;capabilities&quot;, specCompliantCapabilities);
+
+    Response response = this.Execute(DriverCommand.NewSession, parameters);
+
+    Dictionary&lt;string, object&gt; rawCapabilities = (Dictionary&lt;string, object&gt;)response.Value;
+    DesiredCapabilities returnedCapabilities = new DesiredCapabilities(rawCapabilities);
+    this.capabilities = returnedCapabilities;
+    this.sessionId = new SessionId(response.SessionId);
+}
+</code></pre>
+
+<p>So basically when our constructor gets called and the sessionId on our base class is set to null because of our overriden response. The fix is to set the sessionId in our constructor. So if update the constructor as below</p>
+
+<pre><code class="language-csharp">public ReuseRemoteWebDriver(Uri remoteAddress, String sessionId)
+    :base( remoteAddress,  new OpenQA.Selenium.Remote.DesiredCapabilities()) {
+    this._sessionId = sessionId;
+    var sessionIdBase = this.GetType()
+        .BaseType
+        .GetField(&quot;sessionId&quot;,
+                  System.Reflection.BindingFlags.Instance |
+                  System.Reflection.BindingFlags.NonPublic);
+    sessionIdBase.SetValue(this, new OpenQA.Selenium.Remote.SessionId(sessionId));
+}
+</code></pre>
+
+<p>The finally updated code for our class is as below</p>
+
+<pre><code class="language-csharp">public class ReuseRemoteWebDriver: OpenQA.Selenium.Remote.RemoteWebDriver{
+    private String _sessionId;
+    
+    public ReuseRemoteWebDriver(Uri remoteAddress, String sessionId)
+        :base( remoteAddress,  new OpenQA.Selenium.Remote.DesiredCapabilities()) {
+        this._sessionId = sessionId;
+        var sessionIdBase = this.GetType()
+            .BaseType
+            .GetField(&quot;sessionId&quot;,
+                      System.Reflection.BindingFlags.Instance |
+                      System.Reflection.BindingFlags.NonPublic);
+        sessionIdBase.SetValue(this, new OpenQA.Selenium.Remote.SessionId(sessionId));
+    }
+    
+    protected override OpenQA.Selenium.Remote.Response 
+        Execute(string driverCommandToExecute, System.Collections.Generic.Dictionary&lt;string, object&gt; parameters)
+    {
+        if (driverCommandToExecute == OpenQA.Selenium.Remote.DriverCommand.NewSession)
+        {
+            var resp =  new OpenQA.Selenium.Remote.Response();
+            resp.Status = OpenQA.Selenium.WebDriverResult.Success;
+            resp.SessionId = this._sessionId;
+            resp.Value = new System.Collections.Generic.Dictionary&lt;String, Object&gt;();
+            return resp;
+        }
+        var respBase = base.Execute(driverCommandToExecute, parameters);
+        return respBase;
+    }
+}
+</code></pre>
+
+<p>And this version of code works great. Enjoy!</p>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" http://tarunlalwani.com/" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tarunlalwani';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-99088991-1', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "http:\/\/tarunlalwani.com\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  
+
+  <script src="http://tarunlalwani.com//js/highlight.pack.js"></script>
+  
+  <script src="http://tarunlalwani.com//js/App.js"></script>
+  
+</body>
+</html>

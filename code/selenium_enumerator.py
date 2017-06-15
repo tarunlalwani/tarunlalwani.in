@@ -161,6 +161,11 @@ def create_driver_session_firefox(executor_url):
 
     raise Exception("failed to find session id and create driver")
 
-driver = create_driver_session_firefox("http://127.0.0.1:52099")
+# driver = create_driver_session_firefox("http://127.0.0.1:52099")
+#
+# driver.get("http://google.com")
 
-driver.get("http://google.com")
+import ssl
+from urllib2 import urlopen
+print (vars(ssl))
+req = urllib.urlopen("https://test.python.org")

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-csharp/</loc>
+    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/post/simple-parameterized-config-files-docker/</loc>
     <lastmod>2017-06-12T00:00:00+00:00</lastmod>
   </url>
@@ -117,7 +122,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/browser/</loc>
-    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -153,6 +158,12 @@
   <url>
     <loc>http://tarunlalwani.com/tags/config/</loc>
     <lastmod>2017-06-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/tags/csharp/</loc>
+    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -302,7 +313,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/post/</loc>
-    <lastmod>2017-06-12T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -344,7 +355,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/reuse/</loc>
-    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -356,19 +367,19 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/selenium/</loc>
-    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://tarunlalwani.com/tags/sesison/</loc>
-    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://tarunlalwani.com/tags/session_id/</loc>
-    <lastmod>2017-05-31T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -386,7 +397,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/</loc>
-    <lastmod>2017-06-12T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
