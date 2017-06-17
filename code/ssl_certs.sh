@@ -1,10 +1,9 @@
 #!/bin/bash
 
-CERT_COMPANY_NAME=${CERT_COMPANY_NAME:=TARLABS}
+CERT_COMPANY_NAME=${CERT_COMPANY_NAME:=Tarun Lalwani}
 CERT_COUNTRY=${CERT_COUNTRY:=IN}
 CERT_STATE=${CERT_STATE:=DELHI}
 CERT_CITY=${CERT_CITY:=DELHI}
-CERT_COMMON_NAME=${CERT_COMMON_NAME:=${CERT_COMPANY_NAME}.com}
 
 CERT_DIR=${CERT_DIR:=certs}
 
@@ -13,7 +12,7 @@ ROOT_CERT_KEY=${ROOT_CERT:=rootCA.key.pem}
 
 
 # make directories to work from
-mkdir -p server/ client/ all/
+mkdir -p $CERT_DIR
 
 create_root_cert(){
   # Create your very own Root Certificate Authority
@@ -53,7 +52,7 @@ create_domain_cert()
     -subj "/C=${CERT_COUNTRY}/ST=${CERT_STATE/L=${CERT_CITY}/O=$CERT_COMPANY_NAME/CN=${FQDN}"
 
   if [ ! -z "${SAN}" ]; then
-    SAN_PARAMS= -extensions san_env -config <(cat /etc/ssl/openssl.cnf <(cat ./openssl-san.cnf))
+    SAN_PARAMS= -reqexts san_env -config <(cat /etc/ssl/openssl.cnf <(cat ./openssl-san.cnf))
   else
     SAN_PARAMS=
   fi
@@ -77,7 +76,6 @@ if [ -z "$METHOD" ]; then
   echo "CERT_COUNTRY=Country"
   echo "CERT_STATE=State"
   echo "CERT_CITY=City"
-  echo "CERT_COMMON_NAME=Common Name for root cert"
   echo "CERT_DIR=Directory where certificate needs to be genereated" 
   echo "ROOT_CERT=Name of the root cert"
   echo "ROOT_CERT_KEY=Name of root certificate key"

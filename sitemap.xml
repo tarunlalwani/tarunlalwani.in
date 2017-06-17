@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://tarunlalwani.com/post/self-signed-certificates-trusting-them/</loc>
+    <lastmod>2017-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-csharp/</loc>
     <lastmod>2017-06-15T00:00:00+00:00</lastmod>
   </url>
@@ -134,6 +139,12 @@
   
   <url>
     <loc>http://tarunlalwani.com/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/tags/certificate/</loc>
+    <lastmod>2017-06-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -288,6 +299,12 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/openssl/</loc>
+    <lastmod>2017-06-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/tags/parameter/</loc>
     <lastmod>2017-06-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -313,7 +330,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/post/</loc>
-    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -396,8 +413,20 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/ssl/</loc>
+    <lastmod>2017-06-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/tags/subjectaltname/</loc>
+    <lastmod>2017-06-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/</loc>
-    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -414,6 +443,24 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/trust/</loc>
+    <lastmod>2017-06-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/tags/update-ca-certificates/</loc>
+    <lastmod>2017-06-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/tags/update-ca-trust/</loc>
+    <lastmod>2017-06-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/tags/upgrade/</loc>
     <lastmod>2017-05-17T11:47:37+05:30</lastmod>
     <priority>0</priority>
@@ -422,6 +469,12 @@
   <url>
     <loc>http://tarunlalwani.com/tags/user-agent/</loc>
     <lastmod>2017-05-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/tags/vertification/</loc>
+    <lastmod>2017-06-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

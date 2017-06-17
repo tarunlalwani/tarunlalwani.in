@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+      <meta name="description" content="Self signed certificate can be created to enable https in test environments to make them work close to production. Learn how to trust the certificates to enable testing without any code changes">
+      <meta name="twitter:description" content="Self signed certificate can be created to enable https in test environments to make them work close to production. Learn how to trust the certificates to enable testing without any code changes">
+    
+
+    <meta property="og:title" content="Self-signed SSL certificates and how to trust them">
+    <meta property="twitter:title" content="Self-signed SSL certificates and how to trust them">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-06-17">
+    
+    <meta property="og:description" content="Self signed certificate can be created to enable https in test environments to make them work close to production. Learn how to trust the certificates to enable testing without any code changes">
+    <meta property="og:url" content="http://tarunlalwani.com/post/self-signed-certificates-trusting-them/">
+    <meta property="og:site_name" content="TARUN LALWANI">
+   
+
+    
+    <meta property="og:tags" content="ssl">
+    
+    <meta property="og:tags" content="vertification">
+    
+    <meta property="og:tags" content="trust">
+    
+    <meta property="og:tags" content="update-ca-trust">
+    
+    <meta property="og:tags" content="openssl">
+    
+    <meta property="og:tags" content="update-ca-certificates">
+    
+    <meta property="og:tags" content="certificate">
+    
+    <meta property="og:tags" content="subjectAltName">
+    
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ask4tarun">
+    <meta property="og:image" content="http://tarunlalwani.com/images/ssl_certificates.png">
+    <meta property="twitter:image" content="http://tarunlalwani.com/images/ssl_certificates.png">
+    
+
+    <meta name="generator" content="Hugo 0.21" />
+    <title>Self-signed SSL certificates and how to trust them &middot; TARUN LALWANI</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://tarunlalwani.com/css/style.css">
+
+    
+
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/sunburst.min.css">
+
+    
+
+    
+    <link href="http://tarunlalwani.com/index.xml" rel="alternate" type="application/rss+xml" title="TARUN LALWANI" />
+    
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="http://tarunlalwani.com/">TARUN LALWANI</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="http://tarunlalwani.com/">TARUN LALWANI</a></h1>
+		
+		
+		
+			<small class="text-center center-block">Technology Enthusiast</small>
+		
+		
+		
+			<img id="profile-pic" src="http://tarunlalwani.com//images/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			<a href="https://twitter.com/ask4tarun"><i class="fa fa-twitter fa-2x"></i></a>
+			<a href="https://plus.google.com/&#43;TarunLalwani"><i class="fa fa-google-plus fa-2x"></i></a>
+			<a href="https://www.linkedin.com/in/tarunlalwani"><i class="fa fa-linkedin fa-2x"></i></a>
+			<a href="https://github.com/tarunlalwani"><i class="fa fa-github fa-2x"></i></a>
+			
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Self-signed SSL certificates and how to trust them</h1>
+	</header>
+
+	<article>
+		
+
+<p>SSL certificates allow us to secure communication between the server and user. Unfortunately SSL certificates are a bit costly and are not prefered to be bought for development environments. This is where self-signed certificates come into picture.</p>
+
+<h2 id="creating-a-self-signed-certificate">Creating a Self-signed certificate</h2>
+
+<p>We can create a self-signed certificate using the <code>openssl</code> command</p>
+
+<pre><code class="language-accesslog">$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout selfsigned.key -out selfsigned.crt
+Generating a 2048 bit RSA private key
+.+++
+................................+++
+writing new private key to 'selfsigned.key'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:IN
+State or Province Name (full name) [Some-State]:Delhi
+Locality Name (eg, city) []:Delhi
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Tarun Lalwani
+Organizational Unit Name (eg, section) []:IT
+Common Name (e.g. server FQDN or YOUR name) []:*.tarunlalwani.com
+Email Address []:
+</code></pre>
+
+<p>The command would ask certain set of questions depending on the openssl config, once we have answered these questions the certificate would be created</p>
+
+<p>The answer to the FQDN is basically the domain name for which the certificate will be used. The certificate if generated for <code>www.tarunlalwani.com</code> will not work on just <code>tarunlalwani.com</code>. But if we need certificate to work on multiple subdomains then we use a wildcard domain name <code>*.tarunlalwani.com</code>.</p>
+
+<p>These certificates are called wild card certificates. We can even have a multi-domain certificate as well which would list multiple domains in a single certficate. The cost of certificate is dependent on type. With single domain costing the least, then multi-domain and wildcard certificate being the costliest one.</p>
+
+<p>So getting back to the certificate we generated, there are two files that got generated <code>selfsigned.key</code> and <code>selfsigned.crt</code>. The <code>selfsigned.key</code> is a private key and should be secured on the server. The <code>selfsigned.crt</code> is the certificate which is presented to the user.</p>
+
+<h3 id="testing-the-certificates-using-nginx">Testing the certificates using Nginx</h3>
+
+<p>Now let us run a simple nginx server using <code>openresty/openresty</code> docker image and use these ssl certificates</p>
+
+<h4 id="nginx-conf">nginx.conf</h4>
+
+<pre><code class="language-nginx">worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    sendfile        on;
+    keepalive_timeout  65;
+
+    include conf.d/*.conf;
+}
+</code></pre>
+
+<h4 id="site-conf">site.conf</h4>
+
+<pre><code class="language-nginx">server {
+   listen 443 ssl default;
+   server_name *.tarunlalwani.com;
+   ssl_certificate /certs/selfsigned.crt;
+   ssl_certificate_key /certs/selfsigned.key;
+
+   location / {
+     add_header Content-Type &quot;text/html&quot;;
+     echo &quot;$request_method $uri $args&quot;;
+   }
+}
+</code></pre>
+
+<p>Then we run the files in a openresty docker image using below command</p>
+
+<pre><code class="language-bash">$ docker run \
+  -v $PWD:/certs \
+  -p 443:443 \
+  -v $PWD/site.conf:/usr/local/openresty/nginx/conf/conf.d/site.conf \
+  -v $PWD/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf \
+  --name ssltest \
+  -d openresty/openresty
+</code></pre>
+
+<p>Next we create a host entry of our host IP as <code>dev.tarunlalwani.com</code> and test it using curl</p>
+
+<pre><code class="language-bash">$ curl -k &quot;https://dev.tarunlalwani.com/testme&quot;
+GET /testme
+</code></pre>
+
+<h2 id="certificate-validation-and-errors">Certificate validation and errors</h2>
+
+<p>Now that we have used a self-signed certificate, let&rsquo;s look at some of the validation issues.</p>
+
+<h4 id="curl">CURL</h4>
+
+<pre><code class="language-accesslog">$  curl  &quot;https://dev.tarunlalwani.com/testme&quot;
+curl: (60) server certificate verification failed. CAfile: /etc/ssl/certs/ca-certificates.crt CRLfile: none
+More details here: http://curl.haxx.se/docs/sslcerts.html
+
+curl performs SSL certificate verification by default, using a &quot;bundle&quot;
+ of Certificate Authority (CA) public keys (CA certs). If the default
+ bundle file isn't adequate, you can specify an alternate file
+ using the --cacert option.
+If this HTTPS server uses a certificate signed by a CA represented in
+ the bundle, the certificate verification probably failed due to a
+ problem with the certificate (it might be expired, or the name might
+ not match the domain name in the URL).
+If you'd like to turn off curl's verification of the certificate, use
+ the -k (or --insecure) option.
+</code></pre>
+
+<p>We will get a error. We can ignore all the ssl errors by adding the <code>-k</code> flag, but that means we don&rsquo;t care what certificate was used. It&rsquo;s better to be able to validate that it is indeed the certificate that we generated</p>
+
+<p>For curl we can also use <code>--cacert</code> parameter to provide the certificate for validation</p>
+
+<pre><code class="language-bash">$ curl --cacert /vagrant/certs/selfsigned.crt &quot;https://dev.tarunlalwani.com/testme&quot;
+GET /testme
+</code></pre>
+
+<h4 id="python">Python</h4>
+
+<pre><code class="language-python"> Python 2.7.12 (default, Nov 19 2016, 06:48:10)
+[GCC 5.4.0 20160609] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; from urllib2 import urlopen
+&gt;&gt;&gt; req = urlopen(&quot;https://dev.tarunlalwani.com&quot;)
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+  File &quot;/usr/lib/python2.7/urllib2.py&quot;, line 154, in urlopen
+    return opener.open(url, data, timeout)
+  File &quot;/usr/lib/python2.7/urllib2.py&quot;, line 429, in open
+    response = self._open(req, data)
+  File &quot;/usr/lib/python2.7/urllib2.py&quot;, line 447, in _open
+    '_open', req)
+  File &quot;/usr/lib/python2.7/urllib2.py&quot;, line 407, in _call_chain
+    result = func(*args)
+  File &quot;/usr/lib/python2.7/urllib2.py&quot;, line 1241, in https_open
+    context=self._context)
+  File &quot;/usr/lib/python2.7/urllib2.py&quot;, line 1198, in do_open
+    raise URLError(err)
+urllib2.URLError: &lt;urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:590)&gt;
+</code></pre>
+
+<p>So in python also we get an error for such a self-signed certificate. We can fix the same by passing the certificate</p>
+
+<pre><code class="language-python">&gt;&gt;&gt; req = urlopen(&quot;https://dev.tarunlalwani.com/testme&quot;, cafile=&quot;/vagrant/certs/selfsigned.crt&quot;)
+&gt;&gt;&gt; req.read()
+'GET /testme \n'
+</code></pre>
+
+<h4 id="nodejs">NodeJS</h4>
+
+<pre><code class="language-js">&gt; req = https.get(&quot;https://dev.tarunlalwani.com&quot;)
+ClientRequest {
+.....
+}
+&gt; Error: self signed certificate
+    at Error (native)
+    at TLSSocket.&lt;anonymous&gt; (_tls_wrap.js:1016:38)
+    at emitNone (events.js:67:13)
+    at TLSSocket.emit (events.js:166:7)
+    at TLSSocket._finishInit (_tls_wrap.js:585:8)
+</code></pre>
+
+<p>To fix this error we need to use the CA file again</p>
+
+<pre><code class="language-js">&gt; options = url.parse(&quot;https://dev.tarunlalwani.com/testme/&quot;)
+Url {
+  protocol: 'https:',
+  slashes: true,
+  auth: null,
+  host: 'dev.tarunlalwani.com',
+  port: null,
+  hostname: 'dev.tarunlalwani.com',
+  hash: null,
+  search: null,
+  query: null,
+  pathname: '/testme/',
+  path: '/testme/',
+  href: 'https://dev.tarunlalwani.com/testme/' }
+
+&gt; options['ca'] = fs.readFileSync('/vagrant/certs/selfsigned.crt')
+&lt;Buffer ... &gt;
+
+&gt; &gt; https.get(options)
+ClientRequest {
+....
+  output: [ 'GET /testme/ HTTP/1.1\r\nHost: dev.tarunlalwani.com\r\nConnection: close\r\n\r\n' ],
+...
+  method: 'GET',
+  path: '/testme/' }
+</code></pre>
+
+<p>So each language will have a way for you to specify the CA file for validating the certificate.</p>
+
+<p>Now if we replace our url <code>https://dev.tarunlalwani.com</code> by <code>https://www.google.com</code>, all the code samples work without haveing to specify a CA file.</p>
+
+<p>So why does it work for other sites like google, microsoft and not for ours? The reason is that these sites purchase SSL certificate from a signing authority. The signing authority could be certified from another authority. The ones on the top of chain are called &ldquo;Root Authority&rdquo;, the sub authorities are called &ldquo;Intermediate&rdquo; and the last certificate in the chain is our site certificate.</p>
+
+<p>If you need a more detailed explaination of this, please have a look at this <a href="https://support.dnsimple.com/articles/what-is-ssl-root-certificate/">article</a></p>
+
+<p>Since these public signing authority certificates are already trusted on the system, it is easier for us code against these sites. For our self-signed one we need to adjust our code.</p>
+
+<p>But there is a way for us to trust these certificates on the system and avoid having to change our code for SSL validation.</p>
+
+<h2 id="trusting-certificates-on-system">Trusting certificates on System</h2>
+
+<p>Once we trust the certificate on a system, the curl command with validate the certificate directly from system. We will see how to trust the certificate on different OSes</p>
+
+<h3 id="alpine">Alpine</h3>
+
+<pre><code>$ apk add ca-certificates
+$ cp /path/to/certificate/cert.crt /usr/local/share/ca-certificates/
+$ update-ca-certificates --verbose
+Updating certificates in /etc/ssl/certs...
+Doing .
+1 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+</code></pre>
+
+<blockquote>
+<p>Note: The extension of the file should <code>crt</code>. Also print the file and make sure it&rsquo;s first line is <code>-----BEGIN CERTIFICATE-----</code></p>
+</blockquote>
+
+<p>Once the new certificate is installed the curl command will work without specifying <code>-k</code> or the <code>--cafile</code> flag</p>
+
+<pre><code class="language-bash">$ curl &quot;https://dev.tarunlalwani.com/testme/&quot;
+GET /testme/
+</code></pre>
+
+<h3 id="ubuntu-and-debian">Ubuntu and Debian</h3>
+
+<p>Ubuntu and Debian OS will also work the same way as alpine except that the <code>ca-certificates</code> package will be installed using <code>apt</code> or <code>apt-get</code></p>
+
+<h3 id="centos">CentOS</h3>
+
+<p>CentOS is a bit different in terms of the certificate paths</p>
+
+<pre><code class="language-bash">$ yum install -y ca-certificates
+$ cp /path/to/certificate/cert.crt /usr/share/pki/ca-trust-source/anchors/
+$ update-ca-trust force-enable
+$ update-ca-trust extract
+</code></pre>
+
+<blockquote>
+<p>Note: You may need to use sudo for these commands if you are not using the root user</p>
+</blockquote>
+
+<h3 id="windows">Windows</h3>
+
+<pre><code class="language-powershell">certutil -addstore -f &quot;ROOT&quot; /path/to/selfsigned.crt
+</code></pre>
+
+<h3 id="mac-os-x">Mac OS X</h3>
+
+<p>Mac OS uses keychains and there are multiple chains in a system. You can either add it to the System keychain using below command (accessible to all users on the system)</p>
+
+<pre><code class="language-bash">$ sudo security add-trusted-cert -d -r trustRoot -k &quot;/Library/Keychains/System.keychain&quot; &quot;/private/tmp/certs/certname.crt&quot;
+</code></pre>
+
+<p>or you can add it to the current users login chain</p>
+
+<pre><code class="language-bash">$ sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain &quot;/private/tmp/certs/certname.crt&quot;
+</code></pre>
+
+<blockquote>
+<p>Note: This will make the certificate accepted by curl, but not by Python, NodeJS and few other languages. The reason is that these languages don&rsquo;t use the Mac OS keychain for validating the certificates. This article wouldn&rsquo;t go into the details about the same. But see references links for more information on the issue</p>
+</blockquote>
+
+<h2 id="self-signed-certificate-using-root-certificate">Self-signed certificate using Root Certificate</h2>
+
+<p>We generated and self signed our certificate earlier using <code>openssl</code> command. The problem with this approach is that, every time we generated a new certificate it needs to be trusted individually on the machine.</p>
+
+<p>Instead of generating seperate self-signed certificates for our site, we can generate a Root Certificate and then use that certificate to Sign other cetificates.</p>
+
+<p>Once we have generated a root certificate, we can trust that root certificate on our system. Once the root certificate is trusted every individual certificate that we sign using the root certificate will be trusted automatically.</p>
+
+<p>This makes it possible to generate certificates on the fly, tools like Charles Web proxy, Fiddler use this technique for intercepting SSL traffic.</p>
+
+<p>So now we will look at how to create a root certificate and then generate a certificate signed using our root certificate</p>
+
+<p>Below is a sample shell script to make it easy to generate these certificates</p>
+
+<h4 id="sslcerts-sh">sslcerts.sh</h4>
+
+<pre><code class="language-bash">#!/bin/bash
+
+CERT_COMPANY_NAME=${CERT_COMPANY_NAME:=Tarun Lalwani}
+CERT_COUNTRY=${CERT_COUNTRY:=IN}
+CERT_STATE=${CERT_STATE:=DELHI}
+CERT_CITY=${CERT_CITY:=DELHI}
+
+CERT_DIR=${CERT_DIR:=certs}
+
+ROOT_CERT=${ROOT_CERT:=rootCA.pem}
+ROOT_CERT_KEY=${ROOT_CERT_KEY:=rootCA.key.pem}
+
+
+# make directories to work from
+mkdir -p $CERT_DIR
+
+create_root_cert(){
+  # Create your very own Root Certificate Authority
+  openssl genrsa \
+    -out $CERT_DIR/$ROOT_CERT_KEY \
+    2048
+
+  # Self-sign your Root Certificate Authority
+  # Since this is private, the details can be as bogus as you like
+  openssl req \
+    -x509 \
+    -new \
+    -nodes \
+    -key ${CERT_DIR}/$ROOT_CERT_KEY \
+    -days 1024 \
+    -out ${CERT_DIR}/$ROOT_CERT \
+    -subj &quot;/C=$CERT_COUNTRY/ST=$CERT_STATE/L=$CERT_CITY/O=$CERT_COMPANY_NAME Signing Authority/CN=$CERT_COMPANY_NAME Signing Authority&quot;
+}
+
+
+create_domain_cert()
+{
+  local FQDN=$1
+  local FILENAME=${FQDN/\*/wild}
+
+  # Create a Device Certificate for each domain,
+  # such as example.com, *.example.com, awesome.example.com
+  # NOTE: You MUST match CN to the domain name or ip address you want to use
+  openssl genrsa \
+    -out $CERT_DIR/${FILENAME}.key \
+    2048
+
+  # Create a request from your Device, which your Root CA will sign
+  if [[ ! -z &quot;${SAN}&quot; ]]; then
+    openssl req -new \
+      -key ${CERT_DIR}/${FILENAME}.key \
+      -out ${CERT_DIR}/${FILENAME}.csr \
+      -subj &quot;/C=${CERT_COUNTRY}/ST=${CERT_STATE}/L=${CERT_CITY}/O=$CERT_COMPANY_NAME/CN=${FQDN}&quot; \
+      -reqexts san_env -config &lt;(cat /etc/ssl/openssl.cnf &lt;(cat ./openssl-san.cnf))
+  else
+    openssl req -new \
+      -key ${CERT_DIR}/${FILENAME}.key \
+      -out ${CERT_DIR}/${FILENAME}.csr \
+      -subj &quot;/C=${CERT_COUNTRY}/ST=${CERT_STATE}/L=${CERT_CITY}/O=$CERT_COMPANY_NAME/CN=${FQDN}&quot;
+  fi
+
+  
+  # Sign the request from Device with your Root CA
+  if [[ ! -z &quot;${SAN}&quot; ]]; then
+    openssl x509 \
+      -sha256 \
+      -req -in $CERT_DIR/${FILENAME}.csr \
+      -CA $CERT_DIR/$ROOT_CERT \
+      -CAkey $CERT_DIR/$ROOT_CERT_KEY \
+      -CAcreateserial \
+      -out $CERT_DIR/${FILENAME}.crt \
+      -days 500 \
+      -extensions san_env \
+      -extfile openssl-san.cnf
+  else
+    openssl x509 \
+      -sha256 \
+      -req -in $CERT_DIR/${FILENAME}.csr \
+      -CA $CERT_DIR/$ROOT_CERT \
+      -CAkey $CERT_DIR/$ROOT_CERT_KEY \
+      -CAcreateserial \
+      -out $CERT_DIR/${FILENAME}.crt \
+      -days 500 
+  fi
+}
+
+ METHOD=$1
+ ARGS=${*:2}
+
+echo &quot;Called with $METHOD and $ARGS&quot;
+if [ -z &quot;${METHOD}&quot; ]; then
+  echo &quot;Usage ./sslcerts.sh [create_root_cert|create_domain_cert] &lt;args&gt;&quot;
+  echo &quot;Below are the environment variabls you can use:&quot;
+  echo &quot;CERT_COMPANY_NAME=Company Name&quot;
+  echo &quot;CERT_COUNTRY=Country&quot;
+  echo &quot;CERT_STATE=State&quot;
+  echo &quot;CERT_CITY=City&quot;
+  echo &quot;CERT_DIR=Directory where certificate needs to be genereated&quot; 
+  echo &quot;ROOT_CERT=Name of the root cert&quot;
+  echo &quot;ROOT_CERT_KEY=Name of root certificate key&quot;
+else
+  ${METHOD} ${ARGS}
+fi
+</code></pre>
+
+<p>It is very simple to use. To generate the root certifcate, edit the file and update your details.</p>
+
+<h4 id="generating-the-root-certificate">Generating the Root Certificate</h4>
+
+<pre><code class="language-bash">$ ./sslcerts.sh create_root_cert
+</code></pre>
+
+<h4 id="generating-a-certificate-signed-using-root-ca">Generating a Certificate signed using Root CA</h4>
+
+<pre><code class="language-bash">$ ./sslcerts.sh create_domain_cert '*.tarunlalwani.com'
+</code></pre>
+
+<p>The above certificate would not work on Chrome 58 or higher and give below error</p>
+
+<blockquote>
+<p>This server could not prove that it is dev.tarunlalwani.com; its security certificate is from [missing_subjectAltName]. This may be caused by a misconfiguration or an attacker intercepting your connection.</p>
+</blockquote>
+
+<p><img src="../../images/missing_subjectaltname.png" alt="Missing Subject Alt name" style="width: 100%;"></img></p>
+
+<p>The issue is that Chrome requires the certificate to have a x509v3 extended attribute <code>Subject Alternate Name</code>. This can be easily achieved by passing our script a <code>SAN</code> parameter</p>
+
+<pre><code class="language-bash">$ SAN=DNS.1:*.tarunlalwani.com,DNS.2:tarunlalwani.com ./sslcerts.sh create_domain_cert '*.tarunlalwani.com'
+</code></pre>
+
+<p>You can see that chrome shows the two possible DNS names for this certificate and validates our certificate as the Root CA is trusted</p>
+
+<p><img alt="SSL Certificate with Subject Alternative Name" src="../../images/san_certificate.png" style="width: 100%"></img></p>
+
+<h2 id="references">References</h2>
+
+<p>It took me a time to bring everything into a single article and keep it simple. This article wouldn&rsquo;t have been possible without below references</p>
+
+<ul>
+<li><a href="https://stackoverflow.com/questions/19665863/how-do-i-use-a-self-signed-certificate-for-a-https-node-js-server">https://stackoverflow.com/questions/19665863/how-do-i-use-a-self-signed-certificate-for-a-https-node-js-server</a></li>
+<li><a href="http://apetec.com/support/generatesan-csr.htm">http://apetec.com/support/generatesan-csr.htm</a></li>
+<li><a href="https://datacenteroverlords.com/2012/03/01/creating-your-own-ssl-certificate-authority/">https://datacenteroverlords.com/2012/03/01/creating-your-own-ssl-certificate-authority/</a></li>
+<li><a href="https://security.stackexchange.com/questions/74345/provide-subjectaltname-to-openssl-directly-on-command-line">https://security.stackexchange.com/questions/74345/provide-subjectaltname-to-openssl-directly-on-command-line</a></li>
+<li><a href="https://support.dnsimple.com/articles/what-is-ssl-root-certificate/">https://support.dnsimple.com/articles/what-is-ssl-root-certificate/</a></li>
+<li><a href="http://www.cdotson.com/2017/01/sslerror-with-python-3-6-x-on-macos-sierra/comment-page-1/#comment-9697">http://www.cdotson.com/2017/01/sslerror-with-python-3-6-x-on-macos-sierra/comment-page-1/#comment-9697</a></li>
+<li><a href="https://derflounder.wordpress.com/2011/03/13/adding-new-trusted-root-certificates-to-system-keychain/">https://derflounder.wordpress.com/2011/03/13/adding-new-trusted-root-certificates-to-system-keychain/</a></li>
+<li><a href="https://stackoverflow.com/questions/7580508/getting-chrome-to-accept-self-signed-localhost-certificate/43666288#43666288">https://stackoverflow.com/questions/7580508/getting-chrome-to-accept-self-signed-localhost-certificate/43666288#43666288</a></li>
+<li><a href="https://www.sslshopper.com/article-most-common-openssl-commands.html">https://www.sslshopper.com/article-most-common-openssl-commands.html</a></li>
+</ul>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" http://tarunlalwani.com/" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tarunlalwani';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-99088991-1', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "http:\/\/tarunlalwani.com\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  
+
+  <script src="http://tarunlalwani.com//js/highlight.pack.js"></script>
+  
+  <script src="http://tarunlalwani.com//js/App.js"></script>
+  
+</body>
+</html>

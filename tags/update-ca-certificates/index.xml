@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Update Ca Certificates on TARUN LALWANI</title>
+    <link>http://tarunlalwani.com/tags/update-ca-certificates/</link>
+    <description>Recent content in Update Ca Certificates on TARUN LALWANI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 17 Jun 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tarunlalwani.com/tags/update-ca-certificates/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Self-signed SSL certificates and how to trust them</title>
+      <link>http://tarunlalwani.com/post/self-signed-certificates-trusting-them/</link>
+      <pubDate>Sat, 17 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/self-signed-certificates-trusting-them/</guid>
+      <description>SSL certificates allow us to secure communication between the server and user. Unfortunately SSL certificates are a bit costly and are not prefered to be bought for development environments. This is where self-signed certificates come into picture.
+Creating a Self-signed certificate We can create a self-signed certificate using the openssl command
+$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout selfsigned.key -out selfsigned.crt Generating a 2048 bit RSA private key .</description>
+    </item>
+    
+  </channel>
+</rss>

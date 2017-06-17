@@ -106,6 +106,51 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
+			<a href="http://tarunlalwani.com/post/self-signed-certificates-trusting-them/">Self-signed SSL certificates and how to trust them</a>
+			<br>
+			<small>
+				17 June 2017
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+		SSL certificates allow us to secure communication between the server and user. Unfortunately SSL certificates are a bit costly and are not prefered to be bought for development environments. This is where self-signed certificates come into picture.
+Creating a Self-signed certificate We can create a self-signed certificate using the openssl command
+$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout selfsigned.key -out selfsigned.crt Generating a 2048 bit RSA private key .
+		
+			... <a href="http://tarunlalwani.com/post/self-signed-certificates-trusting-them/">Read More</a>
+		
+	</div>
+	<div class="panel-footer">
+		
+		<small class="text-muted">
+			
+			
+				<a href="http://tarunlalwani.com/tags/ssl"><span class="label label-success">ssl</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/vertification"><span class="label label-success">vertification</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/trust"><span class="label label-success">trust</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/update-ca-trust"><span class="label label-success">update-ca-trust</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/openssl"><span class="label label-success">openssl</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/update-ca-certificates"><span class="label label-success">update-ca-certificates</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/certificate"><span class="label label-success">certificate</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/subjectaltname"><span class="label label-success">subjectAltName</span></a>
+			
+		</small>
+		
+	</div>
+</div>
+
+
+	<div class="panel panel-default">
+	<div class="panel-header">
+		<h3>
 			<a href="http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-csharp/">Re-using existing browser session in Selenium using C#</a>
 			<br>
 			<small>
@@ -453,46 +498,6 @@ Attempt 1 ChromeDriver driver = new ChromeDriver(); HttpCommandExecutor executor
 </div>
 
 
-	<div class="panel panel-default">
-	<div class="panel-header">
-		<h3>
-			<a href="http://tarunlalwani.com/post/reusing-existing-browser-session-selenium/">Re-using existing browser session in selenium</a>
-			<br>
-			<small>
-				30 May 2017
-			</small>
-		</h3>
-	</div>
-	<div class="panel-body">
-		Comparison between Selenium and UFT Behavior For those of us who come from a QTP/UFT background, being able to test the same browser after a disconnect is usually a piece of cake
-1. systemutil.run &quot;iexplore.exe&quot; 2. x = 2/0 3. Browser(&quot;index:=0&quot;).navigate (&quot;http://www.google.com&quot;)  If we run the above script in QTP/UFT, the script will error out on Line #2 and we can re-run the script from Line #3 and it would still work and navigate inside the browser we had opened earlier.
-		
-			... <a href="http://tarunlalwani.com/post/reusing-existing-browser-session-selenium/">Read More</a>
-		
-	</div>
-	<div class="panel-footer">
-		
-		<small class="text-muted">
-			
-			
-				<a href="http://tarunlalwani.com/tags/sesison"><span class="label label-success">sesison</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/session_id"><span class="label label-success">session_id</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/selenium"><span class="label label-success">selenium</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/reuse"><span class="label label-success">reuse</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/browser"><span class="label label-success">browser</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/python"><span class="label label-success">python</span></a>
-			
-		</small>
-		
-	</div>
-</div>
-
-
 
 <div class="text-center center-block">
 	
@@ -533,13 +538,25 @@ Attempt 1 ChromeDriver driver = new ChromeDriver(); HttpCommandExecutor executor
     ><a href="./page/2/">2</a></li>
     
     
+    
+    
+    
+     
+        
+        
+    
+    
+    <li
+    ><a href="./page/3/">3</a></li>
+    
+    
     <li
     >
     <a href="./page/2/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
     <li>
-        <a href="./page/2/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="./page/3/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
