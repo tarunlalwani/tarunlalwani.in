@@ -6,10 +6,22 @@
     <description>Recent content in Sesison on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 15 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 19 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/tags/sesison/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Enumerating running Chrome browsers Selenium</title>
+      <link>http://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/</link>
+      <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/</guid>
+      <description>This is another article in our &amp;ldquo;Re-use selenium session&amp;rdquo; series. This article is specific to Chrome browser run on a local system using Selenium
+Consider the below python code
+from selenium import webdriver driver = webdriver.Chrome()  This opens up a chrome browser on your machine. We know that Selenium uses chromewebdriver for communicating with the chrome. So let&amp;rsquo;s check the process
+$ ps aux | grep chromedriver tarun.lalwani 8805 0.</description>
+    </item>
     
     <item>
       <title>Re-using existing browser session in Selenium using C#</title>

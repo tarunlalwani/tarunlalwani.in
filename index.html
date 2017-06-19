@@ -106,6 +106,50 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
+			<a href="http://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/">Enumerating running Chrome browsers Selenium</a>
+			<br>
+			<small>
+				19 June 2017
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+		This is another article in our &ldquo;Re-use selenium session&rdquo; series. This article is specific to Chrome browser run on a local system using Selenium
+Consider the below python code
+from selenium import webdriver driver = webdriver.Chrome()  This opens up a chrome browser on your machine. We know that Selenium uses chromewebdriver for communicating with the chrome. So let&rsquo;s check the process
+$ ps aux | grep chromedriver tarun.lalwani 8805 0.
+		
+			... <a href="http://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/">Read More</a>
+		
+	</div>
+	<div class="panel-footer">
+		
+		<small class="text-muted">
+			
+			
+				<a href="http://tarunlalwani.com/tags/sesison"><span class="label label-success">sesison</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/session_id"><span class="label label-success">session_id</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/selenium"><span class="label label-success">selenium</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/reuse"><span class="label label-success">reuse</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/browser"><span class="label label-success">browser</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/python"><span class="label label-success">python</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/chrome"><span class="label label-success">chrome</span></a>
+			
+		</small>
+		
+	</div>
+</div>
+
+
+	<div class="panel panel-default">
+	<div class="panel-header">
+		<h3>
 			<a href="http://tarunlalwani.com/post/self-signed-certificates-trusting-them/">Self-signed SSL certificates and how to trust them</a>
 			<br>
 			<small>
@@ -450,47 +494,6 @@ from _winreg import * def set_popupblocker_status(enabled): key = OpenKey(HKEY_C
 				<a href="http://tarunlalwani.com/tags/phantomjs"><span class="label label-success">phantomjs</span></a>
 			
 				<a href="http://tarunlalwani.com/tags/chrome"><span class="label label-success">chrome</span></a>
-			
-		</small>
-		
-	</div>
-</div>
-
-
-	<div class="panel panel-default">
-	<div class="panel-header">
-		<h3>
-			<a href="http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-java/">Re-using existing browser session in Selenium using Java</a>
-			<br>
-			<small>
-				31 May 2017
-			</small>
-		</h3>
-	</div>
-	<div class="panel-body">
-		Yesterday I wrote an article on how to re-use a session in Selenium using Python. @Aditya Baraskar asked if the same was possible in Java.
-Once you know the concepts, languages usually is no barrier. So I tried using the same approach that we did in Python and see how it works out in Java
-Attempt 1 ChromeDriver driver = new ChromeDriver(); HttpCommandExecutor executor = (HttpCommandExecutor) driver.getCommandExecutor(); URL url = executor.
-		
-			... <a href="http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-java/">Read More</a>
-		
-	</div>
-	<div class="panel-footer">
-		
-		<small class="text-muted">
-			
-			
-				<a href="http://tarunlalwani.com/tags/sesison"><span class="label label-success">sesison</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/session_id"><span class="label label-success">session_id</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/selenium"><span class="label label-success">selenium</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/reuse"><span class="label label-success">reuse</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/browser"><span class="label label-success">browser</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/java"><span class="label label-success">java</span></a>
 			
 		</small>
 		
