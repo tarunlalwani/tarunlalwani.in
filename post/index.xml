@@ -6,10 +6,22 @@
     <description>Recent content in Posts on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 19 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 20 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Enumerating running Firefox browsers in Selenium</title>
+      <link>http://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</link>
+      <pubDate>Tue, 20 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</guid>
+      <description>This is another article in our &amp;ldquo;Re-use selenium session&amp;rdquo; series. This article is specific to Firefox browser ran on a local system using Selenium
+Consider the below python code
+from selenium import webdriver driver = webdriver.Firefox()  This opens up a firefox browser on your machine. We know that Selenium uses geckodriver for communicating with the firefox. So let&amp;rsquo;s check the process
+$ ps aux | grep geckodriver tarun.lalwani 11982 0.</description>
+    </item>
     
     <item>
       <title>Enumerating running Chrome browsers in Selenium</title>

@@ -106,6 +106,51 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
+			<a href="http://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/">Selenium disable popup blocker in different browsers</a>
+			<br>
+			<small>
+				1 June 2017
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+		Some testing scenarios requires that the Popup blocking be disabled. In this article we will look at ways for disabling popup blocker for different browser
+Disabling Popup blocker in InternetExplorer This can be done by setting a registry setting.
+from _winreg import * def set_popupblocker_status(enabled): key = OpenKey(HKEY_CURRENT_USER, r&quot;Software\Microsoft\Internet Explorer\New Windows&quot;, 0, KEY_ALL_ACCESS) SetValueEx(key, &quot;PopupMgr&quot;, 0, REG_SZ, enabled) CloseKey(key) set_popupblocker_status(&quot;no&quot;)  Disabling Popup blocker in Firefox For firefox, this can be done using a preference setting dom.
+		
+			... <a href="http://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/">Read More</a>
+		
+	</div>
+	<div class="panel-footer">
+		
+		<small class="text-muted">
+			
+			
+				<a href="http://tarunlalwani.com/tags/disable"><span class="label label-success">disable</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/popup"><span class="label label-success">popup</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/blocker"><span class="label label-success">blocker</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/selenium"><span class="label label-success">selenium</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/firefox"><span class="label label-success">firefox</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/safari"><span class="label label-success">safari</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/phantomjs"><span class="label label-success">phantomjs</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/chrome"><span class="label label-success">chrome</span></a>
+			
+		</small>
+		
+	</div>
+</div>
+
+
+	<div class="panel panel-default">
+	<div class="panel-header">
+		<h3>
 			<a href="http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-java/">Re-using existing browser session in Selenium using Java</a>
 			<br>
 			<small>
@@ -414,30 +459,6 @@ In this article I will showcase how we can build Nginx with Lua inside Docker. T
 1. OpenResty OpenRestry® is a full-fledged web platform that integrates the standard Nginx core, LuaJIT, many carefully written Lua libraries, lots of high quality 3rd-party Nginx modules
 		
 			... <a href="http://tarunlalwani.com/post/building-nginx-with-lua/">Read More</a>
-		
-	</div>
-	<div class="panel-footer">
-		
-	</div>
-</div>
-
-
-	<div class="panel panel-default">
-	<div class="panel-header">
-		<h3>
-			<a href="http://tarunlalwani.com/post/detecting-os-in-shell-script/">Detecting OS in shell script</a>
-			<br>
-			<small>
-				27 April 2017
-			</small>
-		</h3>
-	</div>
-	<div class="panel-body">
-		Each linux distribution uses different package manager. To be able to execute commands based on the type of OS in a shell script, we need a way to detect the OS first.
-Using which command My first take on resolving this was to use the which command
-#!/bin/bash if [[ `which yum` ]]; then IS_RHEL=1 elif [[ `which apt` ]]; then IS_UBUNTU=1 elif [[ `which apk` ]]; then IS_ALPINE=1 else IS_UNKNOWN=1 fi  Now this works well on most OS, but the issue is that when you use the same on docker images.
-		
-			... <a href="http://tarunlalwani.com/post/detecting-os-in-shell-script/">Read More</a>
 		
 	</div>
 	<div class="panel-footer">

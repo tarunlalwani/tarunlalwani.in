@@ -106,6 +106,50 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
+			<a href="http://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/">Enumerating running Firefox browsers in Selenium</a>
+			<br>
+			<small>
+				20 June 2017
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+		This is another article in our &ldquo;Re-use selenium session&rdquo; series. This article is specific to Firefox browser ran on a local system using Selenium
+Consider the below python code
+from selenium import webdriver driver = webdriver.Firefox()  This opens up a firefox browser on your machine. We know that Selenium uses geckodriver for communicating with the firefox. So let&rsquo;s check the process
+$ ps aux | grep geckodriver tarun.lalwani 11982 0.
+		
+			... <a href="http://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/">Read More</a>
+		
+	</div>
+	<div class="panel-footer">
+		
+		<small class="text-muted">
+			
+			
+				<a href="http://tarunlalwani.com/tags/sesison"><span class="label label-success">sesison</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/session_id"><span class="label label-success">session_id</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/selenium"><span class="label label-success">selenium</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/reuse"><span class="label label-success">reuse</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/browser"><span class="label label-success">browser</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/python"><span class="label label-success">python</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/firefox"><span class="label label-success">firefox</span></a>
+			
+		</small>
+		
+	</div>
+</div>
+
+
+	<div class="panel panel-default">
+	<div class="panel-header">
+		<h3>
 			<a href="http://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/">Enumerating running Chrome browsers in Selenium</a>
 			<br>
 			<small>
@@ -449,51 +493,6 @@ $ pip install paramiko   Note: based on your setup, you might need to use sudo a
 				<a href="http://tarunlalwani.com/tags/ssh"><span class="label label-success">ssh</span></a>
 			
 				<a href="http://tarunlalwani.com/tags/automation"><span class="label label-success">automation</span></a>
-			
-		</small>
-		
-	</div>
-</div>
-
-
-	<div class="panel panel-default">
-	<div class="panel-header">
-		<h3>
-			<a href="http://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/">Selenium disable popup blocker in different browsers</a>
-			<br>
-			<small>
-				1 June 2017
-			</small>
-		</h3>
-	</div>
-	<div class="panel-body">
-		Some testing scenarios requires that the Popup blocking be disabled. In this article we will look at ways for disabling popup blocker for different browser
-Disabling Popup blocker in InternetExplorer This can be done by setting a registry setting.
-from _winreg import * def set_popupblocker_status(enabled): key = OpenKey(HKEY_CURRENT_USER, r&quot;Software\Microsoft\Internet Explorer\New Windows&quot;, 0, KEY_ALL_ACCESS) SetValueEx(key, &quot;PopupMgr&quot;, 0, REG_SZ, enabled) CloseKey(key) set_popupblocker_status(&quot;no&quot;)  Disabling Popup blocker in Firefox For firefox, this can be done using a preference setting dom.
-		
-			... <a href="http://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/">Read More</a>
-		
-	</div>
-	<div class="panel-footer">
-		
-		<small class="text-muted">
-			
-			
-				<a href="http://tarunlalwani.com/tags/disable"><span class="label label-success">disable</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/popup"><span class="label label-success">popup</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/blocker"><span class="label label-success">blocker</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/selenium"><span class="label label-success">selenium</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/firefox"><span class="label label-success">firefox</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/safari"><span class="label label-success">safari</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/phantomjs"><span class="label label-success">phantomjs</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/chrome"><span class="label label-success">chrome</span></a>
 			
 		</small>
 		
