@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+      <meta name="description" content="Learn how to re-use an existing open session of a browser in Selenium grid. This trick can speed up your development effort">
+      <meta name="twitter:description" content="Learn how to re-use an existing open session of a browser in Selenium grid. This trick can speed up your development effort">
+    
+
+    <meta property="og:title" content="Re-using existing browser session with Selenium Grid">
+    <meta property="twitter:title" content="Re-using existing browser session with Selenium Grid">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-06-21">
+    
+    <meta property="og:description" content="Learn how to re-use an existing open session of a browser in Selenium grid. This trick can speed up your development effort">
+    <meta property="og:url" content="http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-grid-python/">
+    <meta property="og:site_name" content="TARUN LALWANI">
+   
+
+    
+    <meta property="og:tags" content="sesison">
+    
+    <meta property="og:tags" content="session_id">
+    
+    <meta property="og:tags" content="selenium">
+    
+    <meta property="og:tags" content="reuse">
+    
+    <meta property="og:tags" content="browser">
+    
+    <meta property="og:tags" content="python">
+    
+    <meta property="og:tags" content="grid">
+    
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ask4tarun">
+    <meta property="og:image" content="http://tarunlalwani.com/images/reuse_session_selenium_grid.png">
+    <meta property="twitter:image" content="http://tarunlalwani.com/images/reuse_session_selenium_grid.png">
+    
+
+    <meta name="generator" content="Hugo 0.21" />
+    <title>Re-using existing browser session with Selenium Grid &middot; TARUN LALWANI</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://tarunlalwani.com/css/style.css">
+
+    
+
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/sunburst.min.css">
+
+    
+
+    
+    <link href="http://tarunlalwani.com/index.xml" rel="alternate" type="application/rss+xml" title="TARUN LALWANI" />
+    
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="http://tarunlalwani.com/">TARUN LALWANI</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="http://tarunlalwani.com/">TARUN LALWANI</a></h1>
+		
+		
+		
+			<small class="text-center center-block">Technology Enthusiast</small>
+		
+		
+		
+			<img id="profile-pic" src="http://tarunlalwani.com//images/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			<a href="https://twitter.com/ask4tarun"><i class="fa fa-twitter fa-2x"></i></a>
+			<a href="https://plus.google.com/&#43;TarunLalwani"><i class="fa fa-google-plus fa-2x"></i></a>
+			<a href="https://www.linkedin.com/in/tarunlalwani"><i class="fa fa-linkedin fa-2x"></i></a>
+			<a href="https://github.com/tarunlalwani"><i class="fa fa-github fa-2x"></i></a>
+			
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Re-using existing browser session with Selenium Grid</h1>
+	</header>
+
+	<article>
+		
+
+<p>In our previous articles we discussed about re-using Browser session in Selenium for local browsers. We spoke about saving the Session ID and the Executor URL for re-creating the sessions. Now let&rsquo;s us have re-look at the approach when we use Selenium Grid</p>
+
+<h2 id="launching-the-grid">Launching the Grid</h2>
+
+<p>I am using <code>brew</code> to install <code>selenium-server-standalone</code> on my Mac. But if you are using something else, then download the latest version from <a href="http://www.seleniumhq.org/download/">here</a></p>
+
+<pre><code class="language-bash">$ selenium-server
+</code></pre>
+
+<p>For those downloading the jar</p>
+
+<pre><code class="language-bash">$ java -jar selenium-server-standalone-3.4.0.jar
+</code></pre>
+
+<p>By default the grid launches on port <code>4444</code>.</p>
+
+<h2 id="launching-the-drivers">Launching the drivers</h2>
+
+<p>So let us now launch the driver for Firefox and chrome in Python</p>
+
+<pre><code class="language-python">from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
+grid_url = &quot;http://127.0.0.1:4444/wd/hub&quot;
+
+driver_firefox = webdriver.Remote(grid_url, DesiredCapabilities.FIREFOX)
+driver_chrome = webdriver.Remote(grid_url, DesiredCapabilities.CHROME)
+</code></pre>
+
+<p>Now let us print the executor url for one of the drivers</p>
+
+<pre><code class="language-python">print (driver_firefox.command_executor._url)
+</code></pre>
+
+<p>This outputs <code>http://127.0.0.1:4444/wd/hub</code> which is nothing but the <code>grid_url</code> that we specified.</p>
+
+<p>In our previous approach we had to save the command executor url to some place and re-use it later to re-create the driver object. But in case of the Selenium Grid the command executor URL is same as the Grid url itself. So no saving needed.</p>
+
+<h2 id="getting-the-session-id">Getting the Session ID</h2>
+
+<p>The two key information needed to re-use a Selenium browser session is <code>session_id</code> and <code>command_executor_url</code>, we have the later one already for the grid. Now we need to figure out how to get the session ids.</p>
+
+<p>Luckily the Selenium grid implements a <code>/sessions</code> API endpoint. So if we hit the URL we get below response</p>
+
+<pre><code class="language-json">$ curl http://127.0.0.1:4444/wd/hub/sessions | jq
+{
+  &quot;state&quot;: &quot;success&quot;,
+  &quot;sessionId&quot;: null,
+  &quot;hCode&quot;: 973499128,
+  &quot;value&quot;: [
+    {
+      &quot;capabilities&quot;: {
+        &quot;moz:profile&quot;: &quot;/var/folders/4k/n292r2rj5_z3cb9ky0vh_szmk_m94b/T/rust_mozprofile.2ntb14zZkPUC&quot;,
+        &quot;rotatable&quot;: false,
+        &quot;timeouts&quot;: {
+          &quot;implicit&quot;: 0,
+          &quot;pageLoad&quot;: 300000,
+          &quot;script&quot;: 30000
+        },
+        &quot;pageLoadStrategy&quot;: &quot;normal&quot;,
+        &quot;platform&quot;: &quot;ANY&quot;,
+        &quot;specificationLevel&quot;: 0,
+        &quot;moz:accessibilityChecks&quot;: false,
+        &quot;acceptInsecureCerts&quot;: true,
+        &quot;browserVersion&quot;: &quot;53.0.3&quot;,
+        &quot;platformVersion&quot;: &quot;16.6.0&quot;,
+        &quot;moz:processID&quot;: 10299,
+        &quot;browserName&quot;: &quot;firefox&quot;,
+        &quot;takesScreenshot&quot;: true,
+        &quot;javascriptEnabled&quot;: true,
+        &quot;platformName&quot;: &quot;darwin&quot;,
+        &quot;cssSelectorsEnabled&quot;: true
+      },
+      &quot;id&quot;: &quot;26294a77-7ab2-47f1-81fd-e11f593bd960&quot;,
+      &quot;hCode&quot;: 1451216119,
+      &quot;class&quot;: &quot;org.openqa.selenium.remote.server.handler.GetAllSessions$SessionInfo&quot;
+    },
+    {
+      &quot;capabilities&quot;: {
+        &quot;applicationCacheEnabled&quot;: false,
+        &quot;rotatable&quot;: false,
+        &quot;mobileEmulationEnabled&quot;: false,
+        &quot;networkConnectionEnabled&quot;: true,
+        &quot;chrome&quot;: {
+          &quot;chromedriverVersion&quot;: &quot;2.27.440174 (e97a722caafc2d3a8b807ee115bfb307f7d2cfd9)&quot;,
+          &quot;userDataDir&quot;: &quot;/var/folders/4k/n292r2rj5_z3cb9ky0vh_szmk_m94b/T/.org.chromium.Chromium.ZtW0SD&quot;
+        },
+        &quot;takesHeapSnapshot&quot;: true,
+        &quot;pageLoadStrategy&quot;: &quot;normal&quot;,
+        &quot;unhandledPromptBehavior&quot;: &quot;&quot;,
+        &quot;databaseEnabled&quot;: false,
+        &quot;handlesAlerts&quot;: true,
+        &quot;hasTouchScreen&quot;: true,
+        &quot;version&quot;: &quot;58.0.3029.110&quot;,
+        &quot;platform&quot;: &quot;MAC&quot;,
+        &quot;browserConnectionEnabled&quot;: false,
+        &quot;nativeEvents&quot;: true,
+        &quot;acceptSslCerts&quot;: true,
+        &quot;locationContextEnabled&quot;: true,
+        &quot;webStorageEnabled&quot;: true,
+        &quot;browserName&quot;: &quot;chrome&quot;,
+        &quot;takesScreenshot&quot;: true,
+        &quot;javascriptEnabled&quot;: true,
+        &quot;cssSelectorsEnabled&quot;: true,
+        &quot;unexpectedAlertBehaviour&quot;: &quot;&quot;
+      },
+      &quot;id&quot;: &quot;29aa25cb-a60a-4454-a35c-315f76ff1251&quot;,
+      &quot;hCode&quot;: 966845962,
+      &quot;class&quot;: &quot;org.openqa.selenium.remote.server.handler.GetAllSessions$SessionInfo&quot;
+    }
+  ],
+  &quot;class&quot;: &quot;org.openqa.selenium.remote.Response&quot;,
+  &quot;status&quot;: 0
+}
+</code></pre>
+
+<p>We can read these details in python using below code</p>
+
+<pre><code class="language-python">import urllib.request
+import json
+
+grid_url = &quot;http://127.0.0.1:4444/wd/hub&quot;
+
+sessions_req = urllib.request.urlopen(grid_url + &quot;/sessions&quot;)
+sessions_data = sessions_req.read()
+sessions_encoding = sessions_req.info().get_content_charset('utf-8')
+
+sessions = json.loads(sessions_data.decode(sessions_encoding))
+
+for session in sessions[&quot;value&quot;]:
+	print (session[&quot;id&quot;])
+	print (session[&quot;capabilities&quot;][&quot;browserName&quot;])
+</code></pre>
+
+<p>The above code prints</p>
+
+<pre><code class="language-java">26294a77-7ab2-47f1-81fd-e11f593bd960
+firefox
+29aa25cb-a60a-4454-a35c-315f76ff1251
+chrome
+</code></pre>
+
+<p>So now we have the session id also of our browsers. Using the function the we create in our previous article</p>
+
+<pre><code class="language-python">def create_driver_session(session_id, executor_url):
+    from selenium.webdriver.remote.webdriver import WebDriver as RemoteWebDriver
+
+    # Save the original function, so we can revert our patch
+    org_command_execute = RemoteWebDriver.execute
+
+    def new_command_execute(self, command, params=None):
+        if command == &quot;newSession&quot;:
+            # Mock the response
+            return {'success': 0, 'value': None, 'sessionId': session_id}
+        else:
+            return org_command_execute(self, command, params)
+
+    # Patch the function before creating the driver object
+    RemoteWebDriver.execute = new_command_execute
+
+    new_driver = webdriver.Remote(command_executor=executor_url, desired_capabilities={})
+    new_driver.session_id = session_id
+
+    # Replace the patched function with original function
+    RemoteWebDriver.execute = org_command_execute
+
+    return new_driver
+</code></pre>
+
+<p>Let us recreate these two drivers</p>
+
+<pre><code class="language-python">driver_firefox_reuse = create_driver_session(&quot;26294a77-7ab2-47f1-81fd-e11f593bd960&quot;, grid_url)
+
+driver_chrome_reuse = create_driver_session(&quot;29aa25cb-a60a-4454-a35c-315f76ff1251&quot;, grid_url)
+
+driver_firefox_reuse.get(&quot;http://tarunlalwani.com&quot;)
+driver_chrome_reuse.get(&quot;http://tarunlalwani.com&quot;)
+</code></pre>
+
+<p>And both the browsers navigate to the desired location. This approach creates depenceny on using Grid but in return makes re-using browser sessions a piece of cake.</p>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" http://tarunlalwani.com/" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tarunlalwani';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-99088991-1', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "http:\/\/tarunlalwani.com\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  
+
+  <script src="http://tarunlalwani.com//js/highlight.pack.js"></script>
+  
+  <script src="http://tarunlalwani.com//js/App.js"></script>
+  
+</body>
+</html>
