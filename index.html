@@ -106,6 +106,52 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
+			<a href="http://tarunlalwani.com/post/docker-container-cleanup-easy-with-17.05/">Docker container cleanup made easy with Docker 17.05</a>
+			<br>
+			<small>
+				26 June 2017
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+		Earlier docker container and images would keep on occupying spaces until unless manually cleaned up. The clean command included piped commands.
+For example to clean all exited contained
+$ docker ps -a -q -f status=exited | xargs docker rm -v  And to delete volumes or images different commands had to be used. But with Docker 17.05 now out. This is a simple command
+$ docker system prune  If you don&rsquo;t want any confirmation, then add the -f flag at the end
+		
+			... <a href="http://tarunlalwani.com/post/docker-container-cleanup-easy-with-17.05/">Read More</a>
+		
+	</div>
+	<div class="panel-footer">
+		
+		<small class="text-muted">
+			
+			
+				<a href="http://tarunlalwani.com/tags/docker"><span class="label label-success">docker</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/clean"><span class="label label-success">clean</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/prune"><span class="label label-success">prune</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/images"><span class="label label-success">images</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/containers"><span class="label label-success">containers</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/volumes"><span class="label label-success">volumes</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/recover"><span class="label label-success">recover</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/space"><span class="label label-success">space</span></a>
+			
+		</small>
+		
+	</div>
+</div>
+
+
+	<div class="panel panel-default">
+	<div class="panel-header">
+		<h3>
 			<a href="http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-grid-python/">Re-using existing browser session with Selenium Grid</a>
 			<br>
 			<small>
@@ -460,44 +506,6 @@ So we created a simple project to recreate the issue
 				<a href="http://tarunlalwani.com/tags/log"><span class="label label-success">log</span></a>
 			
 				<a href="http://tarunlalwani.com/tags/missing"><span class="label label-success">missing</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/docker"><span class="label label-success">docker</span></a>
-			
-		</small>
-		
-	</div>
-</div>
-
-
-	<div class="panel panel-default">
-	<div class="panel-header">
-		<h3>
-			<a href="http://tarunlalwani.com/post/git-checkout-private-repository-inside-docker/">Git checkout private repository inside Docker</a>
-			<br>
-			<small>
-				3 June 2017
-			</small>
-		</h3>
-	</div>
-	<div class="panel-body">
-		One of the aim of moving project&rsquo;s deployment to docker, is to be able to build a image on any system without any manual setup. This articles shows how you can clone your private git repos inside a docker image without the need of username and password using SSH keys.
-Generating the SSH key pairs First we would generate a SSH key pair, which will be used by the docker image
-		
-			... <a href="http://tarunlalwani.com/post/git-checkout-private-repository-inside-docker/">Read More</a>
-		
-	</div>
-	<div class="panel-footer">
-		
-		<small class="text-muted">
-			
-			
-				<a href="http://tarunlalwani.com/tags/git"><span class="label label-success">git</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/checkout"><span class="label label-success">checkout</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/private"><span class="label label-success">private</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/repository"><span class="label label-success">repository</span></a>
 			
 				<a href="http://tarunlalwani.com/tags/docker"><span class="label label-success">docker</span></a>
 			

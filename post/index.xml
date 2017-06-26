@@ -6,10 +6,22 @@
     <description>Recent content in Posts on TARUN LALWANI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 21 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 26 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://tarunlalwani.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Docker container cleanup made easy with Docker 17.05</title>
+      <link>http://tarunlalwani.com/post/docker-container-cleanup-easy-with-17.05/</link>
+      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/docker-container-cleanup-easy-with-17.05/</guid>
+      <description>Earlier docker container and images would keep on occupying spaces until unless manually cleaned up. The clean command included piped commands.
+For example to clean all exited contained
+$ docker ps -a -q -f status=exited | xargs docker rm -v  And to delete volumes or images different commands had to be used. But with Docker 17.05 now out. This is a simple command
+$ docker system prune  If you don&amp;rsquo;t want any confirmation, then add the -f flag at the end</description>
+    </item>
     
     <item>
       <title>Re-using existing browser session with Selenium Grid</title>

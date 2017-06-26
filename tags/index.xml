@@ -84,6 +84,15 @@
     </item>
     
     <item>
+      <title>Clean</title>
+      <link>http://tarunlalwani.com/tags/clean/</link>
+      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/clean/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Cli</title>
       <link>http://tarunlalwani.com/tags/cli/</link>
       <pubDate>Mon, 05 Jun 2017 00:00:00 +0000</pubDate>
@@ -98,6 +107,15 @@
       <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/config/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Containers</title>
+      <link>http://tarunlalwani.com/tags/containers/</link>
+      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/containers/</guid>
       <description></description>
     </item>
     
@@ -140,7 +158,7 @@
     <item>
       <title>Docker</title>
       <link>http://tarunlalwani.com/tags/docker/</link>
-      <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/docker/</guid>
       <description></description>
@@ -188,6 +206,15 @@
       <pubDate>Mon, 29 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/image/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Images</title>
+      <link>http://tarunlalwani.com/tags/images/</link>
+      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/images/</guid>
       <description></description>
     </item>
     
@@ -345,6 +372,15 @@
     </item>
     
     <item>
+      <title>Prune</title>
+      <link>http://tarunlalwani.com/tags/prune/</link>
+      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/prune/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Python</title>
       <link>http://tarunlalwani.com/tags/python/</link>
       <pubDate>Wed, 21 Jun 2017 00:00:00 +0000</pubDate>
@@ -359,6 +395,15 @@
       <pubDate>Tue, 06 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/record/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Recover</title>
+      <link>http://tarunlalwani.com/tags/recover/</link>
+      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/recover/</guid>
       <description></description>
     </item>
     
@@ -440,6 +485,15 @@
       <pubDate>Thu, 30 Mar 2017 00:00:00 +0530</pubDate>
       
       <guid>http://tarunlalwani.com/tags/slave/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Space</title>
+      <link>http://tarunlalwani.com/tags/space/</link>
+      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/space/</guid>
       <description></description>
     </item>
     
@@ -530,6 +584,15 @@
       <pubDate>Sat, 17 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/vertification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Volumes</title>
+      <link>http://tarunlalwani.com/tags/volumes/</link>
+      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/volumes/</guid>
       <description></description>
     </item>
     

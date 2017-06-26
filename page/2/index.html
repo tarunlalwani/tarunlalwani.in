@@ -106,6 +106,44 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
+			<a href="http://tarunlalwani.com/post/git-checkout-private-repository-inside-docker/">Git checkout private repository inside Docker</a>
+			<br>
+			<small>
+				3 June 2017
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+		One of the aim of moving project&rsquo;s deployment to docker, is to be able to build a image on any system without any manual setup. This articles shows how you can clone your private git repos inside a docker image without the need of username and password using SSH keys.
+Generating the SSH key pairs First we would generate a SSH key pair, which will be used by the docker image
+		
+			... <a href="http://tarunlalwani.com/post/git-checkout-private-repository-inside-docker/">Read More</a>
+		
+	</div>
+	<div class="panel-footer">
+		
+		<small class="text-muted">
+			
+			
+				<a href="http://tarunlalwani.com/tags/git"><span class="label label-success">git</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/checkout"><span class="label label-success">checkout</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/private"><span class="label label-success">private</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/repository"><span class="label label-success">repository</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/docker"><span class="label label-success">docker</span></a>
+			
+		</small>
+		
+	</div>
+</div>
+
+
+	<div class="panel panel-default">
+	<div class="panel-header">
+		<h3>
 			<a href="http://tarunlalwani.com/post/ssh-automation-using-python/">SSH automation using Python</a>
 			<br>
 			<small>
@@ -445,31 +483,6 @@ As time moved on, Gitlab started providing packages and one could install or upg
 But while building images for testing team, I realized the build process needs to repeat and is not a very optimal approach. If you just need to take in a new commit, a different branch or a latest master checkout, you need to rebuild the image.
 		
 			... <a href="http://tarunlalwani.com/post/deploying-code-inside-docker-images-statically-dynamically/">Read More</a>
-		
-	</div>
-	<div class="panel-footer">
-		
-	</div>
-</div>
-
-
-	<div class="panel panel-default">
-	<div class="panel-header">
-		<h3>
-			<a href="http://tarunlalwani.com/post/best-practices-using-environment-files-docker-compose/">Best practices while using environment files with Docker Compose</a>
-			<br>
-			<small>
-				12 May 2017
-			</small>
-		</h3>
-	</div>
-	<div class="panel-body">
-		docker-compose is an amazing tool to create a full fledged environment using different docker containers. We have used the same in our case to deploy multiple environments for testing.
-This article will share the best practices when it comes to using environments files inside docker-compose.yml
-Approach #1 - Using env_file Let&rsquo;s create a simple docker-compose.yml file which prints a environment variable and then sleeps for sometime
-docker-compose.yml version: '2' services: demo: image: centos:7.
-		
-			... <a href="http://tarunlalwani.com/post/best-practices-using-environment-files-docker-compose/">Read More</a>
 		
 	</div>
 	<div class="panel-footer">
