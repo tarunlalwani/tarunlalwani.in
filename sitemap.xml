@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://tarunlalwani.com/post/deploy-selenium-grid-using-docker-swarm-aws/</loc>
+    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/post/docker-container-cleanup-easy-with-17.05/</loc>
     <lastmod>2017-06-26T00:00:00+00:00</lastmod>
   </url>
@@ -140,6 +145,12 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/aws/</loc>
+    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/tags/blocker/</loc>
     <lastmod>2017-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -236,7 +247,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/docker/</loc>
-    <lastmod>2017-06-26T00:00:00+00:00</lastmod>
+    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -260,7 +271,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/grid/</loc>
-    <lastmod>2017-06-21T00:00:00+00:00</lastmod>
+    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -374,7 +385,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/post/</loc>
-    <lastmod>2017-06-26T00:00:00+00:00</lastmod>
+    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -440,7 +451,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/selenium/</loc>
-    <lastmod>2017-06-21T00:00:00+00:00</lastmod>
+    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -487,8 +498,14 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/swarm/</loc>
+    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/</loc>
-    <lastmod>2017-06-26T00:00:00+00:00</lastmod>
+    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

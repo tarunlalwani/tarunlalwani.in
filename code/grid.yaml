@@ -1,0 +1,76 @@
+version: "3"
+
+networks:
+  main:
+    driver: overlay
+services:
+  hub:
+    image: selenium/hub:3.2.0
+    ports:
+      - "4444:4444"
+    networks:
+      - main
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+        selenium.grid.type: "hub"
+        selenium.grid.hub: "true"
+      restart_policy:
+        condition: none
+      placement:
+        constraints: [node.role == worker]
+  chrome:
+    image: selenium/node-chrome
+    entrypoint: >
+      bash -c '
+        export IP_ADDRESS=$$(ip addr show eth0 | grep "inet\b" | awk '"'"'{print $$2}'"'"' | awk -F/ '"'"'{print $$1}'"'"' | head -1) &&
+        SE_OPTS="-host $$IP_ADDRESS" /opt/bin/entry_point.sh'
+    volumes:
+      - /dev/urandom:/dev/random
+      - /dev/shm:/dev/shm
+    environment:
+      HUB_PORT_4444_TCP_ADDR: hub
+      HUB_PORT_4444_TCP_PORT: 4444
+      NODE_MAX_SESSION: 1
+    networks:
+      - main
+    deploy:
+      mode: replicated
+      replicas: 2
+      labels:
+        selenium.grid.type: "node"
+        selenium.grid.node: "true"
+        selenium.grid.node.type: "chrome"
+      restart_policy:
+        condition: none
+      placement:
+        constraints: [node.role == worker]
+  firefox:
+    image: selenium/node-firefox
+    entrypoint: >
+      bash -c '
+        export IP_ADDRESS=$$HOSTNAME &&
+        SE_OPTS="-host $$IP_ADDRESS" /opt/bin/entry_point.sh'
+    volumes:
+      - /dev/shm:/dev/shm
+      - /dev/urandom:/dev/random
+    environment:
+      HUB_PORT_4444_TCP_ADDR: hub
+      HUB_PORT_4444_TCP_PORT: 4444
+      NODE_MAX_SESSION: 1
+    networks:
+      - main
+    depends_on:
+      - hub
+    deploy:
+      mode: replicated
+      replicas: 2
+      labels:
+        selenium.grid.type: "node"
+        selenium.grid.node: "true"
+        selenium.grid.node.type: "firefox"
+      restart_policy:
+        condition: none
+      placement:
+        constraints: [node.role == worker]
