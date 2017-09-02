@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+      <meta name="description" content="Debug issues with reverse proxying in NGINX">
+      <meta name="twitter:description" content="Debug issues with reverse proxying in NGINX">
+    
+
+    <meta property="og:title" content="How To Debug Nginx Reverse Proxy Issues">
+    <meta property="twitter:title" content="How To Debug Nginx Reverse Proxy Issues">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-09-02">
+    
+    <meta property="og:description" content="Debug issues with reverse proxying in NGINX">
+    <meta property="og:url" content="http://tarunlalwani.com/post/how-to-debug-nginx-reverse-proxy-issues-php-fpm-gunicorn-uwsgi/">
+    <meta property="og:site_name" content="TARUN LALWANI">
+   
+
+    
+    <meta property="og:tags" content="nginx">
+    
+    <meta property="og:tags" content="proxy_pass">
+    
+    <meta property="og:tags" content="issue">
+    
+    <meta property="og:tags" content="error">
+    
+    <meta property="og:tags" content="502">
+    
+    <meta property="og:tags" content="504">
+    
+    <meta property="og:tags" content="403">
+    
+    <meta property="og:tags" content="404">
+    
+    <meta property="og:tags" content="gunicorn">
+    
+    <meta property="og:tags" content="flask">
+    
+    <meta property="og:tags" content="django">
+    
+    <meta property="og:tags" content="400">
+    
+    <meta property="og:tags" content="php-fpm">
+    
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ask4tarun">
+    <meta property="og:image" content="http://tarunlalwani.com/images/nginx_debugging.png">
+    <meta property="twitter:image" content="http://tarunlalwani.com/images/nginx_debugging.png">
+    
+
+    <meta name="generator" content="Hugo 0.25.1" />
+    <title>How To Debug Nginx Reverse Proxy Issues &middot; TARUN LALWANI</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://tarunlalwani.com/css/style.css">
+
+    
+
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/sunburst.min.css">
+
+    
+
+    
+    <link href="http://tarunlalwani.com/index.xml" rel="alternate" type="application/rss+xml" title="TARUN LALWANI" />
+    
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="http://tarunlalwani.com/">TARUN LALWANI</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="http://tarunlalwani.com/">TARUN LALWANI</a></h1>
+		
+		
+		
+			<small class="text-center center-block">Technology Enthusiast</small>
+		
+		
+		
+			<img id="profile-pic" src="http://tarunlalwani.com//images/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			<a href="https://twitter.com/ask4tarun"><i class="fa fa-twitter fa-2x"></i></a>
+			<a href="https://plus.google.com/&#43;TarunLalwani"><i class="fa fa-google-plus fa-2x"></i></a>
+			<a href="https://www.linkedin.com/in/tarunlalwani"><i class="fa fa-linkedin fa-2x"></i></a>
+			<a href="https://github.com/tarunlalwani"><i class="fa fa-github fa-2x"></i></a>
+			
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>How To Debug Nginx Reverse Proxy Issues</h1>
+	</header>
+
+	<article>
+		
+
+<p>I love Nginx for its revery proxy capabilities and ease of configuration. A simple <code>proxy_pass</code> can allow you to connect to any of the backends GoLang, php-fpm, NodeJS, another nginx, tomcat, apache, gunicorn, uwsgi, flask, django, a external CDN and many more</p>
+
+<p>When proxying a request to another server, you may or may not have access to log of the server. So it is important to be able to debug, where the problem lies when an issue occurs. Common problems that you may face when proxying request are below</p>
+
+<ul>
+<li>502 Bad Gateway</li>
+<li>504 Gateway Timeout</li>
+<li>404 Page Not Found</li>
+<li>403 Access Denied</li>
+<li>400 Bad Request request header or cookie too large</li>
+<li>Wrong Redirect</li>
+<li>upstream sent too big header while reading response header from upstream</li>
+<li>&ldquo;Primary script unknown&rdquo; while reading response header from upstream</li>
+</ul>
+
+<p>Few of these issues can because of below possible reasons</p>
+
+<ul>
+<li>Error in the your server code</li>
+<li>Error in Nginx config</li>
+<li>Error in the information server recieves</li>
+<li>Fine tuning of timeouts</li>
+</ul>
+
+<p>In this article I will explain few techniques to debug Nginx + PHP-FPM. These techniques will be applicable to other servers like Gunicorn, uwsgi, or other sites as well</p>
+
+<h2 id="sample-php-backend-with-error">Sample PHP Backend with Error</h2>
+
+<p>Consider the below Nginx config with a PHP config</p>
+
+<pre><code class="language-nginx">events {
+    worker_connections 1024;
+}
+http {
+    server {
+
+        listen 80;
+        root /var/www/html;
+
+        index index.php index.html;
+
+        location / {
+            deny all;
+        }
+
+        location ~ \.php$ {
+            #try_files $uri =444;
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            include fastcgi_params;
+            fastcgi_index index.php;
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
+    }
+}
+</code></pre>
+
+<p>The above config passes all <code>php</code> scripts to the running <code>php-fpm</code> server listening on <code>127.0.0.1:9000</code>. And anything other than php is denied.</p>
+
+<p>Now let&rsquo;s create a php file <code>error.php</code> in <code>/var/www/html/</code></p>
+
+<h4 id="var-www-html-error-php">/var/www/html/error.php</h4>
+
+<pre><code class="language-php">
+&lt;?php
+
+function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+{
+    $str = '';
+    $max = strlen($keyspace) - 1;
+    for ($i = 0; $i &lt; $length; ++$i) {
+        $str .= $keyspace[random_int(0, $max)];
+    }
+    return $str;
+}
+
+$body = random_str(65336);
+$header =  random_str(65);
+
+header(&quot;X-MY-Header: $body&quot;);
+
+echo ($body);
+</code></pre>
+
+<p>Now when we call the above script through curl</p>
+
+<pre><code class="language-html">$ curl localhost/error.php
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;502 Bad Gateway&lt;/title&gt;&lt;/head&gt;
+&lt;body bgcolor=&quot;white&quot;&gt;
+&lt;center&gt;&lt;h1&gt;502 Bad Gateway&lt;/h1&gt;&lt;/center&gt;
+&lt;hr&gt;&lt;center&gt;nginx/1.13.3&lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>If we look at nginx error log, it would show below error</p>
+
+<pre><code class="language-bash">2017/08/31 16:18:05 [error] 5#5: *3 upstream sent too big header while reading response header from upstream, client: 192.168.33.1, server: , request: &quot;GET /error.php HTTP/1.1&quot;, upstream: &quot;fastcgi://127.0.0.1:9000&quot;, host: &quot;192.168.33.100&quot;
+</code></pre>
+
+<p>Now this error does indicate that there is an issue with the headers that were sent back. In our demo case there is just one file to check, but in a real project there would be multiple files and it becomes hard to say where the error might be coming from. So what we need is to be able to see the interaction between Nginx and our backend used in proxy_pass</p>
+
+<h2 id="logging-the-traffic-between-source-and-target">Logging the traffic between source and target</h2>
+
+<p>Socat is a command line based utility that establishes two bidirectional byte streams and transfers data between them. Install socat based on the package manager you have on your OS. One of the below commands should do</p>
+
+<pre><code class="language-bash">$ yum install -y socat
+$ apt install -y socat
+$ apk add socat
+</code></pre>
+
+<p>Once installed we need to run socat to listen on a port different than 9000 and pass the data to 9000 port.</p>
+
+<p>So we will run a socat in a new terminal or screen or tmux. The communication transfer between the two ports will only happen till socat is running</p>
+
+<pre><code class="language-bash">socat -v TCP-LISTEN:9001,fork TCP:127.0.0.1:9000
+</code></pre>
+
+<p>The command is self explanatory. It is to listen on <code>9001</code> and pass traffic bidirectionaly between the two <code>127.0.0.1:9000</code>. The <code>-v</code> is for verbose output, it helps us print the traffic</p>
+
+<h4 id="my-app-is-not-listening-on-a-port-but-a-unix-socket">My app is not listening on a port but a unix socket?</h4>
+
+<p>No problems. You can adapt your socat command to something like below</p>
+
+<pre><code class="language-bash">socat -v TCP-LISTEN:9001,fork UNIX-CONNECT:/run/php/php7.0-fpm.sock
+</code></pre>
+
+<blockquote>
+<p>Note: You will need to make sure the user has access to the socket. Some sockets run with 600 permissions and the owners are different than root or your current user. For example <code>/run/php/php7.0-fpm.sock</code> by default is owned by <code>www-data</code>. So you would need to change the owner of these socket or chmod them to 777 for your testing</p>
+</blockquote>
+
+<p>Now let us get back to our testing the <code>curl localhost/error.php</code>. When we run</p>
+
+<pre><code class="language-bash">$ curl localhost/error.php
+</code></pre>
+
+<p>The call fail as usual. Let&rsquo;s look at the socat terminal</p>
+
+<pre><code class="language-bash">&gt; 2017/09/02 10:09:13.028692  length=520 from=0 to=519
+.....\b..................\f.QUERY_STRING..REQUEST_METHODGET\f.CONTENT_TYPE..CONTENT_LENGTH\v
+SCRIPT_NAME/error.php\v
+REQUEST_URI/error.php\f
+DOCUMENT_URI/error.php\r\rDOCUMENT_ROOT/var/www/html.\bSERVER_PROTOCOLHTTP/1.1..REQUEST_SCHEMEhttp.\aGATEWAY_INTERFACECGI/1.1.\fSERVER_SOFTWAREnginx/1.10.3\v	REMOTE_ADDR127.0.0.1\v.REMOTE_PORT33152\v	SERVER_ADDR127.0.0.1\v.SERVER_PORT80\v.SERVER_NAME..REDIRECT_STATUS200..SCRIPT_FILENAME/var/www/html/error.php		HTTP_HOSTlocalhost.\vHTTP_USER_AGENTcurl/7.47.0\v.HTTP_ACCEPT*/*.....................&lt; 2017/09/02 10:09:13.093658  length=8 from=0 to=7
+.....@..&lt; 2017/09/02 10:09:13.094167  length=8192 from=8 to=8199
+X-MY-Header: d38e4MZW1yeVqrjEVcvZEudbhQzIU6GjorJN1Q6LvL8BRUI4OawlZU4jKOcdcMmHeJ9gqmDTunAl2l5HTFYZXTV1MIJflnsVAo45E80XeVCgVAjHqSG58IfTauTPkTqNCSVbHQrzM1obtMFkuJKh8Aw7723UJL82I3Pu9gOjYrrNKLYDbvkwuSwnCBu....
+PCqr9O2YZ71fXyp4kG6LIoOG3xMMr64LwNPGxpbR2Xq7AYzOReFimxnJ8RTjPtwKgAxqNXEcqGJDAlhXEkK7e9CYfAYbIEPIUYa92V0yGBBhzDru6IoUPwayqAJAgbpj60TeQ0ifkBRhd2UKO5mE2Oa9lINtLwd1bhEpmgkqN6N36VJAaLD1eeYfcvSEUiUh&lt; 2017/09/02 10:09:13.111569  length=8192 from=8200 to=16391
+Yh0oedDFdi3LS0UZ7zaBzqzzD5VzFeyFU6NdIQiM87MFcbBVnk9cPhPcYoiQxIS3iOOORviYOpCoMzcuVp7V9uEIo48XRlZvptcDy3d5hV7tuax4vtREh0RIDJFDDVMyB9MCa1gYvdsu88dacBwti1EZOdse7ZDwSnkXcIonnmVu4XbSdCE53qQnfSkIukvuV57DFSt8....
+rnc0AIxYcnj52MLJIMOKz8C8EEa5q37Dh9VdCsXwxmS0uEV0ndJH0wxmJzWPCDbDdOAOW8XLk1EqDE6kV1QORZHoI84x2017/09/02 10:09:13 socat[14573] E write(6, 0x225c530, 8192): Broken pipe
+</code></pre>
+
+<p>From this we can easily see that <code>X-MY-Header</code> is coming with large data and after reading <code>8192</code> bytes that is <code>8KB</code> of headers, nginx just leaves it and fails the request.</p>
+
+<p>Now let us execute another curl statement this time</p>
+
+<pre><code class="language-bash">$ curl localhost/test/not_exists.php
+File not found.
+</code></pre>
+
+<p>This time the output on the socat window will be</p>
+
+<pre><code class="language-sh">&gt; 2017/09/02 10:18:48.834880  length=560 from=0 to=559
+.....\b..................\f.QUERY_STRING..REQUEST_METHODGET\f.CONTENT_TYPE..CONTENT_LENGTH\v.SCRIPT_NAME/test/not_exists.php\v.REQUEST_URI/test/not_exists.php\f.DOCUMENT_URI/test/not_exists.php\r\rDOCUMENT_ROOT/var/www/html.\bSERVER_PROTOCOLHTTP/1.1..REQUEST_SCHEMEhttp.\aGATEWAY_INTERFACECGI/1.1.\fSERVER_SOFTWAREnginx/1.10.3\v	REMOTE_ADDR127.0.0.1\v.REMOTE_PORT33192\v	SERVER_ADDR127.0.0.1\v.SERVER_PORT80\v.SERVER_NAME..REDIRECT_STATUS200.!SCRIPT_FILENAME/var/www/html/test/not_exists.php		HTTP_HOSTlocalhost.\vHTTP_USER_AGENTcurl/7.47.0\v.HTTP_ACCEPT*/*.....................&lt; 2017/09/02 10:18:48.840436  length=144 from=0 to=143
+.\a......Primary script unknown
+......Q\a.Status: 404 Not Found\r
+Content-type: text/html; charset=UTF-8\r
+\r
+File not found.
+............\b......./ht
+</code></pre>
+
+<p>We can see that <code>SCRIPT_FILENAME</code> is getting a value <code>/var/www/html/test/not_exists.php</code>. And now we know this doesn&rsquo;t exists in our code. So it becomes easy to understand what values the backend is getting and why it is not working.</p>
+
+<p>Now let use test another scenario with proxy_pass to another site. So we want to load images from <code>http://tarunlalwani.com/images/</code> from our localhost. So we update our config to</p>
+
+<pre><code class="language-nginx">events {
+    worker_connections 1024;
+}
+http {
+    server {
+
+        listen 80;
+        root /var/www/html;
+
+        index index.php index.html;
+
+        location / {
+            deny all;
+        }
+         
+        location /images/ { 
+            proxy_pass http://tarunlalwani.com/;
+        }
+
+        location ~ \.php$ {
+            #try_files $uri =444;
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            include fastcgi_params;
+            fastcgi_index index.php;
+            fastcgi_pass 127.0.0.1:9001;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
+    }
+}
+</code></pre>
+
+<p>Now if we curl a image from the site <code>http://tarunlalwani.com/images/docker_swarm_security_group.png</code> as <code>http://localhost/images/docker_swarm_security_group.png</code></p>
+
+<pre><code class="language-html">$ curl localhost/images/docker_swarm_security_group.png
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+    &lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src 'none'; style-src 'unsafe-inline'; img-src data:; connect-src 'self'&quot;&gt;
+    &lt;title&gt;Page not found &amp;middot; GitHub Pages&lt;/title&gt;
+    &lt;style type=&quot;text/css&quot; media=&quot;screen&quot;&gt;
+      body {
+        background-color: #f1f1f1;
+        &lt;/style&gt;&lt;/head&gt;&lt;/html&gt;
+</code></pre>
+
+<p>This is weird, we requested a image and got an html. Let us open another socat session</p>
+
+<pre><code class="language-bash">$ socat -v TCP-LISTEN:8080,fork TCP:tarunlalwani.com:80
+</code></pre>
+
+<p>And change our proxy_pass in nginx from <code>tarunlalwani.com</code> to <code>127.0.0.1:8080</code></p>
+
+<p>In the window we can see the request as below</p>
+
+<pre><code class="language-bash">&gt; 2017/09/02 12:38:14.139893  length=128 from=0 to=127
+GET /docker_swarm_security_group.png HTTP/1.0\r
+Host: 127.0.0.1:8080\r
+Connection: close\r
+User-Agent: curl/7.47.0\r
+Accept: */*\r
+\r
+&lt; 2017/09/02 12:38:14.446328  length=1378 from=0 to=1377
+HTTP/1.1 404 Not Found\r
+Server: GitHub.com\r
+Date: Sat, 02 Sep 2017 12:38:14 GMT\r
+Content-Type: text/html; charset=utf-8\r
+Content-Length: 9116\r
+Connection: close\r
+ETag: &quot;590b8af1-239c&quot;\r
+Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src data:; connect-src 'self'\r
+X-GitHub-Request-Id: 68BC:21B9:C23049:10D47B1:59AAA636\r
+\r
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+</code></pre>
+
+<p>You can see that we are requesting <code>/docker_swarm_security_group.png</code> instead of <code>/images/docker_swarm_security_group.png</code>. If we check our  <code>proxy_pass</code>, it is</p>
+
+<pre><code class="language-nginx">location /images/ {
+   proxy_pass http://127.0.0.1:8080/;
+}
+</code></pre>
+
+<p>When we add a trailing <code>/</code> to <code>proxy_pass</code> address then original uri is not sent to the server. So we need to modify our <code>proxy_pass</code> to</p>
+
+<pre><code class="language-nginx">location /images/ {
+   proxy_pass http://127.0.0.1:8080;
+}
+</code></pre>
+
+<p>Now let us re-run our curl statement. The logs in socat will be</p>
+
+<pre><code class="language-bash">&gt; 2017/09/02 13:59:14.183562  length=135 from=0 to=134
+GET /images/docker_swarm_security_group.png HTTP/1.0\r
+Host: 127.0.0.1:8080\r
+Connection: close\r
+User-Agent: curl/7.47.0\r
+Accept: */*\r
+\r
+&lt; 2017/09/02 13:59:14.492039  length=1378 from=0 to=1377
+HTTP/1.1 404 Not Found\r
+Server: GitHub.com\r
+Date: Sat, 02 Sep 2017 13:59:14 GMT\r
+Content-Type: text/html; charset=utf-8\r
+Content-Length: 9116\r
+Connection: close\r
+ETag: &quot;590a28b8-239c&quot;\r
+Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src data:; connect-src 'self'\r
+</code></pre>
+
+<p>As we can see the url is now corrected. But we still have a 404. This could be because of <code>Host: 127.0.0.1:8080</code>. So we should set the host name also with our request</p>
+
+<pre><code class="language-nginx">location /images/ {
+   proxy_pass http://127.0.0.1:8080;
+   proxy_set_header Host tarunlalwani.com;
+}
+</code></pre>
+
+<blockquote>
+<p>Note: This is only needed because we are sending the proxy to socat listener on localhost. If we had use <a href="http://tarunlalwani.com">http://tarunlalwani.com</a> as the proxy_pass address, this was not needed</p>
+</blockquote>
+
+<p>Now our curl command will work. So the final proxy_pass that we need is</p>
+
+<pre><code class="language-nginx">location /images/ {
+   proxy_pass http://tarunlalwani.com;
+   #proxy_set_header Host tarunlalwani.com;
+}
+</code></pre>
+
+<p>I would be soon posting same approach using Docker for docker container communication debugging.</p>
+
+<p>If you have any quesitons, feel free to comment</p>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" http://tarunlalwani.com/" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tarunlalwani';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-99088991-1', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "http:\/\/tarunlalwani.com\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  
+
+  <script src="http://tarunlalwani.com//js/highlight.pack.js"></script>
+  
+  <script src="http://tarunlalwani.com//js/App.js"></script>
+  
+</body>
+</html>
