@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://tarunlalwani.com/post/docker-compose-scale-with-dynamic-configuration-part-1/</loc>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/post/how-to-debug-nginx-reverse-proxy-issues-php-fpm-gunicorn-uwsgi/</loc>
     <lastmod>2017-09-02T00:00:00+00:00</lastmod>
   </url>
@@ -245,6 +250,12 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/container/</loc>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/tags/containers/</loc>
     <lastmod>2017-06-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -288,7 +299,13 @@
   
   <url>
     <loc>http://tarunlalwani.com/tags/docker/</loc>
-    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/tags/docker-compose/</loc>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -359,6 +376,12 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/labels/</loc>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/tags/latest/</loc>
     <lastmod>2017-05-17T11:47:37+05:30</lastmod>
     <priority>0</priority>
@@ -391,6 +414,12 @@
   <url>
     <loc>http://tarunlalwani.com/tags/master/</loc>
     <lastmod>2017-03-30T00:00:00+05:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://tarunlalwani.com/tags/metadata/</loc>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -456,7 +485,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/post/</loc>
-    <lastmod>2017-09-02T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -527,6 +556,12 @@
   </url>
   
   <url>
+    <loc>http://tarunlalwani.com/tags/scale/</loc>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://tarunlalwani.com/tags/selenium/</loc>
     <lastmod>2017-07-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -582,7 +617,7 @@
   
   <url>
     <loc>http://tarunlalwani.com/</loc>
-    <lastmod>2017-09-02T00:00:00+00:00</lastmod>
+    <lastmod>2017-09-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

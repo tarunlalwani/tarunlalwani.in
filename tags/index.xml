@@ -165,6 +165,15 @@
     </item>
     
     <item>
+      <title>Container</title>
+      <link>http://tarunlalwani.com/tags/container/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/container/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Containers</title>
       <link>http://tarunlalwani.com/tags/containers/</link>
       <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
@@ -221,9 +230,18 @@
     <item>
       <title>Docker</title>
       <link>http://tarunlalwani.com/tags/docker/</link>
-      <pubDate>Thu, 06 Jul 2017 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Docker Compose</title>
+      <link>http://tarunlalwani.com/tags/docker-compose/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/docker-compose/</guid>
       <description></description>
     </item>
     
@@ -327,6 +345,15 @@
     </item>
     
     <item>
+      <title>Labels</title>
+      <link>http://tarunlalwani.com/tags/labels/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/labels/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Latest</title>
       <link>http://tarunlalwani.com/tags/latest/</link>
       <pubDate>Wed, 17 May 2017 11:47:37 +0530</pubDate>
@@ -377,6 +404,15 @@
       <pubDate>Thu, 30 Mar 2017 00:00:00 +0530</pubDate>
       
       <guid>http://tarunlalwani.com/tags/master/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Metadata</title>
+      <link>http://tarunlalwani.com/tags/metadata/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/metadata/</guid>
       <description></description>
     </item>
     
@@ -566,6 +602,15 @@
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/safari/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Scale</title>
+      <link>http://tarunlalwani.com/tags/scale/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/scale/</guid>
       <description></description>
     </item>
     

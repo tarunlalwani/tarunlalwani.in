@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+      <meta name="description" content="Docker Compose scale a services without the service knowing that it is being scaled. This article will show few approaches to use dynamic configurations in such case">
+      <meta name="twitter:description" content="Docker Compose scale a services without the service knowing that it is being scaled. This article will show few approaches to use dynamic configurations in such case">
+    
+
+    <meta property="og:title" content="Docker Compose scale with Dynamic Configuration - Part 1">
+    <meta property="twitter:title" content="Docker Compose scale with Dynamic Configuration - Part 1">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-09-11">
+    
+    <meta property="og:description" content="Docker Compose scale a services without the service knowing that it is being scaled. This article will show few approaches to use dynamic configurations in such case">
+    <meta property="og:url" content="http://tarunlalwani.com/post/docker-compose-scale-with-dynamic-configuration-part-1/">
+    <meta property="og:site_name" content="TARUN LALWANI">
+   
+
+    
+    <meta property="og:tags" content="docker">
+    
+    <meta property="og:tags" content="docker-compose">
+    
+    <meta property="og:tags" content="scale">
+    
+    <meta property="og:tags" content="labels">
+    
+    <meta property="og:tags" content="metadata">
+    
+    <meta property="og:tags" content="container">
+    
+    <meta property="og:tags" content="metadata">
+    
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ask4tarun">
+    <meta property="og:image" content="http://tarunlalwani.com/images/nginx_debugging.png">
+    <meta property="twitter:image" content="http://tarunlalwani.com/images/nginx_debugging.png">
+    
+
+    <meta name="generator" content="Hugo 0.25.1" />
+    <title>Docker Compose scale with Dynamic Configuration - Part 1 &middot; TARUN LALWANI</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://tarunlalwani.com/css/style.css">
+
+    
+
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/sunburst.min.css">
+
+    
+
+    
+    <link href="http://tarunlalwani.com/index.xml" rel="alternate" type="application/rss+xml" title="TARUN LALWANI" />
+    
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="http://tarunlalwani.com/">TARUN LALWANI</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="http://tarunlalwani.com/">TARUN LALWANI</a></h1>
+		
+		
+		
+			<small class="text-center center-block">Technology Enthusiast</small>
+		
+		
+		
+			<img id="profile-pic" src="http://tarunlalwani.com//images/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			<a href="https://twitter.com/ask4tarun"><i class="fa fa-twitter fa-2x"></i></a>
+			<a href="https://plus.google.com/&#43;TarunLalwani"><i class="fa fa-google-plus fa-2x"></i></a>
+			<a href="https://www.linkedin.com/in/tarunlalwani"><i class="fa fa-linkedin fa-2x"></i></a>
+			<a href="https://github.com/tarunlalwani"><i class="fa fa-github fa-2x"></i></a>
+			
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Docker Compose scale with Dynamic Configuration - Part 1</h1>
+	</header>
+
+	<article>
+		
+
+<p>TL;DR;</p>
+
+<p>Docker-compose allows scaling specific services from the composition. Assume we have a server and worker model. Consider the below compose file for the same</p>
+
+<pre><code class="language-yaml">version: '3'
+
+services:
+  server:
+    image: alpine
+    command: sh -c &quot;echo Launching server &amp;&amp; exec tail -f /dev/null&quot;
+  worker:
+    image: alpine
+    command: sh -c &quot;echo Launching worker &gt;&gt; /data/worker.log &amp;&amp; exec tail -f /dev/null&quot;
+    volumes:
+      - ./data:/data
+</code></pre>
+
+<p>Now if we do <code>docker-compose up</code> the server will echo <code>Launching server</code> and <code>worker</code> will print <code>Launching worker</code> to the <code>/data/worker.log</code> file.</p>
+
+<p>Now let us run the same config with the scale option</p>
+
+<pre><code class="language-bash">$ docker-compose up -d --scale worker=5
+</code></pre>
+
+<p>Above command instructs docker-compose to launch 1 server container and 5 worker container. Now if we print our <code>./data/worker.log</code></p>
+
+<pre><code class="language-bash">$ cat data/worker.log
+Launching worker
+Launching worker
+Launching worker
+Launching worker
+Launching worker
+</code></pre>
+
+<p>We get logs of all workers mixed into the same log file. The worker container has no idea that it is being scaled and can&rsquo;t adjust its log filename or folder. Now if check the worker containers using <code>docker ps</code></p>
+
+<pre><code class="language-bash">$ docker ps | grep worker
+0520ea120ee0        alpine               &quot;sh -c 'echo Launc...&quot;   32 seconds ago      Up 31 seconds                                          scale1_worker_5
+5d08bf33d88d        alpine               &quot;sh -c 'echo Launc...&quot;   32 seconds ago      Up 30 seconds                                          scale1_worker_4
+34971d89ccdc        alpine               &quot;sh -c 'echo Launc...&quot;   32 seconds ago      Up 31 seconds                                          scale1_worker_3
+b789c7806aac        alpine               &quot;sh -c 'echo Launc...&quot;   32 seconds ago      Up 31 seconds                                          scale1_worker_2
+1468e77231b0        alpine               &quot;sh -c 'echo Launc...&quot;   32 seconds ago      Up 31 seconds                                          scale1_worker_1
+</code></pre>
+
+<p>Let is pick our worker <code>scale1_worker_3</code> and inspect it.</p>
+
+<pre><code class="language-json">$ docker inspect scale1_worker_3
+
+....
+....
+    &quot;Labels&quot;: {
+        &quot;com.docker.compose.config-hash&quot;: &quot;6b42ee8ad919a3581c7342e91900ac3984fcf5b7c69274e63bc655461e9a0b57&quot;,
+        &quot;com.docker.compose.container-number&quot;: &quot;3&quot;,
+        &quot;com.docker.compose.oneoff&quot;: &quot;False&quot;,
+        &quot;com.docker.compose.project&quot;: &quot;scale1&quot;,
+        &quot;com.docker.compose.service&quot;: &quot;worker&quot;,
+        &quot;com.docker.compose.version&quot;: &quot;1.15.0&quot;
+    }
+....            
+....
+</code></pre>
+
+<p>As we can see that compose will label the container using <code>com.docker.compose.container-number</code> which indicates a dynamic number for the worker.</p>
+
+<p>If we can get this label inside docker container it would allow to use this number and change our logging or the log filename.</p>
+
+<p>How do we get labels value inside a container? unfortunately docker does not provide anything of this sort.</p>
+
+<p>Cloud providers like AWS provide a metadata url which a instance and hit query details about itself</p>
+
+<pre><code class="language-bash">$ curl http://169.254.169.254/latest/meta-data/local-hostname
+ip-10-251-50-12.ec2.internal
+</code></pre>
+
+<p>So what we need is a docker metadata service which can return details about a container.</p>
+
+<h3 id="building-a-docker-metadata-service">Building a Docker metadata service</h3>
+
+<p>Docker runs on <code>/var/run/docker.sock</code> by default and one can query Docker API directly on this socket</p>
+
+<p>Now we can also get this using curl</p>
+
+<pre><code class="language-bash">$ curl -sgG --unix-socket /var/run/docker.sock 'http:::/containers/json' --data-urlencode 'filters={&quot;name&quot;:[&quot;scale1_worker_3&quot;]}' | jq  '.[].Labels.&quot;com.docker.compose.container-number&quot;'
+&quot;3&quot;
+</code></pre>
+
+<p>But to do this inside the docker container requires two things. One is to have curl inside, which is ok to have. Second is to share the <code>/var/run/docker.sock</code>.</p>
+
+<p>Sharing the docker socket is ok if we are doing some testing or don&rsquo;t care much about security. But if we need to put something in production then this is not a good way.</p>
+
+<h4 id="building-a-lua-nginx-based-docker-metdata-server">Building a Lua Nginx based Docker metdata server</h4>
+
+<p>Let&rsquo;s build a service with <code>/metadata/&lt;label&gt;/&lt;labelname&gt;</code> as the format for the url that a container should hit. Unlike AWS metadata service we can&rsquo;t determine which container the request generated from. So we need to also get the container id from the container.</p>
+
+<p>So you url should be <code>/metadata/&lt;containerid&gt;/&lt;label&gt;/&lt;labelname&gt;</code>.</p>
+
+<p>Now the simplest nginx config that can do that would be as below</p>
+
+<pre><code class="language-nginx">user root;
+
+events {
+   worker_connections 8000;
+}
+
+http {
+  server {
+     listen 80;
+
+     location / {
+       deny all;
+     }
+
+     location ~* &quot;/metadata/(?&lt;cid&gt;[a-zA-Z0-9]{20,})(/(?&lt;command&gt;[^/]+))?(/(?&lt;subcommand&gt;[^/]+))?&quot; {
+
+     }
+
+   }
+}
+</code></pre>
+
+<p>Now we need a way to query the docker socket but at the same time limit the querys to internal requests only. So we can add</p>
+
+<pre><code class="language-nginx">    location /containers/json {
+      internal;
+      proxy_pass http://unix:/var/run/docker.sock:/containers/json;
+    }
+</code></pre>
+
+<p>This exposes only <code>/containers/json</code> API endpoint to our nginx. Next we need some lua code inside our <code>metadata</code> location block to fetch the details about container and return the response filtered.</p>
+
+<pre><code class="language-lua">local cjson = require(&quot;cjson&quot;)
+
+local cid = ngx.var.cid
+local command = ngx.var.command
+local subcommand = ngx.var.subcommand
+ngx.log(ngx.ERR, &quot;cid=&quot;..cid.. &quot;, command=&quot;.. command .. &quot;, subcommand=&quot; .. subcommand)
+local filters = cjson.encode({id = {cid}})
+local res = ngx.location.capture(&quot;/containers/json&quot;, {args = {filters = filters}})
+</code></pre>
+
+<p>First we get the <code>cid</code>, <code>command</code>, <code>subcommand</code> from our location and then create filter parameter based on the container id. We hit our <code>/containers/json</code> endpoint which is internal, and get the response object.</p>
+
+<p>Next we need to check if container exist or not, if we don&rsquo;t get a response back then we just send a <code>404</code> back</p>
+
+<pre><code class="language-lua">if not res then
+   ngx.status = 404
+   return ngx.exit(ngx.HTTP_NOT_FOUND)
+end
+</code></pre>
+
+<p>If we get a reponse then we want to load that string as a json variable</p>
+
+<pre><code class="language-lua">  local data = cjson.decode(res.body);
+  ngx.header.content_type = &quot;application/json&quot;
+</code></pre>
+
+<p>Next we create a jsonpath query based on the labels</p>
+
+<pre><code class="language-lua">if command == &quot;labels&quot; then
+   json_filter = &quot;$..Labels&quot;
+   if subcommand ~= '' then
+      json_filter = &quot;$..['Labels']['&quot;.. subcommand  .. &quot;']&quot;
+   end
+end
+</code></pre>
+
+<p>Next we apply this json filter and send the response back</p>
+
+<pre><code class="language-lua">  local jp = require(&quot;jsonpath&quot;)
+  local result = jp.value(data, json_filter)
+  if type(result) == &quot;string&quot; then
+     ngx.say(result)
+  else
+     ngx.say(cjson.encode(result))
+  end
+</code></pre>
+
+<p>The <code>jsonpath</code> module need to be installed on <code>openresty</code> image, so we created a new <code>Dockerfile</code></p>
+
+<pre><code class="language-dockerfile">FROM openresty/openresty:alpine-fat
+RUN apk update &amp;&amp; apk add git &amp;&amp; /usr/local/openresty/luajit/bin/luarocks install jsonpath
+</code></pre>
+
+<p>To make it easy for any docker container to reach our metadata service we will use a easy to remember IP <code>172.172.172.172</code>. Now let us put everything into a compose file</p>
+
+<pre><code class="language-yaml">version: '3'
+services:
+  metadata:
+    build:
+      context: .
+    user: root
+    volumes:
+      - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ./lua:/lua
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      metadataserver:
+        ipv4_address: 172.172.172.172
+
+networks:
+  metadataserver:
+    driver: bridge
+    ipam:
+      config:
+      -
+        subnet: 172.172.172.0/24
+</code></pre>
+
+<p>After doing <code>docker-compose up -d</code> we can start checking our metadata service</p>
+
+<pre><code class="language-json">$ docker inspect -f '{{.Id}}' scale1_worker_3
+34971d89ccdc2f58e29f4387ef107714682d69abd06c1d6d1cbb5961ac8b4754
+
+$ curl -s &quot;172.172.172.172/metadata/34971d89ccdc2f58e29f4387ef107714682d69abd06c1d6d1cbb5961ac8b4754/labels&quot; | jq
+{
+  &quot;com.docker.compose.oneoff&quot;: &quot;False&quot;,
+  &quot;com.docker.compose.config-hash&quot;: &quot;6b42ee8ad919a3581c7342e91900ac3984fcf5b7c69274e63bc655461e9a0b57&quot;,
+  &quot;com.docker.compose.version&quot;: &quot;1.15.0&quot;,
+  &quot;com.docker.compose.container-number&quot;: &quot;3&quot;,
+  &quot;com.docker.compose.service&quot;: &quot;worker&quot;,
+  &quot;com.docker.compose.project&quot;: &quot;scale1&quot;
+}
+
+$ curl -s &quot;172.172.172.172/metadata/34971d89ccdc2f58e29f4387ef107714682d69abd06c1d6d1cbb5961ac8b4754/labels/com.docker.compose.container-number&quot;
+3
+</code></pre>
+
+<p>So our metadata service is working great. Now the only issue is that the service requires the container id. This container id needs to be determined inside the container itself.</p>
+
+<h4 id="determing-container-id-from-inside-the-container">Determing container id from inside the container</h4>
+
+<p>This is where cgroup becomes our friend. Extracting container id is easy by exploring the cgroup of <code>PID 1</code> or <code>self</code></p>
+
+<pre><code class="language-bash">$ cat /proc/1/cgroup
+11:freezer:/docker/34971d89ccdc2f58e29f4387ef107714682d69abd06c1d6d1cbb5961ac8b4754
+10:pids:/docker/34971d89ccdc2f58e29f4387ef107714682d69abd06c1d6d1cbb5961ac8b4754
+9:perf_event:/docker/34971d89ccdc2f58e29f4387ef107714682d69abd06c1d6d1cbb5961ac8b4754
+8:net_cls,net_prio:/docker/34971d89ccdc2f58e29f4387ef107714682d69abd06c1d6d1cbb5961ac8b4754
+7:blkio:/docker/34971d89ccdc2f58e29f4387ef107714682d69abd06c1d6d1cbb5961ac8b4754
+6:cpu,cpuacct:/docker/34971d89ccdc2f58e29f4387ef107714682d69abd06c1d6d1cbb5961ac8b4754
+5:hugetlb:/docker/34971d89ccdc2f58e29f4387ef107714682d69abd06c1d6d1cbb5961ac8b4754
+4:memory:/docker/34971d89ccdc2f58e29f4387ef107714682d69abd06c1d6d1cbb5961ac8b4754
+3:cpuset:/docker/34971d89ccdc2f58e29f4387ef107714682d69abd06c1d6d1cbb5961ac8b4754
+2:devices:/docker/34971d89ccdc2f58e29f4387ef107714682d69abd06c1d6d1cbb5961ac8b4754
+1:name=systemd:/docker/34971d89ccdc2f58e29f4387ef107714682d69abd06c1d6d1cbb5961ac8b4754
+</code></pre>
+
+<p>We can easily filter out the container ID using</p>
+
+<pre><code class="language-bash">$ cat /proc/1/cgroup | grep cpuset | awk -F&quot;/&quot; '{print $NF}'
+34971d89ccdc2f58e29f4387ef107714682d69abd06c1d6d1cbb5961ac8b4754
+</code></pre>
+
+<p>Metadata service can be download from below repo</p>
+
+<p><a href="https://github.com/tarunlalwani/docker-container-metdata-service">https://github.com/tarunlalwani/docker-container-metdata-service</a></p>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" http://tarunlalwani.com/" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tarunlalwani';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-99088991-1', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "http:\/\/tarunlalwani.com\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  
+
+  <script src="http://tarunlalwani.com//js/highlight.pack.js"></script>
+  
+  <script src="http://tarunlalwani.com//js/App.js"></script>
+  
+</body>
+</html>

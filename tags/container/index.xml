@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Container on TARUN LALWANI</title>
+    <link>http://tarunlalwani.com/tags/container/</link>
+    <description>Recent content in Container on TARUN LALWANI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Sep 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tarunlalwani.com/tags/container/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Docker Compose scale with Dynamic Configuration - Part 1</title>
+      <link>http://tarunlalwani.com/post/docker-compose-scale-with-dynamic-configuration-part-1/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/docker-compose-scale-with-dynamic-configuration-part-1/</guid>
+      <description>TL;DR;
+Docker-compose allows scaling specific services from the composition. Assume we have a server and worker model. Consider the below compose file for the same
+version: &#39;3&#39; services: server: image: alpine command: sh -c &amp;quot;echo Launching server &amp;amp;&amp;amp; exec tail -f /dev/null&amp;quot; worker: image: alpine command: sh -c &amp;quot;echo Launching worker &amp;gt;&amp;gt; /data/worker.log &amp;amp;&amp;amp; exec tail -f /dev/null&amp;quot; volumes: - ./data:/data  Now if we do docker-compose up the server will echo Launching server and worker will print Launching worker to the /data/worker.</description>
+    </item>
+    
+  </channel>
+</rss>

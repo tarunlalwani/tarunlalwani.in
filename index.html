@@ -106,6 +106,49 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
+			<a href="http://tarunlalwani.com/post/docker-compose-scale-with-dynamic-configuration-part-1/">Docker Compose scale with Dynamic Configuration - Part 1</a>
+			<br>
+			<small>
+				11 September 2017
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+		TL;DR;
+Docker-compose allows scaling specific services from the composition. Assume we have a server and worker model. Consider the below compose file for the same
+version: '3' services: server: image: alpine command: sh -c &quot;echo Launching server &amp;&amp; exec tail -f /dev/null&quot; worker: image: alpine command: sh -c &quot;echo Launching worker &gt;&gt; /data/worker.log &amp;&amp; exec tail -f /dev/null&quot; volumes: - ./data:/data  Now if we do docker-compose up the server will echo Launching server and worker will print Launching worker to the /data/worker.
+		
+			... <a href="http://tarunlalwani.com/post/docker-compose-scale-with-dynamic-configuration-part-1/">Read More</a>
+		
+	</div>
+	<div class="panel-footer">
+		
+		<small class="text-muted">
+			
+			
+				<a href="http://tarunlalwani.com/tags/docker"><span class="label label-success">docker</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/docker-compose"><span class="label label-success">docker-compose</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/scale"><span class="label label-success">scale</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/labels"><span class="label label-success">labels</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/metadata"><span class="label label-success">metadata</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/container"><span class="label label-success">container</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/metadata"><span class="label label-success">metadata</span></a>
+			
+		</small>
+		
+	</div>
+</div>
+
+
+	<div class="panel panel-default">
+	<div class="panel-header">
+		<h3>
 			<a href="http://tarunlalwani.com/post/how-to-debug-nginx-reverse-proxy-issues-php-fpm-gunicorn-uwsgi/">How To Debug Nginx Reverse Proxy Issues</a>
 			<br>
 			<small>
@@ -486,46 +529,6 @@ Approach 1 - Using Bash Substituion This uses shell parameter and file redirecti
 				<a href="http://tarunlalwani.com/tags/docker"><span class="label label-success">docker</span></a>
 			
 				<a href="http://tarunlalwani.com/tags/template"><span class="label label-success">template</span></a>
-			
-		</small>
-		
-	</div>
-</div>
-
-
-	<div class="panel panel-default">
-	<div class="panel-header">
-		<h3>
-			<a href="http://tarunlalwani.com/post/request-capturing-nginx-lua/">Request Capturing using NGINX and Lua</a>
-			<br>
-			<small>
-				6 June 2017
-			</small>
-		</h3>
-	</div>
-	<div class="panel-body">
-		In one of our projects we wanted to capture and document incoming traffic to our server. The requirements for recording/capturing the incoming traffic were as below
- Capture both GET and POST requests Capture only certain locations Back-end service involved were PHP, Java and some NodeJS also Capture Response Code, Response Text and Duration also Mask certain sensitive data like emails, credit card numbers  The plan was to use this data for creating simulated production replay and make sure any changes made to code doesn&rsquo;t impact existing working flows.
-		
-			... <a href="http://tarunlalwani.com/post/request-capturing-nginx-lua/">Read More</a>
-		
-	</div>
-	<div class="panel-footer">
-		
-		<small class="text-muted">
-			
-			
-				<a href="http://tarunlalwani.com/tags/capture"><span class="label label-success">capture</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/request"><span class="label label-success">request</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/nginx"><span class="label label-success">nginx</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/web"><span class="label label-success">web</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/lua"><span class="label label-success">lua</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/record"><span class="label label-success">record</span></a>
 			
 		</small>
 		
