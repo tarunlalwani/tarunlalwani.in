@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on TARUN LALWANI</title>
+    <title>Tags on Tech Adventures by Tarun Lalwani</title>
     <link>http://tarunlalwani.com/tags/</link>
-    <description>Recent content in Tags on TARUN LALWANI</description>
+    <description>Recent content in Tags on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 02 Sep 2017 00:00:00 +0000</lastBuildDate>
@@ -257,7 +257,7 @@
     <item>
       <title>Firefox</title>
       <link>http://tarunlalwani.com/tags/firefox/</link>
-      <pubDate>Tue, 20 Jun 2017 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/firefox/</guid>
       <description></description>
@@ -516,6 +516,24 @@
     </item>
     
     <item>
+      <title>Profile</title>
+      <link>http://tarunlalwani.com/tags/profile/</link>
+      <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/profile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Proxy</title>
+      <link>http://tarunlalwani.com/tags/proxy/</link>
+      <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/proxy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Proxy_pass</title>
       <link>http://tarunlalwani.com/tags/proxy_pass/</link>
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
@@ -597,6 +615,15 @@
     </item>
     
     <item>
+      <title>Runtime</title>
+      <link>http://tarunlalwani.com/tags/runtime/</link>
+      <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/runtime/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Safari</title>
       <link>http://tarunlalwani.com/tags/safari/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
@@ -617,7 +644,7 @@
     <item>
       <title>Selenium</title>
       <link>http://tarunlalwani.com/tags/selenium/</link>
-      <pubDate>Thu, 06 Jul 2017 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/selenium/</guid>
       <description></description>
@@ -638,6 +665,15 @@
       <pubDate>Wed, 21 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://tarunlalwani.com/tags/session_id/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Settings</title>
+      <link>http://tarunlalwani.com/tags/settings/</link>
+      <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/tags/settings/</guid>
       <description></description>
     </item>
     

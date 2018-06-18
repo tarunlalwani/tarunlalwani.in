@@ -5,34 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     
     
-      <meta name="description" content="TARUN LALWANI">
-      <meta name="twitter:description" content="TARUN LALWANI">
+      <meta name="description" content="Tech Adventures by Tarun Lalwani">
+      <meta name="twitter:description" content="Tech Adventures by Tarun Lalwani">
     
 
-    <meta property="og:title" content="TARUN LALWANI">
-    <meta property="twitter:title" content="TARUN LALWANI">
+    <meta property="og:title" content="Tech Adventures by Tarun Lalwani">
+    <meta property="twitter:title" content="Tech Adventures by Tarun Lalwani">
     
     <meta property="og:type" content="website">
     
     <meta property="og:description" content="">
     <meta property="og:url" content="http://tarunlalwani.com/">
-    <meta property="og:site_name" content="TARUN LALWANI">
+    <meta property="og:site_name" content="Tech Adventures by Tarun Lalwani">
    
 
     
 
     
 
-    <meta name="generator" content="Hugo 0.25.1" />
-    <title>TARUN LALWANI &middot; TARUN LALWANI</title>
+    <meta name="generator" content="Hugo 0.42.1" />
+    <title>Tech Adventures by Tarun Lalwani &middot; Tech Adventures by Tarun Lalwani</title>
     
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://tarunlalwani.com/css/style.css">
 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
 
     
-    <link href="http://tarunlalwani.com/index.xml" rel="alternate" type="application/rss+xml" title="TARUN LALWANI" />
+    <link href="http://tarunlalwani.com/index.xml" rel="alternate" type="application/rss+xml" title="Tech Adventures by Tarun Lalwani" />
     
     
 
@@ -101,6 +101,46 @@
 		<h1>What I'm Thinking</h1>
 	
 </header>
+
+
+	<div class="panel panel-default">
+	<div class="panel-header">
+		<h3>
+			<a href="http://tarunlalwani.com/post/change-profile-settings-at-runtime-firefox-selenium/">Change firefox profile settings at runtime using selenium</a>
+			<br>
+			<small>
+				17 June 2018
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+		Selenium allows creating a custom profile for firefox and launching the browser with the same. Below is a sample code on how to change the download folder of the browser launched
+from selenium import webdriver profile = webdriver.FirefoxProfile() profile.set_preference(&quot;browser.download.folderList&quot;, 2) profile.set_preference(&quot;browser.download.manager.showWhenStarting&quot;, False) profile.set_preference(&quot;browser.download.dir&quot;, '/Users/tarunlalwani/Downloads/') profile.set_preference(&quot;browser.helperApps.neverAsk.saveToDisk&quot;, &quot;application/x-gzip&quot;) driver = webdriver.Firefox(firefox_profile=profile)  This is good when you know the download folder while starting the browser or you are NOT interested in changing the download folder after the browser has starting.
+		
+			... <a href="http://tarunlalwani.com/post/change-profile-settings-at-runtime-firefox-selenium/">Read More</a>
+		
+	</div>
+	<div class="panel-footer">
+		
+		<small class="text-muted">
+			
+			
+				<a href="http://tarunlalwani.com/tags/selenium"><span class="label label-success">selenium</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/firefox"><span class="label label-success">firefox</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/profile"><span class="label label-success">profile</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/runtime"><span class="label label-success">runtime</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/settings"><span class="label label-success">settings</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/proxy"><span class="label label-success">proxy</span></a>
+			
+		</small>
+		
+	</div>
+</div>
 
 
 	<div class="panel panel-default">
@@ -499,43 +539,6 @@ The first time I worked out this approach was in C# only, but that was back in 2
 </div>
 
 
-	<div class="panel panel-default">
-	<div class="panel-header">
-		<h3>
-			<a href="http://tarunlalwani.com/post/simple-parameterized-config-files-docker/">Simple Parameterized config files inside Docker</a>
-			<br>
-			<small>
-				12 June 2017
-			</small>
-		</h3>
-	</div>
-	<div class="panel-body">
-		Parameterized config files are a must to create customizable and flexible docker images. There are many tools available for doing the same. To name a few, consul-template, confd
-But in this article I want to discuss about few of the basic approaches. So why basic ones? Well, when you can do the job with a knife, why use a gun!
-Approach 1 - Using Bash Substituion This uses shell parameter and file redirection.
-		
-			... <a href="http://tarunlalwani.com/post/simple-parameterized-config-files-docker/">Read More</a>
-		
-	</div>
-	<div class="panel-footer">
-		
-		<small class="text-muted">
-			
-			
-				<a href="http://tarunlalwani.com/tags/config"><span class="label label-success">config</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/parameter"><span class="label label-success">parameter</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/docker"><span class="label label-success">docker</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/template"><span class="label label-success">template</span></a>
-			
-		</small>
-		
-	</div>
-</div>
-
-
 
 <div class="text-center center-block">
 	
@@ -555,7 +558,7 @@ Approach 1 - Using Bash Substituion This uses shell parameter and file redirecti
     
     
     
-     
+    
         
         
     
@@ -567,7 +570,7 @@ Approach 1 - Using Bash Substituion This uses shell parameter and file redirecti
     
     
     
-     
+    
         
         
     
@@ -579,7 +582,7 @@ Approach 1 - Using Bash Substituion This uses shell parameter and file redirecti
     
     
     
-     
+    
         
         
     
