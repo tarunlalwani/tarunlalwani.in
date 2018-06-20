@@ -106,6 +106,47 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
+			<a href="http://tarunlalwani.com/post/nginx-proxypass-server-paths/">Understanding Nginx proxy_pass and url path translations</a>
+			<br>
+			<small>
+				18 June 2018
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+		Consider the following nginx config blocks
+location / { proxy_pass http://127.0.0.1:8080; }  and
+location / { proxy_pass http://127.0.0.1:8080/; }  They are both same in terms of final result. You if call /abc/def on the main server it passes the request to http://127.0.0.1:8080/abc/def
+But as soon as you have a location block with a non-root path like below
+location /app { proxy_pass http://127.0.0.1:8080; }  The above config is not same as below
+		
+			... <a href="http://tarunlalwani.com/post/nginx-proxypass-server-paths/">Read More</a>
+		
+	</div>
+	<div class="panel-footer">
+		
+		<small class="text-muted">
+			
+			
+				<a href="http://tarunlalwani.com/tags/nginx"><span class="label label-success">nginx</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/proxy_pass"><span class="label label-success">proxy_pass</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/url"><span class="label label-success">url</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/path"><span class="label label-success">path</span></a>
+			
+				<a href="http://tarunlalwani.com/tags/folder"><span class="label label-success">folder</span></a>
+			
+		</small>
+		
+	</div>
+</div>
+
+
+	<div class="panel panel-default">
+	<div class="panel-header">
+		<h3>
 			<a href="http://tarunlalwani.com/post/change-profile-settings-at-runtime-firefox-selenium/">Change firefox profile settings at runtime using selenium</a>
 			<br>
 			<small>
@@ -492,46 +533,6 @@ $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout selfsigned.key -ou
 				<a href="http://tarunlalwani.com/tags/certificate"><span class="label label-success">certificate</span></a>
 			
 				<a href="http://tarunlalwani.com/tags/subjectaltname"><span class="label label-success">subjectAltName</span></a>
-			
-		</small>
-		
-	</div>
-</div>
-
-
-	<div class="panel panel-default">
-	<div class="panel-header">
-		<h3>
-			<a href="http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-csharp/">Re-using existing browser session in Selenium using C#</a>
-			<br>
-			<small>
-				15 June 2017
-			</small>
-		</h3>
-	</div>
-	<div class="panel-body">
-		Earlier I wrote an article on how to re-use a session in Selenium using Java. @Jim Hazen asked if the I could provide the implementation of same in C#. So here it is
-The first time I worked out this approach was in C# only, but that was back in 2014. That time I copied code from the Selenium source code and modified it. This makes upgrading Selenium version difficult.
-		
-			... <a href="http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-csharp/">Read More</a>
-		
-	</div>
-	<div class="panel-footer">
-		
-		<small class="text-muted">
-			
-			
-				<a href="http://tarunlalwani.com/tags/sesison"><span class="label label-success">sesison</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/session_id"><span class="label label-success">session_id</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/selenium"><span class="label label-success">selenium</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/reuse"><span class="label label-success">reuse</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/browser"><span class="label label-success">browser</span></a>
-			
-				<a href="http://tarunlalwani.com/tags/csharp"><span class="label label-success">csharp</span></a>
 			
 		</small>
 		

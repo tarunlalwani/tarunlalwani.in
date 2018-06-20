@@ -1,0 +1,11 @@
+Nginx location,proxy_pass URL,Test URL, Path received by backend server
+/test1,http://127.0.0.1:8080,http://192.168.33.100/test1/abc/test,/test1/abc/test
+/test2,http://127.0.0.1:8080/,http://192.168.33.100/test2/abc/test,//abc/test
+/test3/,http://127.0.0.1:8080,http://192.168.33.100/test3/abc/test,/test3/abc/test
+/test4/,http://127.0.0.1:8080/,http://192.168.33.100/test4/abc/test,/abc/test
+/test5,http://127.0.0.1:8080/app1,http://192.168.33.100/test5/abc/test,/app1/abc/test
+/test6,http://127.0.0.1:8080/app1/,http://192.168.33.100/test6/abc/test,/app1//abc/test
+/test7/,http://127.0.0.1:8080/app1,http://192.168.33.100/test7/abc/test,/app1abc/test
+/test8/,http://127.0.0.1:8080/app1/,http://192.168.33.100/test8/abc/test,/app1/abc/test
+
+

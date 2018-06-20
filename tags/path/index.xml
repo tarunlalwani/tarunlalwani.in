@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Path on Tech Adventures by Tarun Lalwani</title>
+    <link>http://tarunlalwani.com/tags/path/</link>
+    <description>Recent content in Path on Tech Adventures by Tarun Lalwani</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 18 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://tarunlalwani.com/tags/path/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Understanding Nginx proxy_pass and url path translations</title>
+      <link>http://tarunlalwani.com/post/nginx-proxypass-server-paths/</link>
+      <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://tarunlalwani.com/post/nginx-proxypass-server-paths/</guid>
+      <description>Consider the following nginx config blocks
+location / { proxy_pass http://127.0.0.1:8080; }  and
+location / { proxy_pass http://127.0.0.1:8080/; }  They are both same in terms of final result. You if call /abc/def on the main server it passes the request to http://127.0.0.1:8080/abc/def
+But as soon as you have a location block with a non-root path like below
+location /app { proxy_pass http://127.0.0.1:8080; }  The above config is not same as below</description>
+    </item>
+    
+  </channel>
+</rss>
