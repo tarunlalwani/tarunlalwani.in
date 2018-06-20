@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Gitlab on Tech Adventures by Tarun Lalwani</title>
-    <link>http://tarunlalwani.com/tags/gitlab/</link>
+    <link>https://tarunlalwani.com/tags/gitlab/</link>
     <description>Recent content in Gitlab on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 17 May 2017 11:47:37 +0530</lastBuildDate>
     
-	<atom:link href="http://tarunlalwani.com/tags/gitlab/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.com/tags/gitlab/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Migrating/Upgrading Gitlab 6.X to latest Gitlab docker</title>
-      <link>http://tarunlalwani.com/post/migrating-gitlab-6-mysql-to-latest-gitlab/</link>
+      <link>https://tarunlalwani.com/post/migrating-gitlab-6-mysql-to-latest-gitlab/</link>
       <pubDate>Wed, 17 May 2017 11:47:37 +0530</pubDate>
       
-      <guid>http://tarunlalwani.com/post/migrating-gitlab-6-mysql-to-latest-gitlab/</guid>
+      <guid>https://tarunlalwani.com/post/migrating-gitlab-6-mysql-to-latest-gitlab/</guid>
       <description>Gitlab is an amazing Git hosting service. With it&amp;rsquo;s community edition, one can setup an in-house git server in no time.
 Those who have been an earlier follower of Gitlab, may still be stuck with the version 6.X. Version 6.X was setup manually by creating DB in MySQL/Postgres, Nginx/Apache entries and few other setup steps.
 As time moved on, Gitlab started providing packages and one could install or upgrade Gitlab using a package manager like yum, apt.</description>

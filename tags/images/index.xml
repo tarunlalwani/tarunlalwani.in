@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Images on Tech Adventures by Tarun Lalwani</title>
-    <link>http://tarunlalwani.com/tags/images/</link>
+    <link>https://tarunlalwani.com/tags/images/</link>
     <description>Recent content in Images on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 26 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://tarunlalwani.com/tags/images/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.com/tags/images/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Docker container cleanup made easy with Docker 17.05</title>
-      <link>http://tarunlalwani.com/post/docker-container-cleanup-easy-with-17.05/</link>
+      <link>https://tarunlalwani.com/post/docker-container-cleanup-easy-with-17.05/</link>
       <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/docker-container-cleanup-easy-with-17.05/</guid>
+      <guid>https://tarunlalwani.com/post/docker-container-cleanup-easy-with-17.05/</guid>
       <description>Earlier docker container and images would keep on occupying spaces until unless manually cleaned up. The clean command included piped commands.
 For example to clean all exited contained
 $ docker ps -a -q -f status=exited | xargs docker rm -v  And to delete volumes or images different commands had to be used. But with Docker 17.05 now out. This is a simple command

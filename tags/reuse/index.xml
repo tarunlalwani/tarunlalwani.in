@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Reuse on Tech Adventures by Tarun Lalwani</title>
-    <link>http://tarunlalwani.com/tags/reuse/</link>
+    <link>https://tarunlalwani.com/tags/reuse/</link>
     <description>Recent content in Reuse on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 21 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://tarunlalwani.com/tags/reuse/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.com/tags/reuse/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Re-using existing browser session with Selenium Grid</title>
-      <link>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-grid-python/</link>
+      <link>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium-grid-python/</link>
       <pubDate>Wed, 21 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-grid-python/</guid>
+      <guid>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium-grid-python/</guid>
       <description>In our previous articles we discussed about re-using Browser session in Selenium for local browsers. We spoke about saving the Session ID and the Executor URL for re-creating the sessions. Now let&amp;rsquo;s us have re-look at the approach when we use Selenium Grid
 Launching the Grid I am using brew to install selenium-server-standalone on my Mac. But if you are using something else, then download the latest version from here</description>
     </item>
     
     <item>
       <title>Enumerating running Firefox browsers in Selenium</title>
-      <link>http://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</link>
+      <link>https://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</link>
       <pubDate>Tue, 20 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</guid>
+      <guid>https://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</guid>
       <description>This is another article in our &amp;ldquo;Re-use selenium session&amp;rdquo; series. This article is specific to Firefox browser ran on a local system using Selenium
 Consider the below python code
 from selenium import webdriver driver = webdriver.Firefox()  This opens up a firefox browser on your machine. We know that Selenium uses geckodriver for communicating with the firefox. So let&amp;rsquo;s check the process
@@ -35,10 +35,10 @@ $ ps aux | grep geckodriver tarun.lalwani 11982 0.</description>
     
     <item>
       <title>Enumerating running Chrome browsers in Selenium</title>
-      <link>http://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/</link>
+      <link>https://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/</link>
       <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/</guid>
+      <guid>https://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/</guid>
       <description>This is another article in our &amp;ldquo;Re-use selenium session&amp;rdquo; series. This article is specific to Chrome browser run on a local system using Selenium
 Consider the below python code
 from selenium import webdriver driver = webdriver.Chrome()  This opens up a chrome browser on your machine. We know that Selenium uses chromewebdriver for communicating with the chrome. So let&amp;rsquo;s check the process
@@ -47,20 +47,20 @@ $ ps aux | grep chromedriver tarun.lalwani 8805 0.</description>
     
     <item>
       <title>Re-using existing browser session in Selenium using C#</title>
-      <link>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-csharp/</link>
+      <link>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium-csharp/</link>
       <pubDate>Thu, 15 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-csharp/</guid>
+      <guid>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium-csharp/</guid>
       <description>Earlier I wrote an article on how to re-use a session in Selenium using Java. @Jim Hazen asked if the I could provide the implementation of same in C#. So here it is
 The first time I worked out this approach was in C# only, but that was back in 2014. That time I copied code from the Selenium source code and modified it. This makes upgrading Selenium version difficult.</description>
     </item>
     
     <item>
       <title>Re-using existing browser session in Selenium using Java</title>
-      <link>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-java/</link>
+      <link>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium-java/</link>
       <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-java/</guid>
+      <guid>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium-java/</guid>
       <description>Yesterday I wrote an article on how to re-use a session in Selenium using Python. @Aditya Baraskar asked if the same was possible in Java.
 Once you know the concepts, languages usually is no barrier. So I tried using the same approach that we did in Python and see how it works out in Java
 Attempt 1 ChromeDriver driver = new ChromeDriver(); HttpCommandExecutor executor = (HttpCommandExecutor) driver.getCommandExecutor(); URL url = executor.</description>
@@ -68,10 +68,10 @@ Attempt 1 ChromeDriver driver = new ChromeDriver(); HttpCommandExecutor executor
     
     <item>
       <title>Re-using existing browser session in selenium</title>
-      <link>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium/</link>
+      <link>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium/</link>
       <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium/</guid>
+      <guid>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium/</guid>
       <description>Comparison between Selenium and UFT Behavior For those of us who come from a QTP/UFT background, being able to test the same browser after a disconnect is usually a piece of cake
 1. systemutil.run &amp;quot;iexplore.exe&amp;quot; 2. x = 2/0 3. Browser(&amp;quot;index:=0&amp;quot;).navigate (&amp;quot;http://www.google.com&amp;quot;)  If we run the above script in QTP/UFT, the script will error out on Line #2 and we can re-run the script from Line #3 and it would still work and navigate inside the browser we had opened earlier.</description>
     </item>

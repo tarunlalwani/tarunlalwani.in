@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Settings on Tech Adventures by Tarun Lalwani</title>
-    <link>http://tarunlalwani.com/tags/settings/</link>
+    <link>https://tarunlalwani.com/tags/settings/</link>
     <description>Recent content in Settings on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 17 Jun 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://tarunlalwani.com/tags/settings/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.com/tags/settings/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Change firefox profile settings at runtime using selenium</title>
-      <link>http://tarunlalwani.com/post/change-profile-settings-at-runtime-firefox-selenium/</link>
+      <link>https://tarunlalwani.com/post/change-profile-settings-at-runtime-firefox-selenium/</link>
       <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/change-profile-settings-at-runtime-firefox-selenium/</guid>
+      <guid>https://tarunlalwani.com/post/change-profile-settings-at-runtime-firefox-selenium/</guid>
       <description>Selenium allows creating a custom profile for firefox and launching the browser with the same. Below is a sample code on how to change the download folder of the browser launched
 from selenium import webdriver profile = webdriver.FirefoxProfile() profile.set_preference(&amp;quot;browser.download.folderList&amp;quot;, 2) profile.set_preference(&amp;quot;browser.download.manager.showWhenStarting&amp;quot;, False) profile.set_preference(&amp;quot;browser.download.dir&amp;quot;, &#39;/Users/tarunlalwani/Downloads/&#39;) profile.set_preference(&amp;quot;browser.helperApps.neverAsk.saveToDisk&amp;quot;, &amp;quot;application/x-gzip&amp;quot;) driver = webdriver.Firefox(firefox_profile=profile)  This is good when you know the download folder while starting the browser or you are NOT interested in changing the download folder after the browser has starting.</description>
     </item>

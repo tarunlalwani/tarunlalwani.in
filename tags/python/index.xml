@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on Tech Adventures by Tarun Lalwani</title>
-    <link>http://tarunlalwani.com/tags/python/</link>
+    <link>https://tarunlalwani.com/tags/python/</link>
     <description>Recent content in Python on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 21 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://tarunlalwani.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Re-using existing browser session with Selenium Grid</title>
-      <link>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-grid-python/</link>
+      <link>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium-grid-python/</link>
       <pubDate>Wed, 21 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-grid-python/</guid>
+      <guid>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium-grid-python/</guid>
       <description>In our previous articles we discussed about re-using Browser session in Selenium for local browsers. We spoke about saving the Session ID and the Executor URL for re-creating the sessions. Now let&amp;rsquo;s us have re-look at the approach when we use Selenium Grid
 Launching the Grid I am using brew to install selenium-server-standalone on my Mac. But if you are using something else, then download the latest version from here</description>
     </item>
     
     <item>
       <title>Enumerating running Firefox browsers in Selenium</title>
-      <link>http://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</link>
+      <link>https://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</link>
       <pubDate>Tue, 20 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</guid>
+      <guid>https://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</guid>
       <description>This is another article in our &amp;ldquo;Re-use selenium session&amp;rdquo; series. This article is specific to Firefox browser ran on a local system using Selenium
 Consider the below python code
 from selenium import webdriver driver = webdriver.Firefox()  This opens up a firefox browser on your machine. We know that Selenium uses geckodriver for communicating with the firefox. So let&amp;rsquo;s check the process
@@ -35,10 +35,10 @@ $ ps aux | grep geckodriver tarun.lalwani 11982 0.</description>
     
     <item>
       <title>Enumerating running Chrome browsers in Selenium</title>
-      <link>http://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/</link>
+      <link>https://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/</link>
       <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/</guid>
+      <guid>https://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/</guid>
       <description>This is another article in our &amp;ldquo;Re-use selenium session&amp;rdquo; series. This article is specific to Chrome browser run on a local system using Selenium
 Consider the below python code
 from selenium import webdriver driver = webdriver.Chrome()  This opens up a chrome browser on your machine. We know that Selenium uses chromewebdriver for communicating with the chrome. So let&amp;rsquo;s check the process
@@ -47,10 +47,10 @@ $ ps aux | grep chromedriver tarun.lalwani 8805 0.</description>
     
     <item>
       <title>A10 Network load balancer automation</title>
-      <link>http://tarunlalwani.com/post/a10-network-load-balancer-automation/</link>
+      <link>https://tarunlalwani.com/post/a10-network-load-balancer-automation/</link>
       <pubDate>Mon, 05 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/a10-network-load-balancer-automation/</guid>
+      <guid>https://tarunlalwani.com/post/a10-network-load-balancer-automation/</guid>
       <description>A10 Networks provides hardware Load Balancer, which can be used to balance loads in your data center.
 A10 Load Balancer (LB) have a web based interface to perform different task. Once the server definitions tasks are created, the common thing is to disable and enable servers out of LB.
 Going to the web interface and performing these activities is a tedious task. Also many time the Linux operations teams want to view the status of these server.</description>
@@ -58,10 +58,10 @@ Going to the web interface and performing these activities is a tedious task. Al
     
     <item>
       <title>Why delayed output for python process in my Docker logs?</title>
-      <link>http://tarunlalwani.com/post/why-delayed-output-python-docker/</link>
+      <link>https://tarunlalwani.com/post/why-delayed-output-python-docker/</link>
       <pubDate>Sun, 04 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/why-delayed-output-python-docker/</guid>
+      <guid>https://tarunlalwani.com/post/why-delayed-output-python-docker/</guid>
       <description>Recently while moving one of our projects to Docker, we had a weird error that our python script would not output any data in docker logs. We thought the scripts were stuck, but later we realized the logs had a delayed output
 When we were running the script inside the docker image through bash they would give all output on the console fine. Which kind of puzzled us
 So we created a simple project to recreate the issue</description>
@@ -69,10 +69,10 @@ So we created a simple project to recreate the issue</description>
     
     <item>
       <title>SSH automation using Python</title>
-      <link>http://tarunlalwani.com/post/ssh-automation-using-python/</link>
+      <link>https://tarunlalwani.com/post/ssh-automation-using-python/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/ssh-automation-using-python/</guid>
+      <guid>https://tarunlalwani.com/post/ssh-automation-using-python/</guid>
       <description>Sometimes its required for us to be able to communicate with a remote host using automation. To do it in bash we can use the expect command. But do it in Python, we can use a package named paramiko.
 Installing Paramiko Installation is quite simple. It can be done using the pip or pip3 command
 $ pip install paramiko   Note: based on your setup, you might need to use sudo as well before the pip command</description>
@@ -80,10 +80,10 @@ $ pip install paramiko   Note: based on your setup, you might need to use sudo a
     
     <item>
       <title>Re-using existing browser session in selenium</title>
-      <link>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium/</link>
+      <link>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium/</link>
       <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium/</guid>
+      <guid>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium/</guid>
       <description>Comparison between Selenium and UFT Behavior For those of us who come from a QTP/UFT background, being able to test the same browser after a disconnect is usually a piece of cake
 1. systemutil.run &amp;quot;iexplore.exe&amp;quot; 2. x = 2/0 3. Browser(&amp;quot;index:=0&amp;quot;).navigate (&amp;quot;http://www.google.com&amp;quot;)  If we run the above script in QTP/UFT, the script will error out on Line #2 and we can re-run the script from Line #3 and it would still work and navigate inside the browser we had opened earlier.</description>
     </item>

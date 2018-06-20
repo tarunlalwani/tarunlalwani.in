@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Debugging on Tech Adventures by Tarun Lalwani</title>
-    <link>http://tarunlalwani.com/tags/debugging/</link>
+    <link>https://tarunlalwani.com/tags/debugging/</link>
     <description>Recent content in Debugging on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 20 May 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://tarunlalwani.com/tags/debugging/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.com/tags/debugging/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Debugging PHP web applications using XDebug inside Docker</title>
-      <link>http://tarunlalwani.com/post/debugging-php-xdebug-docker/</link>
+      <link>https://tarunlalwani.com/post/debugging-php-xdebug-docker/</link>
       <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/debugging-php-xdebug-docker/</guid>
+      <guid>https://tarunlalwani.com/post/debugging-php-xdebug-docker/</guid>
       <description>Debugging is an important aspect of any test environment. It helps developer troubleshoot their code on a deployed environment.
 XDebug is one of the popular debuggers for PHP and many PHP IDEs have built-in support for XDebug.
 Docker provides official images for php-fpm and nginx. php-fpm process all the PHP code and for client request handling we will use nginx.

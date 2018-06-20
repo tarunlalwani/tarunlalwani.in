@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tech Adventures by Tarun Lalwani</title>
-    <link>http://tarunlalwani.com/</link>
+    <link>https://tarunlalwani.com/</link>
     <description>Recent content on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 18 Jun 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://tarunlalwani.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Understanding Nginx proxy_pass and url path translations</title>
-      <link>http://tarunlalwani.com/post/nginx-proxypass-server-paths/</link>
+      <link>https://tarunlalwani.com/post/nginx-proxypass-server-paths/</link>
       <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/nginx-proxypass-server-paths/</guid>
+      <guid>https://tarunlalwani.com/post/nginx-proxypass-server-paths/</guid>
       <description>Consider the following nginx config blocks
 location / { proxy_pass http://127.0.0.1:8080; }  and
 location / { proxy_pass http://127.0.0.1:8080/; }  They are both same in terms of final result. You if call /abc/def on the main server it passes the request to http://127.0.0.1:8080/abc/def
@@ -26,20 +26,20 @@ location /app { proxy_pass http://127.0.0.1:8080; }  The above config is not sam
     
     <item>
       <title>Change firefox profile settings at runtime using selenium</title>
-      <link>http://tarunlalwani.com/post/change-profile-settings-at-runtime-firefox-selenium/</link>
+      <link>https://tarunlalwani.com/post/change-profile-settings-at-runtime-firefox-selenium/</link>
       <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/change-profile-settings-at-runtime-firefox-selenium/</guid>
+      <guid>https://tarunlalwani.com/post/change-profile-settings-at-runtime-firefox-selenium/</guid>
       <description>Selenium allows creating a custom profile for firefox and launching the browser with the same. Below is a sample code on how to change the download folder of the browser launched
 from selenium import webdriver profile = webdriver.FirefoxProfile() profile.set_preference(&amp;quot;browser.download.folderList&amp;quot;, 2) profile.set_preference(&amp;quot;browser.download.manager.showWhenStarting&amp;quot;, False) profile.set_preference(&amp;quot;browser.download.dir&amp;quot;, &#39;/Users/tarunlalwani/Downloads/&#39;) profile.set_preference(&amp;quot;browser.helperApps.neverAsk.saveToDisk&amp;quot;, &amp;quot;application/x-gzip&amp;quot;) driver = webdriver.Firefox(firefox_profile=profile)  This is good when you know the download folder while starting the browser or you are NOT interested in changing the download folder after the browser has starting.</description>
     </item>
     
     <item>
       <title>Docker Compose scale with Dynamic Configuration - Part 1</title>
-      <link>http://tarunlalwani.com/post/docker-compose-scale-with-dynamic-configuration-part-1/</link>
+      <link>https://tarunlalwani.com/post/docker-compose-scale-with-dynamic-configuration-part-1/</link>
       <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/docker-compose-scale-with-dynamic-configuration-part-1/</guid>
+      <guid>https://tarunlalwani.com/post/docker-compose-scale-with-dynamic-configuration-part-1/</guid>
       <description>TL;DR;
 Docker-compose allows scaling specific services from the composition. Assume we have a server and worker model. Consider the below compose file for the same
 version: &#39;3&#39; services: server: image: alpine command: sh -c &amp;quot;echo Launching server &amp;amp;&amp;amp; exec tail -f /dev/null&amp;quot; worker: image: alpine command: sh -c &amp;quot;echo Launching worker &amp;gt;&amp;gt; /data/worker.log &amp;amp;&amp;amp; exec tail -f /dev/null&amp;quot; volumes: - ./data:/data  Now if we do docker-compose up the server will echo Launching server and worker will print Launching worker to the /data/worker.</description>
@@ -47,30 +47,30 @@ version: &#39;3&#39; services: server: image: alpine command: sh -c &amp;quot;ec
     
     <item>
       <title>How To Debug Nginx Reverse Proxy Issues</title>
-      <link>http://tarunlalwani.com/post/how-to-debug-nginx-reverse-proxy-issues-php-fpm-gunicorn-uwsgi/</link>
+      <link>https://tarunlalwani.com/post/how-to-debug-nginx-reverse-proxy-issues-php-fpm-gunicorn-uwsgi/</link>
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/how-to-debug-nginx-reverse-proxy-issues-php-fpm-gunicorn-uwsgi/</guid>
+      <guid>https://tarunlalwani.com/post/how-to-debug-nginx-reverse-proxy-issues-php-fpm-gunicorn-uwsgi/</guid>
       <description>I love Nginx for its revery proxy capabilities and ease of configuration. A simple proxy_pass can allow you to connect to any of the backends GoLang, php-fpm, NodeJS, another nginx, tomcat, apache, gunicorn, uwsgi, flask, django, a external CDN and many more
 When proxying a request to another server, you may or may not have access to log of the server. So it is important to be able to debug, where the problem lies when an issue occurs.</description>
     </item>
     
     <item>
       <title>AWS Docker Swarm - Deploying a Selenium grid</title>
-      <link>http://tarunlalwani.com/post/deploy-selenium-grid-using-docker-swarm-aws/</link>
+      <link>https://tarunlalwani.com/post/deploy-selenium-grid-using-docker-swarm-aws/</link>
       <pubDate>Thu, 06 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/deploy-selenium-grid-using-docker-swarm-aws/</guid>
+      <guid>https://tarunlalwani.com/post/deploy-selenium-grid-using-docker-swarm-aws/</guid>
       <description>Selenium Grid helps us to group multiple machines as worker nodes to provide browsers for our tests. To run multiple tests in parallel grid is a must.
 With Docker Swarm it becomes easy to create dynamic grid, which can be scaled on need. This article will walk you through setting up a Grid on AWS using 3 machines (1 manager, 2 worker node). The minimum recommeded setup is of 5 machines at least (3 manager, 2 worker nodes).</description>
     </item>
     
     <item>
       <title>Docker container cleanup made easy with Docker 17.05</title>
-      <link>http://tarunlalwani.com/post/docker-container-cleanup-easy-with-17.05/</link>
+      <link>https://tarunlalwani.com/post/docker-container-cleanup-easy-with-17.05/</link>
       <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/docker-container-cleanup-easy-with-17.05/</guid>
+      <guid>https://tarunlalwani.com/post/docker-container-cleanup-easy-with-17.05/</guid>
       <description>Earlier docker container and images would keep on occupying spaces until unless manually cleaned up. The clean command included piped commands.
 For example to clean all exited contained
 $ docker ps -a -q -f status=exited | xargs docker rm -v  And to delete volumes or images different commands had to be used. But with Docker 17.05 now out. This is a simple command
@@ -79,20 +79,20 @@ $ docker system prune  If you don&amp;rsquo;t want any confirmation, then add th
     
     <item>
       <title>Re-using existing browser session with Selenium Grid</title>
-      <link>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-grid-python/</link>
+      <link>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium-grid-python/</link>
       <pubDate>Wed, 21 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-grid-python/</guid>
+      <guid>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium-grid-python/</guid>
       <description>In our previous articles we discussed about re-using Browser session in Selenium for local browsers. We spoke about saving the Session ID and the Executor URL for re-creating the sessions. Now let&amp;rsquo;s us have re-look at the approach when we use Selenium Grid
 Launching the Grid I am using brew to install selenium-server-standalone on my Mac. But if you are using something else, then download the latest version from here</description>
     </item>
     
     <item>
       <title>Enumerating running Firefox browsers in Selenium</title>
-      <link>http://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</link>
+      <link>https://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</link>
       <pubDate>Tue, 20 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</guid>
+      <guid>https://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</guid>
       <description>This is another article in our &amp;ldquo;Re-use selenium session&amp;rdquo; series. This article is specific to Firefox browser ran on a local system using Selenium
 Consider the below python code
 from selenium import webdriver driver = webdriver.Firefox()  This opens up a firefox browser on your machine. We know that Selenium uses geckodriver for communicating with the firefox. So let&amp;rsquo;s check the process
@@ -101,10 +101,10 @@ $ ps aux | grep geckodriver tarun.lalwani 11982 0.</description>
     
     <item>
       <title>Enumerating running Chrome browsers in Selenium</title>
-      <link>http://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/</link>
+      <link>https://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/</link>
       <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/</guid>
+      <guid>https://tarunlalwani.com/post/enumerating-running-chrome-browser-selenium/</guid>
       <description>This is another article in our &amp;ldquo;Re-use selenium session&amp;rdquo; series. This article is specific to Chrome browser run on a local system using Selenium
 Consider the below python code
 from selenium import webdriver driver = webdriver.Chrome()  This opens up a chrome browser on your machine. We know that Selenium uses chromewebdriver for communicating with the chrome. So let&amp;rsquo;s check the process
@@ -113,10 +113,10 @@ $ ps aux | grep chromedriver tarun.lalwani 8805 0.</description>
     
     <item>
       <title>Self-signed SSL certificates and how to trust them</title>
-      <link>http://tarunlalwani.com/post/self-signed-certificates-trusting-them/</link>
+      <link>https://tarunlalwani.com/post/self-signed-certificates-trusting-them/</link>
       <pubDate>Sat, 17 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/self-signed-certificates-trusting-them/</guid>
+      <guid>https://tarunlalwani.com/post/self-signed-certificates-trusting-them/</guid>
       <description>SSL certificates allow us to secure communication between the server and user. Unfortunately SSL certificates are a bit costly and are not prefered to be bought for development environments. This is where self-signed certificates come into picture.
 Creating a Self-signed certificate We can create a self-signed certificate using the openssl command
 $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout selfsigned.key -out selfsigned.crt Generating a 2048 bit RSA private key .</description>
@@ -124,20 +124,20 @@ $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout selfsigned.key -ou
     
     <item>
       <title>Re-using existing browser session in Selenium using C#</title>
-      <link>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-csharp/</link>
+      <link>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium-csharp/</link>
       <pubDate>Thu, 15 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-csharp/</guid>
+      <guid>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium-csharp/</guid>
       <description>Earlier I wrote an article on how to re-use a session in Selenium using Java. @Jim Hazen asked if the I could provide the implementation of same in C#. So here it is
 The first time I worked out this approach was in C# only, but that was back in 2014. That time I copied code from the Selenium source code and modified it. This makes upgrading Selenium version difficult.</description>
     </item>
     
     <item>
       <title>Simple Parameterized config files inside Docker</title>
-      <link>http://tarunlalwani.com/post/simple-parameterized-config-files-docker/</link>
+      <link>https://tarunlalwani.com/post/simple-parameterized-config-files-docker/</link>
       <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/simple-parameterized-config-files-docker/</guid>
+      <guid>https://tarunlalwani.com/post/simple-parameterized-config-files-docker/</guid>
       <description>Parameterized config files are a must to create customizable and flexible docker images. There are many tools available for doing the same. To name a few, consul-template, confd
 But in this article I want to discuss about few of the basic approaches. So why basic ones? Well, when you can do the job with a knife, why use a gun!
 Approach 1 - Using Bash Substituion This uses shell parameter and file redirection.</description>
@@ -145,20 +145,20 @@ Approach 1 - Using Bash Substituion This uses shell parameter and file redirecti
     
     <item>
       <title>Request Capturing using NGINX and Lua</title>
-      <link>http://tarunlalwani.com/post/request-capturing-nginx-lua/</link>
+      <link>https://tarunlalwani.com/post/request-capturing-nginx-lua/</link>
       <pubDate>Tue, 06 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/request-capturing-nginx-lua/</guid>
+      <guid>https://tarunlalwani.com/post/request-capturing-nginx-lua/</guid>
       <description>In one of our projects we wanted to capture and document incoming traffic to our server. The requirements for recording/capturing the incoming traffic were as below
  Capture both GET and POST requests Capture only certain locations Back-end service involved were PHP, Java and some NodeJS also Capture Response Code, Response Text and Duration also Mask certain sensitive data like emails, credit card numbers  The plan was to use this data for creating simulated production replay and make sure any changes made to code doesn&amp;rsquo;t impact existing working flows.</description>
     </item>
     
     <item>
       <title>A10 Network load balancer automation</title>
-      <link>http://tarunlalwani.com/post/a10-network-load-balancer-automation/</link>
+      <link>https://tarunlalwani.com/post/a10-network-load-balancer-automation/</link>
       <pubDate>Mon, 05 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/a10-network-load-balancer-automation/</guid>
+      <guid>https://tarunlalwani.com/post/a10-network-load-balancer-automation/</guid>
       <description>A10 Networks provides hardware Load Balancer, which can be used to balance loads in your data center.
 A10 Load Balancer (LB) have a web based interface to perform different task. Once the server definitions tasks are created, the common thing is to disable and enable servers out of LB.
 Going to the web interface and performing these activities is a tedious task. Also many time the Linux operations teams want to view the status of these server.</description>
@@ -166,10 +166,10 @@ Going to the web interface and performing these activities is a tedious task. Al
     
     <item>
       <title>Why delayed output for python process in my Docker logs?</title>
-      <link>http://tarunlalwani.com/post/why-delayed-output-python-docker/</link>
+      <link>https://tarunlalwani.com/post/why-delayed-output-python-docker/</link>
       <pubDate>Sun, 04 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/why-delayed-output-python-docker/</guid>
+      <guid>https://tarunlalwani.com/post/why-delayed-output-python-docker/</guid>
       <description>Recently while moving one of our projects to Docker, we had a weird error that our python script would not output any data in docker logs. We thought the scripts were stuck, but later we realized the logs had a delayed output
 When we were running the script inside the docker image through bash they would give all output on the console fine. Which kind of puzzled us
 So we created a simple project to recreate the issue</description>
@@ -177,20 +177,20 @@ So we created a simple project to recreate the issue</description>
     
     <item>
       <title>Git checkout private repository inside Docker</title>
-      <link>http://tarunlalwani.com/post/git-checkout-private-repository-inside-docker/</link>
+      <link>https://tarunlalwani.com/post/git-checkout-private-repository-inside-docker/</link>
       <pubDate>Sat, 03 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/git-checkout-private-repository-inside-docker/</guid>
+      <guid>https://tarunlalwani.com/post/git-checkout-private-repository-inside-docker/</guid>
       <description>One of the aim of moving project&amp;rsquo;s deployment to docker, is to be able to build a image on any system without any manual setup. This articles shows how you can clone your private git repos inside a docker image without the need of username and password using SSH keys.
 Generating the SSH key pairs First we would generate a SSH key pair, which will be used by the docker image</description>
     </item>
     
     <item>
       <title>SSH automation using Python</title>
-      <link>http://tarunlalwani.com/post/ssh-automation-using-python/</link>
+      <link>https://tarunlalwani.com/post/ssh-automation-using-python/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/ssh-automation-using-python/</guid>
+      <guid>https://tarunlalwani.com/post/ssh-automation-using-python/</guid>
       <description>Sometimes its required for us to be able to communicate with a remote host using automation. To do it in bash we can use the expect command. But do it in Python, we can use a package named paramiko.
 Installing Paramiko Installation is quite simple. It can be done using the pip or pip3 command
 $ pip install paramiko   Note: based on your setup, you might need to use sudo as well before the pip command</description>
@@ -198,10 +198,10 @@ $ pip install paramiko   Note: based on your setup, you might need to use sudo a
     
     <item>
       <title>Selenium disable popup blocker in different browsers</title>
-      <link>http://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/</link>
+      <link>https://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/</guid>
+      <guid>https://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/</guid>
       <description>Some testing scenarios requires that the Popup blocking be disabled. In this article we will look at ways for disabling popup blocker for different browser
 Disabling Popup blocker in InternetExplorer This can be done by setting a registry setting.
 from _winreg import * def set_popupblocker_status(enabled): key = OpenKey(HKEY_CURRENT_USER, r&amp;quot;Software\Microsoft\Internet Explorer\New Windows&amp;quot;, 0, KEY_ALL_ACCESS) SetValueEx(key, &amp;quot;PopupMgr&amp;quot;, 0, REG_SZ, enabled) CloseKey(key) set_popupblocker_status(&amp;quot;no&amp;quot;)  Disabling Popup blocker in Firefox For firefox, this can be done using a preference setting dom.</description>
@@ -209,10 +209,10 @@ from _winreg import * def set_popupblocker_status(enabled): key = OpenKey(HKEY_C
     
     <item>
       <title>Re-using existing browser session in Selenium using Java</title>
-      <link>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-java/</link>
+      <link>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium-java/</link>
       <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium-java/</guid>
+      <guid>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium-java/</guid>
       <description>Yesterday I wrote an article on how to re-use a session in Selenium using Python. @Aditya Baraskar asked if the same was possible in Java.
 Once you know the concepts, languages usually is no barrier. So I tried using the same approach that we did in Python and see how it works out in Java
 Attempt 1 ChromeDriver driver = new ChromeDriver(); HttpCommandExecutor executor = (HttpCommandExecutor) driver.getCommandExecutor(); URL url = executor.</description>
@@ -220,30 +220,30 @@ Attempt 1 ChromeDriver driver = new ChromeDriver(); HttpCommandExecutor executor
     
     <item>
       <title>Re-using existing browser session in selenium</title>
-      <link>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium/</link>
+      <link>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium/</link>
       <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/reusing-existing-browser-session-selenium/</guid>
+      <guid>https://tarunlalwani.com/post/reusing-existing-browser-session-selenium/</guid>
       <description>Comparison between Selenium and UFT Behavior For those of us who come from a QTP/UFT background, being able to test the same browser after a disconnect is usually a piece of cake
 1. systemutil.run &amp;quot;iexplore.exe&amp;quot; 2. x = 2/0 3. Browser(&amp;quot;index:=0&amp;quot;).navigate (&amp;quot;http://www.google.com&amp;quot;)  If we run the above script in QTP/UFT, the script will error out on Line #2 and we can re-run the script from Line #3 and it would still work and navigate inside the browser we had opened earlier.</description>
     </item>
     
     <item>
       <title>Selenium disable Image loading in different browsers</title>
-      <link>http://tarunlalwani.com/post/selenium-disable-image-loading-different-browsers/</link>
+      <link>https://tarunlalwani.com/post/selenium-disable-image-loading-different-browsers/</link>
       <pubDate>Mon, 29 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/selenium-disable-image-loading-different-browsers/</guid>
+      <guid>https://tarunlalwani.com/post/selenium-disable-image-loading-different-browsers/</guid>
       <description>Sometimes during testing or scraping a website, we are not interested in loading the images on the page. Disabling images helps up speed up the page load times and make execution faster.
 Even if we are interested in knowing the location (source) of images, we can still disable loading of all the images in GUI. In Selenium each browser requires different techniques to do so. We will look at each one of them one by one</description>
     </item>
     
     <item>
       <title>Selenium change User-Agent of different browsers</title>
-      <link>http://tarunlalwani.com/post/selenium-change-user-agent-different-browsers/</link>
+      <link>https://tarunlalwani.com/post/selenium-change-user-agent-different-browsers/</link>
       <pubDate>Sun, 28 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/selenium-change-user-agent-different-browsers/</guid>
+      <guid>https://tarunlalwani.com/post/selenium-change-user-agent-different-browsers/</guid>
       <description>Server uses User-Agent string to differentiate between different browsers and devices. Each device + browser combination can have a different name to identify the Browser and its version. Thougth that may not be 100% true in all cases.
 In this article we will see how to change the user-agent of different browser when automating them using Selenium
 Changing User-Agent in Internet Explorer Unfortunately there is no good way to change the User-Agent of a IE browser.</description>
@@ -251,10 +251,10 @@ Changing User-Agent in Internet Explorer Unfortunately there is no good way to c
     
     <item>
       <title>Debugging PHP web applications using XDebug inside Docker</title>
-      <link>http://tarunlalwani.com/post/debugging-php-xdebug-docker/</link>
+      <link>https://tarunlalwani.com/post/debugging-php-xdebug-docker/</link>
       <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/debugging-php-xdebug-docker/</guid>
+      <guid>https://tarunlalwani.com/post/debugging-php-xdebug-docker/</guid>
       <description>Debugging is an important aspect of any test environment. It helps developer troubleshoot their code on a deployed environment.
 XDebug is one of the popular debuggers for PHP and many PHP IDEs have built-in support for XDebug.
 Docker provides official images for php-fpm and nginx. php-fpm process all the PHP code and for client request handling we will use nginx.
@@ -263,10 +263,10 @@ In this article we will explore 2 approaches for using XDebug in a php-fpm + Ngi
     
     <item>
       <title>Migrating/Upgrading Gitlab 6.X to latest Gitlab docker</title>
-      <link>http://tarunlalwani.com/post/migrating-gitlab-6-mysql-to-latest-gitlab/</link>
+      <link>https://tarunlalwani.com/post/migrating-gitlab-6-mysql-to-latest-gitlab/</link>
       <pubDate>Wed, 17 May 2017 11:47:37 +0530</pubDate>
       
-      <guid>http://tarunlalwani.com/post/migrating-gitlab-6-mysql-to-latest-gitlab/</guid>
+      <guid>https://tarunlalwani.com/post/migrating-gitlab-6-mysql-to-latest-gitlab/</guid>
       <description>Gitlab is an amazing Git hosting service. With it&amp;rsquo;s community edition, one can setup an in-house git server in no time.
 Those who have been an earlier follower of Gitlab, may still be stuck with the version 6.X. Version 6.X was setup manually by creating DB in MySQL/Postgres, Nginx/Apache entries and few other setup steps.
 As time moved on, Gitlab started providing packages and one could install or upgrade Gitlab using a package manager like yum, apt.</description>
@@ -274,20 +274,20 @@ As time moved on, Gitlab started providing packages and one could install or upg
     
     <item>
       <title>Should we deploying code inside docker images Statically or Dynamically?</title>
-      <link>http://tarunlalwani.com/post/deploying-code-inside-docker-images-statically-dynamically/</link>
+      <link>https://tarunlalwani.com/post/deploying-code-inside-docker-images-statically-dynamically/</link>
       <pubDate>Sat, 13 May 2017 01:12:38 +0530</pubDate>
       
-      <guid>http://tarunlalwani.com/post/deploying-code-inside-docker-images-statically-dynamically/</guid>
+      <guid>https://tarunlalwani.com/post/deploying-code-inside-docker-images-statically-dynamically/</guid>
       <description>When I started using docker, I used to deploy the source code of my application statically into docker images. This is a good and recommended approach for production.
 But while building images for testing team, I realized the build process needs to repeat and is not a very optimal approach. If you just need to take in a new commit, a different branch or a latest master checkout, you need to rebuild the image.</description>
     </item>
     
     <item>
       <title>Best practices while using environment files with Docker Compose</title>
-      <link>http://tarunlalwani.com/post/best-practices-using-environment-files-docker-compose/</link>
+      <link>https://tarunlalwani.com/post/best-practices-using-environment-files-docker-compose/</link>
       <pubDate>Fri, 12 May 2017 12:43:22 +0530</pubDate>
       
-      <guid>http://tarunlalwani.com/post/best-practices-using-environment-files-docker-compose/</guid>
+      <guid>https://tarunlalwani.com/post/best-practices-using-environment-files-docker-compose/</guid>
       <description>docker-compose is an amazing tool to create a full fledged environment using different docker containers. We have used the same in our case to deploy multiple environments for testing.
 This article will share the best practices when it comes to using environments files inside docker-compose.yml
 Approach #1 - Using env_file Let&amp;rsquo;s create a simple docker-compose.yml file which prints a environment variable and then sleeps for sometime
@@ -296,10 +296,10 @@ docker-compose.yml version: &#39;2&#39; services: demo: image: centos:7.</descri
     
     <item>
       <title>Building Nginx from source with LuaJIT</title>
-      <link>http://tarunlalwani.com/post/building-nginx-with-lua/</link>
+      <link>https://tarunlalwani.com/post/building-nginx-with-lua/</link>
       <pubDate>Sun, 30 Apr 2017 01:42:00 +0530</pubDate>
       
-      <guid>http://tarunlalwani.com/post/building-nginx-with-lua/</guid>
+      <guid>https://tarunlalwani.com/post/building-nginx-with-lua/</guid>
       <description>Nginx is a great webserver. But it has no scripting capabilities. To add scripting capabilities in Nginx, one needs to build it from source with the necessary add-ons.
 In this article I will showcase how we can build Nginx with Lua inside Docker. There are two ways to do it
 1. OpenResty OpenRestry® is a full-fledged web platform that integrates the standard Nginx core, LuaJIT, many carefully written Lua libraries, lots of high quality 3rd-party Nginx modules</description>
@@ -307,10 +307,10 @@ In this article I will showcase how we can build Nginx with Lua inside Docker. T
     
     <item>
       <title>Detecting OS in shell script</title>
-      <link>http://tarunlalwani.com/post/detecting-os-in-shell-script/</link>
+      <link>https://tarunlalwani.com/post/detecting-os-in-shell-script/</link>
       <pubDate>Thu, 27 Apr 2017 15:05:18 +0530</pubDate>
       
-      <guid>http://tarunlalwani.com/post/detecting-os-in-shell-script/</guid>
+      <guid>https://tarunlalwani.com/post/detecting-os-in-shell-script/</guid>
       <description>Each linux distribution uses different package manager. To be able to execute commands based on the type of OS in a shell script, we need a way to detect the OS first.
 Using which command My first take on resolving this was to use the which command
 #!/bin/bash if [[ `which yum` ]]; then IS_RHEL=1 elif [[ `which apt` ]]; then IS_UBUNTU=1 elif [[ `which apk` ]]; then IS_ALPINE=1 else IS_UNKNOWN=1 fi  Now this works well on most OS, but the issue is that when you use the same on docker images.</description>
@@ -318,20 +318,20 @@ Using which command My first take on resolving this was to use the which command
     
     <item>
       <title>PHP Code Coverage for your web/selenium automation</title>
-      <link>http://tarunlalwani.com/post/php-code-coverage-web-selenium/</link>
+      <link>https://tarunlalwani.com/post/php-code-coverage-web-selenium/</link>
       <pubDate>Fri, 31 Mar 2017 11:57:30 +0530</pubDate>
       
-      <guid>http://tarunlalwani.com/post/php-code-coverage-web-selenium/</guid>
+      <guid>https://tarunlalwani.com/post/php-code-coverage-web-selenium/</guid>
       <description>Approach 1 PHP code coverage data can be collected using the sebastianbergmann/php-code-coverage composer module. But this is easier when we are running PHP unit test.
 When we test our application using a browser, either through manual testing or through automation like Selenium or QTP. Every request get&amp;rsquo;s generated by the Web Browser and is handled by a Web Server. This in many cases would be either Nginx or Apache.</description>
     </item>
     
     <item>
       <title>MySQL master slave using docker</title>
-      <link>http://tarunlalwani.com/post/mysql-master-slave-using-docker/</link>
+      <link>https://tarunlalwani.com/post/mysql-master-slave-using-docker/</link>
       <pubDate>Thu, 30 Mar 2017 00:00:00 +0530</pubDate>
       
-      <guid>http://tarunlalwani.com/post/mysql-master-slave-using-docker/</guid>
+      <guid>https://tarunlalwani.com/post/mysql-master-slave-using-docker/</guid>
       <description>Docker makes it easy to run multiple independent mysql instances on the same machines for different projects. But some projects use a Master and slave setup of MySQL, where usually writes are directed to Master and the reads are directed to Slave.
 I based my approach on tegansnyder/docker-mysql-master-slave. But what I didn&amp;rsquo;t like about the existing setup is that it assumed mysql client setup on the host. I wanted to do it using the mysql docker images itself.</description>
     </item>

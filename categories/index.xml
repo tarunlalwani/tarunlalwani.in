@@ -2,29 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Tech Adventures by Tarun Lalwani</title>
-    <link>http://tarunlalwani.com/categories/</link>
+    <link>https://tarunlalwani.com/categories/</link>
     <description>Recent content in Categories on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="http://tarunlalwani.com/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Development</title>
-      <link>http://tarunlalwani.com/categories/development/</link>
+      <link>https://tarunlalwani.com/categories/development/</link>
       <pubDate>Thu, 30 Mar 2017 00:00:00 +0530</pubDate>
       
-      <guid>http://tarunlalwani.com/categories/development/</guid>
+      <guid>https://tarunlalwani.com/categories/development/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vim</title>
-      <link>http://tarunlalwani.com/categories/vim/</link>
+      <link>https://tarunlalwani.com/categories/vim/</link>
       <pubDate>Thu, 30 Mar 2017 00:00:00 +0530</pubDate>
       
-      <guid>http://tarunlalwani.com/categories/vim/</guid>
+      <guid>https://tarunlalwani.com/categories/vim/</guid>
       <description></description>
     </item>
     

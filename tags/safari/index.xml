@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Safari on Tech Adventures by Tarun Lalwani</title>
-    <link>http://tarunlalwani.com/tags/safari/</link>
+    <link>https://tarunlalwani.com/tags/safari/</link>
     <description>Recent content in Safari on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 01 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://tarunlalwani.com/tags/safari/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.com/tags/safari/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Selenium disable popup blocker in different browsers</title>
-      <link>http://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/</link>
+      <link>https://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/</guid>
+      <guid>https://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/</guid>
       <description>Some testing scenarios requires that the Popup blocking be disabled. In this article we will look at ways for disabling popup blocker for different browser
 Disabling Popup blocker in InternetExplorer This can be done by setting a registry setting.
 from _winreg import * def set_popupblocker_status(enabled): key = OpenKey(HKEY_CURRENT_USER, r&amp;quot;Software\Microsoft\Internet Explorer\New Windows&amp;quot;, 0, KEY_ALL_ACCESS) SetValueEx(key, &amp;quot;PopupMgr&amp;quot;, 0, REG_SZ, enabled) CloseKey(key) set_popupblocker_status(&amp;quot;no&amp;quot;)  Disabling Popup blocker in Firefox For firefox, this can be done using a preference setting dom.</description>
@@ -24,20 +24,20 @@ from _winreg import * def set_popupblocker_status(enabled): key = OpenKey(HKEY_C
     
     <item>
       <title>Selenium disable Image loading in different browsers</title>
-      <link>http://tarunlalwani.com/post/selenium-disable-image-loading-different-browsers/</link>
+      <link>https://tarunlalwani.com/post/selenium-disable-image-loading-different-browsers/</link>
       <pubDate>Mon, 29 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/selenium-disable-image-loading-different-browsers/</guid>
+      <guid>https://tarunlalwani.com/post/selenium-disable-image-loading-different-browsers/</guid>
       <description>Sometimes during testing or scraping a website, we are not interested in loading the images on the page. Disabling images helps up speed up the page load times and make execution faster.
 Even if we are interested in knowing the location (source) of images, we can still disable loading of all the images in GUI. In Selenium each browser requires different techniques to do so. We will look at each one of them one by one</description>
     </item>
     
     <item>
       <title>Selenium change User-Agent of different browsers</title>
-      <link>http://tarunlalwani.com/post/selenium-change-user-agent-different-browsers/</link>
+      <link>https://tarunlalwani.com/post/selenium-change-user-agent-different-browsers/</link>
       <pubDate>Sun, 28 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/selenium-change-user-agent-different-browsers/</guid>
+      <guid>https://tarunlalwani.com/post/selenium-change-user-agent-different-browsers/</guid>
       <description>Server uses User-Agent string to differentiate between different browsers and devices. Each device + browser combination can have a different name to identify the Browser and its version. Thougth that may not be 100% true in all cases.
 In this article we will see how to change the user-agent of different browser when automating them using Selenium
 Changing User-Agent in Internet Explorer Unfortunately there is no good way to change the User-Agent of a IE browser.</description>

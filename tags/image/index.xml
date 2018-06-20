@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Image on Tech Adventures by Tarun Lalwani</title>
-    <link>http://tarunlalwani.com/tags/image/</link>
+    <link>https://tarunlalwani.com/tags/image/</link>
     <description>Recent content in Image on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 29 May 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://tarunlalwani.com/tags/image/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.com/tags/image/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Selenium disable Image loading in different browsers</title>
-      <link>http://tarunlalwani.com/post/selenium-disable-image-loading-different-browsers/</link>
+      <link>https://tarunlalwani.com/post/selenium-disable-image-loading-different-browsers/</link>
       <pubDate>Mon, 29 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://tarunlalwani.com/post/selenium-disable-image-loading-different-browsers/</guid>
+      <guid>https://tarunlalwani.com/post/selenium-disable-image-loading-different-browsers/</guid>
       <description>Sometimes during testing or scraping a website, we are not interested in loading the images on the page. Disabling images helps up speed up the page load times and make execution faster.
 Even if we are interested in knowing the location (source) of images, we can still disable loading of all the images in GUI. In Selenium each browser requires different techniques to do so. We will look at each one of them one by one</description>
     </item>
