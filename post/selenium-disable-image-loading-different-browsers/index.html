@@ -176,6 +176,7 @@ option = webdriver.ChromeOptions()
 chrome_prefs = {}
 option.experimental_options[&quot;prefs&quot;] = chrome_prefs
 chrome_prefs[&quot;profile.default_content_settings&quot;] = {&quot;images&quot;: 2}
+chrome_prefs[&quot;profile.managed_default_content_settings&quot;] = {&quot;images&quot;: 2}
 
 driver = webdriver.Chrome(chrome_options=option)
 driver.get(&quot;http://www.yahoo.com&quot;)
