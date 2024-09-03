@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Firefox on Tech Adventures by Tarun Lalwani</title>
-    <link>https://tarunlalwani.com/tags/firefox/</link>
+    <link>https://tarunlalwani.in/tags/firefox/</link>
     <description>Recent content in Firefox on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 17 Jun 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://tarunlalwani.com/tags/firefox/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.in/tags/firefox/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Change firefox profile settings at runtime using selenium</title>
-      <link>https://tarunlalwani.com/post/change-profile-settings-at-runtime-firefox-selenium/</link>
+      <link>https://tarunlalwani.in/post/change-profile-settings-at-runtime-firefox-selenium/</link>
       <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/change-profile-settings-at-runtime-firefox-selenium/</guid>
+      <guid>https://tarunlalwani.in/post/change-profile-settings-at-runtime-firefox-selenium/</guid>
       <description>Selenium allows creating a custom profile for firefox and launching the browser with the same. Below is a sample code on how to change the download folder of the browser launched
 from selenium import webdriver profile = webdriver.FirefoxProfile() profile.set_preference(&amp;quot;browser.download.folderList&amp;quot;, 2) profile.set_preference(&amp;quot;browser.download.manager.showWhenStarting&amp;quot;, False) profile.set_preference(&amp;quot;browser.download.dir&amp;quot;, &#39;/Users/tarunlalwani/Downloads/&#39;) profile.set_preference(&amp;quot;browser.helperApps.neverAsk.saveToDisk&amp;quot;, &amp;quot;application/x-gzip&amp;quot;) driver = webdriver.Firefox(firefox_profile=profile)  This is good when you know the download folder while starting the browser or you are NOT interested in changing the download folder after the browser has starting.</description>
     </item>
     
     <item>
       <title>Enumerating running Firefox browsers in Selenium</title>
-      <link>https://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</link>
+      <link>https://tarunlalwani.in/post/enumerating-running-firefox-browser-selenium/</link>
       <pubDate>Tue, 20 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/enumerating-running-firefox-browser-selenium/</guid>
+      <guid>https://tarunlalwani.in/post/enumerating-running-firefox-browser-selenium/</guid>
       <description>This is another article in our &amp;ldquo;Re-use selenium session&amp;rdquo; series. This article is specific to Firefox browser ran on a local system using Selenium
 Consider the below python code
 from selenium import webdriver driver = webdriver.Firefox()  This opens up a firefox browser on your machine. We know that Selenium uses geckodriver for communicating with the firefox. So let&amp;rsquo;s check the process
@@ -35,10 +35,10 @@ $ ps aux | grep geckodriver tarun.lalwani 11982 0.</description>
     
     <item>
       <title>Selenium disable popup blocker in different browsers</title>
-      <link>https://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/</link>
+      <link>https://tarunlalwani.in/post/selenium-disable-popup-blocker-different-browsers/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/selenium-disable-popup-blocker-different-browsers/</guid>
+      <guid>https://tarunlalwani.in/post/selenium-disable-popup-blocker-different-browsers/</guid>
       <description>Some testing scenarios requires that the Popup blocking be disabled. In this article we will look at ways for disabling popup blocker for different browser
 Disabling Popup blocker in InternetExplorer This can be done by setting a registry setting.
 from _winreg import * def set_popupblocker_status(enabled): key = OpenKey(HKEY_CURRENT_USER, r&amp;quot;Software\Microsoft\Internet Explorer\New Windows&amp;quot;, 0, KEY_ALL_ACCESS) SetValueEx(key, &amp;quot;PopupMgr&amp;quot;, 0, REG_SZ, enabled) CloseKey(key) set_popupblocker_status(&amp;quot;no&amp;quot;)  Disabling Popup blocker in Firefox For firefox, this can be done using a preference setting dom.</description>
@@ -46,20 +46,20 @@ from _winreg import * def set_popupblocker_status(enabled): key = OpenKey(HKEY_C
     
     <item>
       <title>Selenium disable Image loading in different browsers</title>
-      <link>https://tarunlalwani.com/post/selenium-disable-image-loading-different-browsers/</link>
+      <link>https://tarunlalwani.in/post/selenium-disable-image-loading-different-browsers/</link>
       <pubDate>Mon, 29 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/selenium-disable-image-loading-different-browsers/</guid>
+      <guid>https://tarunlalwani.in/post/selenium-disable-image-loading-different-browsers/</guid>
       <description>Sometimes during testing or scraping a website, we are not interested in loading the images on the page. Disabling images helps up speed up the page load times and make execution faster.
 Even if we are interested in knowing the location (source) of images, we can still disable loading of all the images in GUI. In Selenium each browser requires different techniques to do so. We will look at each one of them one by one</description>
     </item>
     
     <item>
       <title>Selenium change User-Agent of different browsers</title>
-      <link>https://tarunlalwani.com/post/selenium-change-user-agent-different-browsers/</link>
+      <link>https://tarunlalwani.in/post/selenium-change-user-agent-different-browsers/</link>
       <pubDate>Sun, 28 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/selenium-change-user-agent-different-browsers/</guid>
+      <guid>https://tarunlalwani.in/post/selenium-change-user-agent-different-browsers/</guid>
       <description>Server uses User-Agent string to differentiate between different browsers and devices. Each device + browser combination can have a different name to identify the Browser and its version. Thougth that may not be 100% true in all cases.
 In this article we will see how to change the user-agent of different browser when automating them using Selenium
 Changing User-Agent in Internet Explorer Unfortunately there is no good way to change the User-Agent of a IE browser.</description>

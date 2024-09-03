@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Automation on Tech Adventures by Tarun Lalwani</title>
-    <link>https://tarunlalwani.com/tags/automation/</link>
+    <link>https://tarunlalwani.in/tags/automation/</link>
     <description>Recent content in Automation on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 02 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://tarunlalwani.com/tags/automation/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.in/tags/automation/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>SSH automation using Python</title>
-      <link>https://tarunlalwani.com/post/ssh-automation-using-python/</link>
+      <link>https://tarunlalwani.in/post/ssh-automation-using-python/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/ssh-automation-using-python/</guid>
+      <guid>https://tarunlalwani.in/post/ssh-automation-using-python/</guid>
       <description>Sometimes its required for us to be able to communicate with a remote host using automation. To do it in bash we can use the expect command. But do it in Python, we can use a package named paramiko.
 Installing Paramiko Installation is quite simple. It can be done using the pip or pip3 command
 $ pip install paramiko   Note: based on your setup, you might need to use sudo as well before the pip command</description>

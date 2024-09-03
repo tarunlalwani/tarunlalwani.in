@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ssh on Tech Adventures by Tarun Lalwani</title>
-    <link>https://tarunlalwani.com/tags/ssh/</link>
+    <link>https://tarunlalwani.in/tags/ssh/</link>
     <description>Recent content in Ssh on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 02 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://tarunlalwani.com/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.in/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>SSH automation using Python</title>
-      <link>https://tarunlalwani.com/post/ssh-automation-using-python/</link>
+      <link>https://tarunlalwani.in/post/ssh-automation-using-python/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/ssh-automation-using-python/</guid>
+      <guid>https://tarunlalwani.in/post/ssh-automation-using-python/</guid>
       <description>Sometimes its required for us to be able to communicate with a remote host using automation. To do it in bash we can use the expect command. But do it in Python, we can use a package named paramiko.
 Installing Paramiko Installation is quite simple. It can be done using the pip or pip3 command
 $ pip install paramiko   Note: based on your setup, you might need to use sudo as well before the pip command</description>
@@ -24,10 +24,10 @@ $ pip install paramiko   Note: based on your setup, you might need to use sudo a
     
     <item>
       <title>Debugging PHP web applications using XDebug inside Docker</title>
-      <link>https://tarunlalwani.com/post/debugging-php-xdebug-docker/</link>
+      <link>https://tarunlalwani.in/post/debugging-php-xdebug-docker/</link>
       <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/debugging-php-xdebug-docker/</guid>
+      <guid>https://tarunlalwani.in/post/debugging-php-xdebug-docker/</guid>
       <description>Debugging is an important aspect of any test environment. It helps developer troubleshoot their code on a deployed environment.
 XDebug is one of the popular debuggers for PHP and many PHP IDEs have built-in support for XDebug.
 Docker provides official images for php-fpm and nginx. php-fpm process all the PHP code and for client request handling we will use nginx.

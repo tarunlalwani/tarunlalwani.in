@@ -16,7 +16,7 @@
     <meta property="article:published_time" content="2017-06-17">
     
     <meta property="og:description" content="Self signed certificate can be created to enable https in test environments to make them work close to production. Learn how to trust the certificates to enable testing without any code changes">
-    <meta property="og:url" content="https://tarunlalwani.com/post/self-signed-certificates-trusting-them/">
+    <meta property="og:url" content="https://tarunlalwani.in/post/self-signed-certificates-trusting-them/">
     <meta property="og:site_name" content="Tech Adventures by Tarun Lalwani">
    
 
@@ -41,14 +41,14 @@
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@ask4tarun">
-    <meta property="og:image" content="https://tarunlalwani.com/images/ssl_certificates.png">
-    <meta property="twitter:image" content="https://tarunlalwani.com/images/ssl_certificates.png">
+    <meta property="og:image" content="https://tarunlalwani.in/images/ssl_certificates.png">
+    <meta property="twitter:image" content="https://tarunlalwani.in/images/ssl_certificates.png">
     
 
     <meta name="generator" content="Hugo 0.42.1" />
     <title>Self-signed SSL certificates and how to trust them &middot; Tech Adventures by Tarun Lalwani</title>
     
-    <link rel="stylesheet" href="https://tarunlalwani.com/css/style.css">
+    <link rel="stylesheet" href="https://tarunlalwani.in/css/style.css">
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
@@ -57,7 +57,7 @@
     
 
     
-    <link href="https://tarunlalwani.com/index.xml" rel="alternate" type="application/rss+xml" title="Tech Adventures by Tarun Lalwani" />
+    <link href="https://tarunlalwani.in/index.xml" rel="alternate" type="application/rss+xml" title="Tech Adventures by Tarun Lalwani" />
     
     
 
@@ -76,7 +76,7 @@
 				<span class="icon-bar"></span>
 			</button>
 			
-				<a class="navbar-brand" href="https://tarunlalwani.com/">TARUN LALWANI</a>
+				<a class="navbar-brand" href="https://tarunlalwani.in/">TARUN LALWANI</a>
 			
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -92,7 +92,7 @@
 		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
 	<div id="menu-content" class="vertical-align">
 		
-			<h1 class="text-center"><a href="https://tarunlalwani.com/">TARUN LALWANI</a></h1>
+			<h1 class="text-center"><a href="https://tarunlalwani.in/">TARUN LALWANI</a></h1>
 		
 		
 		
@@ -100,7 +100,7 @@
 		
 		
 		
-			<img id="profile-pic" src="https://tarunlalwani.com//images/profile.png" alt="My Picture" class="img-circle center-block">
+			<img id="profile-pic" src="https://tarunlalwani.in//images/profile.png" alt="My Picture" class="img-circle center-block">
 		
 		<div id="social" class="text-center">
 			<a href="https://twitter.com/ask4tarun"><i class="fa fa-twitter fa-2x"></i></a>
@@ -152,13 +152,13 @@ State or Province Name (full name) [Some-State]:Delhi
 Locality Name (eg, city) []:Delhi
 Organization Name (eg, company) [Internet Widgits Pty Ltd]:Tarun Lalwani
 Organizational Unit Name (eg, section) []:IT
-Common Name (e.g. server FQDN or YOUR name) []:*.tarunlalwani.com
+Common Name (e.g. server FQDN or YOUR name) []:*.tarunlalwani.in
 Email Address []:
 </code></pre>
 
 <p>The command would ask certain set of questions depending on the openssl config, once we have answered these questions the certificate would be created</p>
 
-<p>The answer to the FQDN is basically the domain name for which the certificate will be used. The certificate if generated for <code>www.tarunlalwani.com</code> will not work on just <code>tarunlalwani.com</code>. But if we need certificate to work on multiple subdomains then we use a wildcard domain name <code>*.tarunlalwani.com</code>.</p>
+<p>The answer to the FQDN is basically the domain name for which the certificate will be used. The certificate if generated for <code>www.tarunlalwani.in</code> will not work on just <code>tarunlalwani.in</code>. But if we need certificate to work on multiple subdomains then we use a wildcard domain name <code>*.tarunlalwani.in</code>.</p>
 
 <p>These certificates are called wild card certificates. We can even have a multi-domain certificate as well which would list multiple domains in a single certficate. The cost of certificate is dependent on type. With single domain costing the least, then multi-domain and wildcard certificate being the costliest one.</p>
 
@@ -191,7 +191,7 @@ http {
 
 <pre><code class="language-nginx">server {
    listen 443 ssl default;
-   server_name *.tarunlalwani.com;
+   server_name *.tarunlalwani.in;
    ssl_certificate /certs/selfsigned.crt;
    ssl_certificate_key /certs/selfsigned.key;
 
@@ -213,9 +213,9 @@ http {
   -d openresty/openresty
 </code></pre>
 
-<p>Next we create a host entry of our host IP as <code>dev.tarunlalwani.com</code> and test it using curl</p>
+<p>Next we create a host entry of our host IP as <code>dev.tarunlalwani.in</code> and test it using curl</p>
 
-<pre><code class="language-bash">$ curl -k &quot;https://dev.tarunlalwani.com/testme&quot;
+<pre><code class="language-bash">$ curl -k &quot;https://dev.tarunlalwani.in/testme&quot;
 GET /testme
 </code></pre>
 
@@ -225,7 +225,7 @@ GET /testme
 
 <h4 id="curl">CURL</h4>
 
-<pre><code class="language-accesslog">$  curl  &quot;https://dev.tarunlalwani.com/testme&quot;
+<pre><code class="language-accesslog">$  curl  &quot;https://dev.tarunlalwani.in/testme&quot;
 curl: (60) server certificate verification failed. CAfile: /etc/ssl/certs/ca-certificates.crt CRLfile: none
 More details here: http://curl.haxx.se/docs/sslcerts.html
 
@@ -245,7 +245,7 @@ If you'd like to turn off curl's verification of the certificate, use
 
 <p>For curl we can also use <code>--cacert</code> parameter to provide the certificate for validation</p>
 
-<pre><code class="language-bash">$ curl --cacert /vagrant/certs/selfsigned.crt &quot;https://dev.tarunlalwani.com/testme&quot;
+<pre><code class="language-bash">$ curl --cacert /vagrant/certs/selfsigned.crt &quot;https://dev.tarunlalwani.in/testme&quot;
 GET /testme
 </code></pre>
 
@@ -255,7 +255,7 @@ GET /testme
 [GCC 5.4.0 20160609] on linux2
 Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
 &gt;&gt;&gt; from urllib2 import urlopen
-&gt;&gt;&gt; req = urlopen(&quot;https://dev.tarunlalwani.com&quot;)
+&gt;&gt;&gt; req = urlopen(&quot;https://dev.tarunlalwani.in&quot;)
 Traceback (most recent call last):
   File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
   File &quot;/usr/lib/python2.7/urllib2.py&quot;, line 154, in urlopen
@@ -275,14 +275,14 @@ urllib2.URLError: &lt;urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate
 
 <p>So in python also we get an error for such a self-signed certificate. We can fix the same by passing the certificate</p>
 
-<pre><code class="language-python">&gt;&gt;&gt; req = urlopen(&quot;https://dev.tarunlalwani.com/testme&quot;, cafile=&quot;/vagrant/certs/selfsigned.crt&quot;)
+<pre><code class="language-python">&gt;&gt;&gt; req = urlopen(&quot;https://dev.tarunlalwani.in/testme&quot;, cafile=&quot;/vagrant/certs/selfsigned.crt&quot;)
 &gt;&gt;&gt; req.read()
 'GET /testme \n'
 </code></pre>
 
 <h4 id="nodejs">NodeJS</h4>
 
-<pre><code class="language-js">&gt; req = https.get(&quot;https://dev.tarunlalwani.com&quot;)
+<pre><code class="language-js">&gt; req = https.get(&quot;https://dev.tarunlalwani.in&quot;)
 ClientRequest {
 .....
 }
@@ -296,20 +296,20 @@ ClientRequest {
 
 <p>To fix this error we need to use the CA file again</p>
 
-<pre><code class="language-js">&gt; options = url.parse(&quot;https://dev.tarunlalwani.com/testme/&quot;)
+<pre><code class="language-js">&gt; options = url.parse(&quot;https://dev.tarunlalwani.in/testme/&quot;)
 Url {
   protocol: 'https:',
   slashes: true,
   auth: null,
-  host: 'dev.tarunlalwani.com',
+  host: 'dev.tarunlalwani.in',
   port: null,
-  hostname: 'dev.tarunlalwani.com',
+  hostname: 'dev.tarunlalwani.in',
   hash: null,
   search: null,
   query: null,
   pathname: '/testme/',
   path: '/testme/',
-  href: 'https://dev.tarunlalwani.com/testme/' }
+  href: 'https://dev.tarunlalwani.in/testme/' }
 
 &gt; options['ca'] = fs.readFileSync('/vagrant/certs/selfsigned.crt')
 &lt;Buffer ... &gt;
@@ -317,7 +317,7 @@ Url {
 &gt; &gt; https.get(options)
 ClientRequest {
 ....
-  output: [ 'GET /testme/ HTTP/1.1\r\nHost: dev.tarunlalwani.com\r\nConnection: close\r\n\r\n' ],
+  output: [ 'GET /testme/ HTTP/1.1\r\nHost: dev.tarunlalwani.in\r\nConnection: close\r\n\r\n' ],
 ...
   method: 'GET',
   path: '/testme/' }
@@ -325,7 +325,7 @@ ClientRequest {
 
 <p>So each language will have a way for you to specify the CA file for validating the certificate.</p>
 
-<p>Now if we replace our url <code>https://dev.tarunlalwani.com</code> by <code>https://www.google.com</code>, all the code samples work without haveing to specify a CA file.</p>
+<p>Now if we replace our url <code>https://dev.tarunlalwani.in</code> by <code>https://www.google.com</code>, all the code samples work without haveing to specify a CA file.</p>
 
 <p>So why does it work for other sites like google, microsoft and not for ours? The reason is that these sites purchase SSL certificate from a signing authority. The signing authority could be certified from another authority. The ones on the top of chain are called &ldquo;Root Authority&rdquo;, the sub authorities are called &ldquo;Intermediate&rdquo; and the last certificate in the chain is our site certificate.</p>
 
@@ -357,7 +357,7 @@ done.
 
 <p>Once the new certificate is installed the curl command will work without specifying <code>-k</code> or the <code>--cafile</code> flag</p>
 
-<pre><code class="language-bash">$ curl &quot;https://dev.tarunlalwani.com/testme/&quot;
+<pre><code class="language-bash">$ curl &quot;https://dev.tarunlalwani.in/testme/&quot;
 GET /testme/
 </code></pre>
 
@@ -530,20 +530,20 @@ fi
 
 <h4 id="generating-a-certificate-signed-using-root-ca">Generating a Certificate signed using Root CA</h4>
 
-<pre><code class="language-bash">$ ./sslcerts.sh create_domain_cert '*.tarunlalwani.com'
+<pre><code class="language-bash">$ ./sslcerts.sh create_domain_cert '*.tarunlalwani.in'
 </code></pre>
 
 <p>The above certificate would not work on Chrome 58 or higher and give below error</p>
 
 <blockquote>
-<p>This server could not prove that it is dev.tarunlalwani.com; its security certificate is from [missing_subjectAltName]. This may be caused by a misconfiguration or an attacker intercepting your connection.</p>
+<p>This server could not prove that it is dev.tarunlalwani.in; its security certificate is from [missing_subjectAltName]. This may be caused by a misconfiguration or an attacker intercepting your connection.</p>
 </blockquote>
 
 <p><img src="../../images/missing_subjectaltname.png" alt="Missing Subject Alt name" style="width: 100%;"></img></p>
 
 <p>The issue is that Chrome requires the certificate to have a x509v3 extended attribute <code>Subject Alternate Name</code>. This can be easily achieved by passing our script a <code>SAN</code> parameter</p>
 
-<pre><code class="language-bash">$ SAN=DNS.1:*.tarunlalwani.com,DNS.2:tarunlalwani.com ./sslcerts.sh create_domain_cert '*.tarunlalwani.com'
+<pre><code class="language-bash">$ SAN=DNS.1:*.tarunlalwani.in,DNS.2:tarunlalwani.in ./sslcerts.sh create_domain_cert '*.tarunlalwani.in'
 </code></pre>
 
 <p>You can see that chrome shows the two possible DNS names for this certificate and validates our certificate as the Root CA is trusted</p>
@@ -570,7 +570,7 @@ fi
 </main>
 
 <div id="bottom-nav" class="text-center center-block">
-	<a href=" https://tarunlalwani.com/" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+	<a href=" https://tarunlalwani.in/" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
 </div>
 
 
@@ -608,7 +608,7 @@ fi
 
     ga('create', 'UA-99088991-1', 'auto');
     ga('send', 'pageview');
-    window.baseURL = "https:\/\/tarunlalwani.com\/";
+    window.baseURL = "https:\/\/tarunlalwani.in\/";
   </script>
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -620,9 +620,9 @@ fi
   
   
 
-  <script src="https://tarunlalwani.com//js/highlight.pack.js"></script>
+  <script src="https://tarunlalwani.in//js/highlight.pack.js"></script>
   
-  <script src="https://tarunlalwani.com//js/App.js"></script>
+  <script src="https://tarunlalwani.in//js/App.js"></script>
   
 </body>
 </html>

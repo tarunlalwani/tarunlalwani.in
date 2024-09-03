@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docker on Tech Adventures by Tarun Lalwani</title>
-    <link>https://tarunlalwani.com/tags/docker/</link>
+    <link>https://tarunlalwani.in/tags/docker/</link>
     <description>Recent content in Docker on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 11 Sep 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://tarunlalwani.com/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.in/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Docker Compose scale with Dynamic Configuration - Part 1</title>
-      <link>https://tarunlalwani.com/post/docker-compose-scale-with-dynamic-configuration-part-1/</link>
+      <link>https://tarunlalwani.in/post/docker-compose-scale-with-dynamic-configuration-part-1/</link>
       <pubDate>Mon, 11 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/docker-compose-scale-with-dynamic-configuration-part-1/</guid>
+      <guid>https://tarunlalwani.in/post/docker-compose-scale-with-dynamic-configuration-part-1/</guid>
       <description>TL;DR;
 Docker-compose allows scaling specific services from the composition. Assume we have a server and worker model. Consider the below compose file for the same
 version: &#39;3&#39; services: server: image: alpine command: sh -c &amp;quot;echo Launching server &amp;amp;&amp;amp; exec tail -f /dev/null&amp;quot; worker: image: alpine command: sh -c &amp;quot;echo Launching worker &amp;gt;&amp;gt; /data/worker.log &amp;amp;&amp;amp; exec tail -f /dev/null&amp;quot; volumes: - ./data:/data  Now if we do docker-compose up the server will echo Launching server and worker will print Launching worker to the /data/worker.</description>
@@ -24,20 +24,20 @@ version: &#39;3&#39; services: server: image: alpine command: sh -c &amp;quot;ec
     
     <item>
       <title>AWS Docker Swarm - Deploying a Selenium grid</title>
-      <link>https://tarunlalwani.com/post/deploy-selenium-grid-using-docker-swarm-aws/</link>
+      <link>https://tarunlalwani.in/post/deploy-selenium-grid-using-docker-swarm-aws/</link>
       <pubDate>Thu, 06 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/deploy-selenium-grid-using-docker-swarm-aws/</guid>
+      <guid>https://tarunlalwani.in/post/deploy-selenium-grid-using-docker-swarm-aws/</guid>
       <description>Selenium Grid helps us to group multiple machines as worker nodes to provide browsers for our tests. To run multiple tests in parallel grid is a must.
 With Docker Swarm it becomes easy to create dynamic grid, which can be scaled on need. This article will walk you through setting up a Grid on AWS using 3 machines (1 manager, 2 worker node). The minimum recommeded setup is of 5 machines at least (3 manager, 2 worker nodes).</description>
     </item>
     
     <item>
       <title>Docker container cleanup made easy with Docker 17.05</title>
-      <link>https://tarunlalwani.com/post/docker-container-cleanup-easy-with-17.05/</link>
+      <link>https://tarunlalwani.in/post/docker-container-cleanup-easy-with-17.05/</link>
       <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/docker-container-cleanup-easy-with-17.05/</guid>
+      <guid>https://tarunlalwani.in/post/docker-container-cleanup-easy-with-17.05/</guid>
       <description>Earlier docker container and images would keep on occupying spaces until unless manually cleaned up. The clean command included piped commands.
 For example to clean all exited contained
 $ docker ps -a -q -f status=exited | xargs docker rm -v  And to delete volumes or images different commands had to be used. But with Docker 17.05 now out. This is a simple command
@@ -46,10 +46,10 @@ $ docker system prune  If you don&amp;rsquo;t want any confirmation, then add th
     
     <item>
       <title>Simple Parameterized config files inside Docker</title>
-      <link>https://tarunlalwani.com/post/simple-parameterized-config-files-docker/</link>
+      <link>https://tarunlalwani.in/post/simple-parameterized-config-files-docker/</link>
       <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/simple-parameterized-config-files-docker/</guid>
+      <guid>https://tarunlalwani.in/post/simple-parameterized-config-files-docker/</guid>
       <description>Parameterized config files are a must to create customizable and flexible docker images. There are many tools available for doing the same. To name a few, consul-template, confd
 But in this article I want to discuss about few of the basic approaches. So why basic ones? Well, when you can do the job with a knife, why use a gun!
 Approach 1 - Using Bash Substituion This uses shell parameter and file redirection.</description>
@@ -57,10 +57,10 @@ Approach 1 - Using Bash Substituion This uses shell parameter and file redirecti
     
     <item>
       <title>Why delayed output for python process in my Docker logs?</title>
-      <link>https://tarunlalwani.com/post/why-delayed-output-python-docker/</link>
+      <link>https://tarunlalwani.in/post/why-delayed-output-python-docker/</link>
       <pubDate>Sun, 04 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/why-delayed-output-python-docker/</guid>
+      <guid>https://tarunlalwani.in/post/why-delayed-output-python-docker/</guid>
       <description>Recently while moving one of our projects to Docker, we had a weird error that our python script would not output any data in docker logs. We thought the scripts were stuck, but later we realized the logs had a delayed output
 When we were running the script inside the docker image through bash they would give all output on the console fine. Which kind of puzzled us
 So we created a simple project to recreate the issue</description>
@@ -68,20 +68,20 @@ So we created a simple project to recreate the issue</description>
     
     <item>
       <title>Git checkout private repository inside Docker</title>
-      <link>https://tarunlalwani.com/post/git-checkout-private-repository-inside-docker/</link>
+      <link>https://tarunlalwani.in/post/git-checkout-private-repository-inside-docker/</link>
       <pubDate>Sat, 03 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/git-checkout-private-repository-inside-docker/</guid>
+      <guid>https://tarunlalwani.in/post/git-checkout-private-repository-inside-docker/</guid>
       <description>One of the aim of moving project&amp;rsquo;s deployment to docker, is to be able to build a image on any system without any manual setup. This articles shows how you can clone your private git repos inside a docker image without the need of username and password using SSH keys.
 Generating the SSH key pairs First we would generate a SSH key pair, which will be used by the docker image</description>
     </item>
     
     <item>
       <title>Debugging PHP web applications using XDebug inside Docker</title>
-      <link>https://tarunlalwani.com/post/debugging-php-xdebug-docker/</link>
+      <link>https://tarunlalwani.in/post/debugging-php-xdebug-docker/</link>
       <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/debugging-php-xdebug-docker/</guid>
+      <guid>https://tarunlalwani.in/post/debugging-php-xdebug-docker/</guid>
       <description>Debugging is an important aspect of any test environment. It helps developer troubleshoot their code on a deployed environment.
 XDebug is one of the popular debuggers for PHP and many PHP IDEs have built-in support for XDebug.
 Docker provides official images for php-fpm and nginx. php-fpm process all the PHP code and for client request handling we will use nginx.
@@ -90,10 +90,10 @@ In this article we will explore 2 approaches for using XDebug in a php-fpm + Ngi
     
     <item>
       <title>Migrating/Upgrading Gitlab 6.X to latest Gitlab docker</title>
-      <link>https://tarunlalwani.com/post/migrating-gitlab-6-mysql-to-latest-gitlab/</link>
+      <link>https://tarunlalwani.in/post/migrating-gitlab-6-mysql-to-latest-gitlab/</link>
       <pubDate>Wed, 17 May 2017 11:47:37 +0530</pubDate>
       
-      <guid>https://tarunlalwani.com/post/migrating-gitlab-6-mysql-to-latest-gitlab/</guid>
+      <guid>https://tarunlalwani.in/post/migrating-gitlab-6-mysql-to-latest-gitlab/</guid>
       <description>Gitlab is an amazing Git hosting service. With it&amp;rsquo;s community edition, one can setup an in-house git server in no time.
 Those who have been an earlier follower of Gitlab, may still be stuck with the version 6.X. Version 6.X was setup manually by creating DB in MySQL/Postgres, Nginx/Apache entries and few other setup steps.
 As time moved on, Gitlab started providing packages and one could install or upgrade Gitlab using a package manager like yum, apt.</description>
@@ -101,10 +101,10 @@ As time moved on, Gitlab started providing packages and one could install or upg
     
     <item>
       <title>MySQL master slave using docker</title>
-      <link>https://tarunlalwani.com/post/mysql-master-slave-using-docker/</link>
+      <link>https://tarunlalwani.in/post/mysql-master-slave-using-docker/</link>
       <pubDate>Thu, 30 Mar 2017 00:00:00 +0530</pubDate>
       
-      <guid>https://tarunlalwani.com/post/mysql-master-slave-using-docker/</guid>
+      <guid>https://tarunlalwani.in/post/mysql-master-slave-using-docker/</guid>
       <description>Docker makes it easy to run multiple independent mysql instances on the same machines for different projects. But some projects use a Master and slave setup of MySQL, where usually writes are directed to Master and the reads are directed to Slave.
 I based my approach on tegansnyder/docker-mysql-master-slave. But what I didn&amp;rsquo;t like about the existing setup is that it assumed mysql client setup on the host. I wanted to do it using the mysql docker images itself.</description>
     </item>

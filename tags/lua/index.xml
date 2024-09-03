@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lua on Tech Adventures by Tarun Lalwani</title>
-    <link>https://tarunlalwani.com/tags/lua/</link>
+    <link>https://tarunlalwani.in/tags/lua/</link>
     <description>Recent content in Lua on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 06 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://tarunlalwani.com/tags/lua/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.in/tags/lua/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Request Capturing using NGINX and Lua</title>
-      <link>https://tarunlalwani.com/post/request-capturing-nginx-lua/</link>
+      <link>https://tarunlalwani.in/post/request-capturing-nginx-lua/</link>
       <pubDate>Tue, 06 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/request-capturing-nginx-lua/</guid>
+      <guid>https://tarunlalwani.in/post/request-capturing-nginx-lua/</guid>
       <description>In one of our projects we wanted to capture and document incoming traffic to our server. The requirements for recording/capturing the incoming traffic were as below
  Capture both GET and POST requests Capture only certain locations Back-end service involved were PHP, Java and some NodeJS also Capture Response Code, Response Text and Duration also Mask certain sensitive data like emails, credit card numbers  The plan was to use this data for creating simulated production replay and make sure any changes made to code doesn&amp;rsquo;t impact existing working flows.</description>
     </item>

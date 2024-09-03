@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>502 on Tech Adventures by Tarun Lalwani</title>
-    <link>https://tarunlalwani.com/tags/502/</link>
+    <link>https://tarunlalwani.in/tags/502/</link>
     <description>Recent content in 502 on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 02 Sep 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://tarunlalwani.com/tags/502/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.in/tags/502/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>How To Debug Nginx Reverse Proxy Issues</title>
-      <link>https://tarunlalwani.com/post/how-to-debug-nginx-reverse-proxy-issues-php-fpm-gunicorn-uwsgi/</link>
+      <link>https://tarunlalwani.in/post/how-to-debug-nginx-reverse-proxy-issues-php-fpm-gunicorn-uwsgi/</link>
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/how-to-debug-nginx-reverse-proxy-issues-php-fpm-gunicorn-uwsgi/</guid>
+      <guid>https://tarunlalwani.in/post/how-to-debug-nginx-reverse-proxy-issues-php-fpm-gunicorn-uwsgi/</guid>
       <description>I love Nginx for its revery proxy capabilities and ease of configuration. A simple proxy_pass can allow you to connect to any of the backends GoLang, php-fpm, NodeJS, another nginx, tomcat, apache, gunicorn, uwsgi, flask, django, a external CDN and many more
 When proxying a request to another server, you may or may not have access to log of the server. So it is important to be able to debug, where the problem lies when an issue occurs.</description>
     </item>

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Aws on Tech Adventures by Tarun Lalwani</title>
-    <link>https://tarunlalwani.com/tags/aws/</link>
+    <link>https://tarunlalwani.in/tags/aws/</link>
     <description>Recent content in Aws on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 06 Jul 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://tarunlalwani.com/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.in/tags/aws/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>AWS Docker Swarm - Deploying a Selenium grid</title>
-      <link>https://tarunlalwani.com/post/deploy-selenium-grid-using-docker-swarm-aws/</link>
+      <link>https://tarunlalwani.in/post/deploy-selenium-grid-using-docker-swarm-aws/</link>
       <pubDate>Thu, 06 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/deploy-selenium-grid-using-docker-swarm-aws/</guid>
+      <guid>https://tarunlalwani.in/post/deploy-selenium-grid-using-docker-swarm-aws/</guid>
       <description>Selenium Grid helps us to group multiple machines as worker nodes to provide browsers for our tests. To run multiple tests in parallel grid is a must.
 With Docker Swarm it becomes easy to create dynamic grid, which can be scaled on need. This article will walk you through setting up a Grid on AWS using 3 machines (1 manager, 2 worker node). The minimum recommeded setup is of 5 machines at least (3 manager, 2 worker nodes).</description>
     </item>

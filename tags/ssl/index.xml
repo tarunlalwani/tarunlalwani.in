@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ssl on Tech Adventures by Tarun Lalwani</title>
-    <link>https://tarunlalwani.com/tags/ssl/</link>
+    <link>https://tarunlalwani.in/tags/ssl/</link>
     <description>Recent content in Ssl on Tech Adventures by Tarun Lalwani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 17 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://tarunlalwani.com/tags/ssl/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://tarunlalwani.in/tags/ssl/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Self-signed SSL certificates and how to trust them</title>
-      <link>https://tarunlalwani.com/post/self-signed-certificates-trusting-them/</link>
+      <link>https://tarunlalwani.in/post/self-signed-certificates-trusting-them/</link>
       <pubDate>Sat, 17 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://tarunlalwani.com/post/self-signed-certificates-trusting-them/</guid>
+      <guid>https://tarunlalwani.in/post/self-signed-certificates-trusting-them/</guid>
       <description>SSL certificates allow us to secure communication between the server and user. Unfortunately SSL certificates are a bit costly and are not prefered to be bought for development environments. This is where self-signed certificates come into picture.
 Creating a Self-signed certificate We can create a self-signed certificate using the openssl command
 $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout selfsigned.key -out selfsigned.crt Generating a 2048 bit RSA private key .</description>

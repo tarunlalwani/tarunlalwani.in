@@ -95,7 +95,7 @@ def get_running_firefox(geckodriver=True):
 # driver = webdriver.Firefox()
 # executor_url = driver.command_executor._url
 # session_id = driver.session_id
-# driver.get("http://tarunlalwani.com")
+# driver.get("http://tarunlalwani.in")
 #
 # print session_id
 # print executor_url
